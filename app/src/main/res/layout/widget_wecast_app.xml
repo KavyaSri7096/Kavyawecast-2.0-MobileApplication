@@ -1,0 +1,30 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:id="@+id/noData"
+        style="@style/TextView.Title.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/standard_double"
+        android:drawableTop="@drawable/ic_accounts"
+        android:drawablePadding="@dimen/standard_half"
+        android:drawableTint="@color/black"
+        android:gravity="center"
+        android:text="@string/message_you_are_not_subscribed"
+        android:textColor="@color/black" />
+
+    <ListView
+        android:id="@+id/data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#EEEEEE"
+        android:dividerHeight="1dp"
+        tools:listitem="@layout/widget_wecast_app_item" />
+
+</FrameLayout>

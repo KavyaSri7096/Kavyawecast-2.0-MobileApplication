@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Marble theme color palette -->
+    <color name="colorAccentMarble">#0068AC</color>
+
+    <!-- Prism theme color palette     -->
+    <color name="colorAccentPrism">#0068AC</color>
+
+</resources>

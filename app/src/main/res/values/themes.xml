@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:navigationBarColor">@color/black</item>
+        <!-- Disable multitouch -->
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
+        <!-- Coordinator layout fix -->
+        <item name="coordinatorLayoutStyle">@style/Widget.Support.CoordinatorLayout</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.Base.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Base.Transparent" parent="AppTheme.Base">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="AppTheme.Base.Gallery" parent="AppTheme.Base.Transparent">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/blackOverlay80</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!-- Dialog themes -->
+    <style name="BaseDialog">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="BaseDialog.Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_from_left</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_from_left</item>
+    </style>
+
+    <style name="TrackDialog">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!-- MARBLE -->
+    <style name="AppTheme.Marble" parent="AppTheme.Base">
+        <item name="colorPrimary">@color/colorPrimaryMarble</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkMarble</item>
+        <item name="colorAccent">@color/colorAccentMarble</item>
+        <item name="colorBackground">@color/colorBackgroundMarble</item>
+        <item name="colorTextActive">@color/colorTextActiveMarble</item>
+        <item name="colorTextInactive">@color/colorTextInactiveMarble</item>
+        <item name="colorSplashBackground">@color/colorSplashBackgroundMarble</item>
+        <item name="actionBarTheme">@style/Toolbar.Marble</item>
+        <item name="android:windowBackground">@color/colorBackgroundMarble</item>
+        <item name="cardViewStyle">@style/CardView.Light</item>
+    </style>
+
+    <style name="Toolbar.Marble" parent="AppTheme.Marble">
+        <item name="android:background">@color/colorPrimaryMarble</item>
+        <item name="android:textColorPrimary">@color/colorTextActiveMarble</item>
+    </style>
+
+    <style name="AppTheme.Marble.Splash" parent="AppTheme.Marble">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@drawable/bg_splash_screen</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="AppTheme.Marble.Composer" parent="AppTheme.Marble">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@drawable/bg_composer_screen</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    <!-- -->
+
+    <!-- PRISM -->
+    <style name="AppTheme.Prism" parent="AppTheme.Base">
+        <item name="colorPrimary">@color/colorPrimaryPrism</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkPrism</item>
+        <item name="colorAccent">@color/colorAccentPrism</item>
+        <item name="colorBackground">@color/colorBackgroundPrism</item>
+        <item name="colorTextActive">@color/colorTextActivePrism</item>
+        <item name="colorTextInactive">@color/colorTextInactivePrism</item>
+        <item name="colorSplashBackground">@color/colorSplashBackgroundPrism</item>
+        <item name="actionBarTheme">@style/Toolbar.Prism</item>
+        <item name="android:windowBackground">@color/colorBackgroundPrism</item>
+        <item name="cardViewStyle">@style/CardView.Dark</item>
+    </style>
+
+    <style name="Toolbar.Prism" parent="AppTheme.Prism">
+        <item name="android:background">@color/colorPrimaryPrism</item>
+        <item name="android:textColorPrimary">@color/colorTextActivePrism</item>
+    </style>
+
+    <style name="AppTheme.Prism.Splash" parent="AppTheme.Prism">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@drawable/bg_splash_screen</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    <!-- -->
+
+</resources>

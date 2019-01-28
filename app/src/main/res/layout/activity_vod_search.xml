@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.vod.search.VodSearchActivityViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/component_toolbar_white" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/standard"
+            android:paddingTop="@dimen/standard"
+            android:paddingEnd="@dimen/standard"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.wecast.mobile.ui.widget.banner.BannerView
+                    android:layout_width="match_parent"
+                    app:box_position="search_box"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/standard_half" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_button_block"
+                    android:elevation="0.5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/standard_half">
+
+                    <EditText
+                        android:id="@+id/query"
+                        style="@style/TextView.Content.Big"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="?attr/colorPrimary"
+                        android:inputType="text"
+                        android:textAlignment="viewStart"
+                        android:textColorHint="?attr/colorTextInactive">
+
+                        <requestFocus />
+
+                    </EditText>
+
+                    <ImageView
+                        android:id="@+id/clear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_clear_box" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_half"
+                        android:layout_marginBottom="@dimen/standard_half"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title"
+                            style="@style/TextView.Content.Big"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <com.wecast.mobile.ui.widget.FilterSpinner
+                            android:id="@+id/filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:dropDownVerticalOffset="30dp"
+                            android:popupBackground="@drawable/bg_spinner"
+                            android:spinnerMode="dropdown"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:overScrollMode="never" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="@dimen/spinner_size"
+                android:layout_height="@dimen/spinner_size"
+                android:layout_gravity="center"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+        </FrameLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

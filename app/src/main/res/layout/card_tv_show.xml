@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.show.TVShowViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        style="@style/CustomCardView"
+        android:layout_width="@dimen/vod_card_width"
+        android:layout_height="@dimen/vod_card_height"
+        android:onClick="@{() -> viewModel.onItemClick()}">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            app:coverUrl="@{viewModel.coverUrl}" />
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

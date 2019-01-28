@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isFavorite"
+            type="Boolean" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/standard"
+        android:paddingEnd="@dimen/standard">
+
+        <Button
+            android:id="@+id/play"
+            style="@style/ComponentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_half"
+            android:alpha="0.3"
+            android:drawableTop="@drawable/ic_go_channel"
+            android:enabled="false"
+            android:text="@string/play" />
+
+        <Button
+            android:id="@+id/reminder"
+            style="@style/ComponentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_half"
+            android:alpha="0.3"
+            android:drawableTop="@drawable/ic_add_reminder"
+            android:enabled="false"
+            android:text="@string/reminder" />
+
+        <Button
+            android:id="@+id/addFavorite"
+            style="@style/ComponentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_half"
+            android:drawableTop="@drawable/ic_add_favorite"
+            android:text="@string/favorite"
+            android:visibility="@{isFavorite ? View.GONE : View.VISIBLE, default=gone}" />
+
+        <Button
+            android:id="@+id/removeFavorite"
+            style="@style/ComponentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_half"
+            android:drawableTop="@drawable/ic_remove_favorite"
+            android:text="@string/favorite"
+            android:visibility="@{isFavorite ? View.VISIBLE : View.GONE, default=gone}" />
+
+    </LinearLayout>
+
+</layout>

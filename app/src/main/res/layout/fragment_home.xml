@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.home.HomeFragmentViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <com.wecast.mobile.ui.widget.listRow.ListRowContainer
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/standard">
+
+            <com.wecast.mobile.ui.screen.home.HomeHighlightedListRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.wecast.mobile.ui.screen.home.HomeContinueListRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard" />
+
+            <com.wecast.mobile.ui.screen.home.HomeLiveTVListRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard" />
+
+            <com.wecast.mobile.ui.screen.home.HomeMoviesListRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard" />
+
+            <com.wecast.mobile.ui.screen.home.HomeTVShowsListRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard" />
+
+            <com.wecast.mobile.ui.widget.banner.BannerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard"
+                android:layout_marginTop="@dimen/standard"
+                android:layout_marginEnd="@dimen/standard"
+                app:box_position="home_box" />
+
+        </com.wecast.mobile.ui.widget.listRow.ListRowContainer>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
+

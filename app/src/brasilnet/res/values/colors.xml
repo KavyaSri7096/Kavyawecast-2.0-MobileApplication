@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Marble theme color palette -->
+    <color name="colorAccentMarble">#FFCC29</color>
+
+    <!-- Prism theme color palette     -->
+    <color name="colorAccentPrism">#FFCC29</color>
+
+</resources>

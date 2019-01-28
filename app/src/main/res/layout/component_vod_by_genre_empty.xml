@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isEmpty"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="@{isEmpty ? View.VISIBLE : View.GONE, default=visible}">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_vod_inactive" />
+
+        <TextView
+            style="@style/TextView.Title.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/standard"
+            android:text="@string/message_content_not_available"
+            android:textColor="?attr/colorTextInactive" />
+
+        <TextView
+            style="@style/TextView.Title.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/message_vod_by_genre_empty"
+            android:textColor="?attr/colorTextInactive" />
+
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        style="@style/CustomCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="?attr/colorBackground"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/standard">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_fingerprint" />
+
+            <TextView
+                style="@style/TextView.Title.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/standard_double"
+                android:gravity="center"
+                android:text="@string/confirm_purchase" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/cover"
+                    android:layout_width="@dimen/vod_cover_width"
+                    android:layout_height="@dimen/vod_cover_height"
+                    android:layout_marginEnd="@dimen/standard_half"
+                    android:layout_marginBottom="@dimen/standard_half"
+                    android:contentDescription="@string/app_name" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/title"
+                        style="@style/TextView.Title.Big"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="2dp"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/content_big"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/info"
+                        style="@style/TextView.Title.Big"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/colorTextInactive"
+                        android:textSize="@dimen/content_big" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/profile"
+                style="@style/TextView.Title.Big"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="78dp"
+                android:textAllCaps="true"
+                android:textSize="@dimen/content_medium" />
+
+            <include
+                android:id="@+id/profileDivider"
+                layout="@layout/component_divider" />
+
+            <TextView
+                android:id="@+id/pricing"
+                style="@style/TextView.Title.Big"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="78dp"
+                android:textAllCaps="true"
+                android:textSize="@dimen/content_medium" />
+
+            <include
+                android:id="@+id/pricingDivider"
+                layout="@layout/component_divider" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/CustomTextInputLayout"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/standard_half"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pin"
+                    style="@style/CustomTextInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/purchase_pin"
+                    android:inputType="numberPassword"
+                    android:maxLength="5"
+                    android:padding="@dimen/standard" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/standard"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cancel"
+                    style="@style/CustomDialogButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="@string/cancel"
+                    android:textColor="?attr/colorTextInactive" />
+
+                <Button
+                    android:id="@+id/confirm"
+                    style="@style/CustomDialogButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="@dimen/standard_half"
+                    android:text="@string/confirm" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.live.LiveTVFragmentViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard"
+            android:background="?colorBackground"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="100"
+            app:sc_border_width="1dp"
+            app:sc_checked_text_color="?attr/colorPrimary"
+            app:sc_corner_radius="2dp"
+            app:sc_tint_color="?attr/colorTextActive">
+
+            <RadioButton
+                android:id="@+id/channels"
+                style="@style/RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:checked="true"
+                android:text="@string/watch_live"
+                android:textAllCaps="true"
+                android:textSize="@dimen/content_medium" />
+
+            <RadioButton
+                android:id="@+id/tvGuide"
+                style="@style/RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:text="@string/tv_guide"
+                android:textAllCaps="true"
+                android:textSize="@dimen/content_medium" />
+
+        </info.hoang8f.android.segmented.SegmentedGroup>
+
+    </FrameLayout>
+
+</layout>
+

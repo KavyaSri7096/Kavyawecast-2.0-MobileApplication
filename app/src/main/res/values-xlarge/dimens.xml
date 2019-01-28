@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <bool name="isPhone">false</bool>
+
+    <!-- Standardize margin & padding -->
+    <dimen name="standard_small">7.5dp</dimen>
+    <dimen name="standard_half">12dp</dimen>
+    <dimen name="standard">24dp</dimen>
+    <dimen name="standard_double">48dp</dimen>
+
+    <!-- Text -->
+    <dimen name="title_large">40sp</dimen>
+    <dimen name="title_big">34sp</dimen>
+    <dimen name="title_medium">29sp</dimen>
+    <dimen name="title_small">24sp</dimen>
+    <dimen name="content_big">21sp</dimen>
+    <dimen name="content_medium">20sp</dimen>
+    <dimen name="content_small">18sp</dimen>
+
+    <dimen name="status_bar_height">24dp</dimen>
+    <dimen name="login_button_width">300dp</dimen>
+    <dimen name="tabs_layout_width">52dp</dimen>
+
+    <!-- Loading -->
+    <dimen name="spinner_size">82dp</dimen>
+
+    <!-- Logo -->
+    <dimen name="login_logo_width">240dp</dimen>
+    <dimen name="toolbar_logo_width">195dp</dimen>
+    <dimen name="splash_logo_width">255dp</dimen>
+    <dimen name="splash_logo_height">45dp</dimen>
+    <dimen name="dialog_logo_width">210dp</dimen>
+    <dimen name="dialog_logo_height">75dp</dimen>
+    <dimen name="channel_logo_width">120dp</dimen>
+    <dimen name="channel_logo_height">100dp</dimen>
+
+    <!-- Cards -->
+    <!-- Highlighted -->
+    <dimen name="highlighted_card_height">300dp</dimen>
+    <!-- Vod -->
+    <dimen name="vod_card_width">165dp</dimen>
+    <dimen name="vod_card_height">225dp</dimen>
+    <dimen name="vod_genre_card_width">165dp</dimen>
+    <dimen name="vod_genre_card_height">90dp</dimen>
+    <dimen name="vod_continue_card_height">180dp</dimen>
+    <!-- Channel -->
+    <dimen name="channel_card_height">210dp</dimen>
+    <dimen name="channel_card_logo_height">165dp</dimen>
+    <dimen name="channel_card_favorite_width">165dp</dimen>
+    <dimen name="channel_card_favorite_height">90dp</dimen>
+    <!-- Episode -->
+    <dimen name="episode_card_width">240dp</dimen>
+    <dimen name="episode_card_height">135dp</dimen>
+    <!-- TV Guide -->
+    <dimen name="tv_guide_card_width">150dp</dimen>
+    <dimen name="tv_guide_card_height">135dp</dimen>
+
+    <!-- Vod details -->
+    <dimen name="gallery_height">345dp</dimen>
+    <!-- Vod cover rent preview -->
+    <dimen name="vod_cover_width">105dp</dimen>
+    <dimen name="vod_cover_height">135dp</dimen>
+
+    <!-- Player -->
+    <dimen name="channel_player_height">400dp</dimen>
+
+    <!--
+    Refer to App Widget Documentation for margin information
+    http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">12dp</dimen>
+
+</resources>

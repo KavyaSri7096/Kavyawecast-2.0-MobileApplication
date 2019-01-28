@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.wecast.mobile">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+
+    <application
+        android:name=".WeApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/app_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/app_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.Marble"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".ui.screen.composer.ComposerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Marble.Composer">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="${ADMOB_APP_ID}" />
+
+        <meta-data
+            android:name="net.hockeyapp.android.appIdentifier"
+            android:value="${HOCKEYAPP_APP_ID}" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="${FABRIC_APP_ID}" />
+
+        <activity
+            android:name=".ui.screen.splash.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Marble.Splash" />
+
+        <activity
+            android:name=".ui.screen.welcome.WelcomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.NoActionBar" />
+
+        <activity
+            android:name=".ui.screen.registration.RegistrationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.NoActionBar" />
+
+        <activity
+            android:name=".ui.screen.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.NoActionBar" />
+
+        <activity
+            android:name=".ui.screen.reset.ResetPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.NoActionBar" />
+
+        <activity
+            android:name=".ui.screen.navigation.NavigationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.NoActionBar" />
+
+        <activity
+            android:name=".ui.screen.live.channel.details.ChannelDetailsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.live.channel.search.ChannelSearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.live.channel.details.progamme.details.ProgrammeDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.vod.details.VodDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.vod.genre.VodByGenreActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.vod.search.VodSearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.vod.player.VodPlayerActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.show.details.TVShowDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.show.genre.TVShowByGenreActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.show.search.TVShowSearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.show.player.TVShowPlayerActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.gallery.GalleryActivity"
+            android:theme="@style/AppTheme.Base.Gallery" />
+
+        <activity
+            android:name=".ui.screen.settings.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.settings.profile.EditProfileActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.settings.language.LanguageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.settings.quality.VideoQualityActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
+            android:name=".ui.screen.settings.buffer.BufferActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <service
+            android:name="com.wecast.core.service.SyncRemindersService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <receiver android:name=".ui.widget.wecast.WeCastWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/wecast_app_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".ui.widget.wecast.WeCastRemoteViewsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+    </application>
+
+</manifest>

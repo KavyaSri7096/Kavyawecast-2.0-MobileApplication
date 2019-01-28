@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.show.details.TVShowDetailsGenreViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/standard_half"
+        android:layout_marginTop="@dimen/standard_half">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:background="@drawable/bg_oval_stroked"
+            android:paddingEnd="@dimen/standard_half"
+            android:paddingStart="@dimen/standard_half"
+            android:text="@{viewModel.name}"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorTextActive" />
+
+    </FrameLayout>
+
+</layout>

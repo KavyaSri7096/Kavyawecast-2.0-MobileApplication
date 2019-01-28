@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.trending.TrendingFragmentViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.wecast.mobile.ui.widget.listRow.ListRowContainer
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/standard"
+                app:emptyLayout="@layout/component_trending_empty">
+
+                <com.wecast.mobile.ui.widget.banner.BannerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/standard"
+                    android:layout_marginTop="@dimen/standard"
+                    android:layout_marginEnd="@dimen/standard"
+                    app:box_position="trending_box" />
+
+                <com.wecast.mobile.ui.screen.trending.TrendingChannelListRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard" />
+
+                <com.wecast.mobile.ui.screen.trending.TrendingVodListRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard" />
+
+                <com.wecast.mobile.ui.screen.trending.TrendingTVShowListRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard" />
+
+            </com.wecast.mobile.ui.widget.listRow.ListRowContainer>
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="@dimen/spinner_size"
+                android:layout_height="@dimen/spinner_size"
+                android:layout_gravity="center"
+                android:layout_marginBottom="?android:actionBarSize"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
+

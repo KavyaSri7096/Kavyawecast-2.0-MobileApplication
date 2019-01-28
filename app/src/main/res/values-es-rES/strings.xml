@@ -1,0 +1,210 @@
+<resources>
+
+    <!-- General -->
+    <string name="ok">OK</string>
+    <string name="confirm">Confirmar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="next">Seguinte</string>
+    <string name="today">Hoy</string>
+    <string name="no_data">Sin Datos</string>
+
+    <!-- Welcome -->
+    <string name="log_in">Iniciar Sesión</string>
+    <string name="your_content_anytime">Su contenido \n en cualquier momento, \n en cualquier lugar</string>
+    <string name="enter_now">Entre ahora para ver sus \n películas y programas de televisión favoritos</string>
+    <string name="register">Registro</string>
+
+    <!-- Register -->
+    <string name="create_your_account">Crea tu conta y disfruta</string>
+    <string name="username">NOMBRE DE USARIO</string>
+    <string name="first_name">PRIMER NOMBRE</string>
+    <string name="last_name">APELLIDO</string>
+    <string name="pin">PIN</string>
+    <string name="purchase_pin">PINDE COMPRA</string>
+    <string name="already_have_account">Ya te registraste? &lt;u>Inicia sesión aquí&lt;/u></string>
+    <string-array name="gender">
+        <item>Masculino</item>
+        <item>Hembra</item>
+    </string-array>
+
+    <!-- Login -->
+    <string name="enter_credentials">Por favor, introduzca su credencial para continuar</string>
+    <string name="email">E-MAIL</string>
+    <string name="password">CONTRASEÑA</string>
+    <string name="forgot_password">Olvidé mi contraseña</string>
+
+    <!-- Reset Password -->
+    <string name="enter_email_to_reset_password">Por favor introduzca su dirección de e-mail para reiniciar su contraseña:</string>
+    <string name="reset_password">REINICIAR CONTRASEÑA</string>
+    <string name="proceed">Continuar</string>
+
+    <!-- Navigation -->
+    <string name="welcome_to">Welcome to %1$s</string>
+    <!-- Drawer -->
+    <string name="open">Open navigation drawer</string>
+    <string name="close">Close navigation drawer</string>
+    <!-- Modules -->
+    <string name="home">Home</string>
+    <string name="trending">Tendencias</string>
+    <string name="live_tv">TV en vivo</string>
+    <string name="movies">Peliculas</string>
+    <string name="tv_shows">Programas de TV</string>
+    <string name="account">Cuenta</string>
+    <!-- Rows -->
+    <string name="continue_watching">Seguir viendo</string>
+    <string name="recommended">Recomendados</string>
+    <string name="genres">Genres</string>
+    <string name="recently_added">Recientemente añadido</string>
+    <string name="favorite_channels">Canales favoritos</string>
+    <string name="all_channels">Todos los canales</string>
+    <string name="channel_categories">Categorias de canales</string>
+    <string name="top_channels">Canales Top</string>
+    <string name="top_movies">Películas Top</string>
+    <string name="top_tv_shows">Programas de TV TOP</string>
+    <string name="advertisement">Advertisement</string>
+
+    <!-- Home -->
+    <!-- Exit & Logout Dialog -->
+    <string name="are_you_sure_log_out">Estás seguro de que quieres \ n cerrar la sesión?</string>
+    <string name="are_you_sure_exit">Estás seguro de que quieres \ n salir?</string>
+
+    <!-- Live TV -->
+    <string name="watch_live">Wer en vivo</string>
+    <string name="tv_guide">Guia TV</string>
+    <string name="load_more">Cargar más</string>
+    <!-- Channel Rent Dialog -->
+    <string name="rent_this_channel">Alquilar este canal</string>
+    <string name="rent_for_with_days">Nombre: %1$s \nPrecio: %2$s \nDuracion en días: %3$s</string>
+    <!-- Programme Info Dialog -->
+    <string name="description">Descripción</string>
+    <string name="options">Opciones</string>
+    <string name="reminder">Recordatorio</string>
+    <string name="favorite">Favorito</string>
+
+    <!-- Vod Details -->
+    <string name="cast">Elenco:&#160;</string>
+    <string name="director">Director:&#160;</string>
+    <string name="rent">Alquilar</string>
+    <string name="trailer">Trailer</string>
+    <string name="rate">Calificar</string>
+    <string name="play">Play</string>
+    <string name="rate_this_title">Califica este titulo</string>
+    <string name="imdb_rating">&#160;| %1$s/10</string>
+    <!-- Vod Rent/Play Dialog -->
+    <string name="resolution">Resolution</string>
+    <string name="duration">Duración</string>
+    <string name="confirm_purchase">Confirmar compra</string>
+    <!-- VOD Player -->
+    <string name="error_playing">Uh oh! \n Algo ha pasado. \n Intentalo de nuevo</string>
+    <string name="video_profiles">Perfiles de Video</string>
+    <string name="audio_profiles">Perfiles de Audio</string>
+    <string name="subtitles">Subtitulos</string>
+    <string name="retry">Intentar otra vez</string>
+
+    <!-- TV Show Details -->
+    <string name="seasons_count">%1$d&#160;Temporada(s)</string>
+    <string name="season_number">Temporada %1$d</string>
+    <string name="estimation_available_date">Estimativa de fecha(s) disponibles</string>
+
+    <!-- Settings -->
+    <string name="country">PAIS</string>
+    <string name="city">CIUDAD</string>
+    <string name="membership">AFILIACION</string>
+    <string name="language">IDIOMA</string>
+    <string name="english">English</string>
+    <string name="spanish">Español</string>
+    <string name="brazilian">Brasileño</string>
+    <string name="video_quality">CALIDAD VIDEO</string>
+    <string name="buffer">BUFFER</string>
+    <string name="debug">DEBUG</string>
+    <string name="unlimited">Ilimitado</string>
+    <string name="valid_until">Valido hasta %1$s</string>
+    <string name="expired_on">Expira en %1$s</string>
+    <string name="log_out">Cerrar sesion</string>
+    <string name="right_to_left">RIGHT TO LEFT</string>
+    <string name="theme">MODO NOCTURNO</string>
+    <string name="age">EDAD</string>
+    <string name="gender">GÉNERO</string>
+    <!-- Edit Info Dialog -->
+    <string name="edit_info">Editar Info</string>
+    <string name="confirm_the_changes">Confirme los cambios haciendo clic en el botón superior derecho</string>
+    <string name="new_password">UEVA CONTRASEÑA</string>
+    <string name="current_password">CONTRASEÑA ACTUAL</string>
+    <string name="confirm_password">CONFIRMAR CONTRASEÑA</string>
+    <string name="enter_new_password">Por favor, introduzca su nueva contraseña</string>
+    <string name="confirm_new_password">Por favor, confirme su nueva contraseña</string>
+    <string name="passwords_not_match">Las contraseñas tendrán que ser iguales</string>
+    <!-- Language Dialog -->
+    <string name="language_title">Idioma</string>
+    <string name="select_a_language">Select a language</string>
+
+    <string name="select_default_languages">Seleccione el idioma para la app</string>
+    <!-- Video Quality -->
+    <string name="video_quality_title">Calidad Video</string>
+    <string name="select_default_quality">Seleccione la calidad default para videos</string>
+    <!-- Buffer Dialog -->
+    <string name="buffer_title">Buffer</string>
+    <string name="buffer_live_tv">Estabelecer el tiempo de buffer para TV en vivo</string>
+    <string name="buffer_vod">Estabelecer el tiempo de buffer para peliculas</string>
+    <string name="buffer_size_live_tv">Tiempo de Buffer para TV en vivo -&#160;%1$d</string>
+    <string name="buffer_size_movies">Tiempo de Buffer para peliculas -&#160;%1$d</string>
+    <string name="maximum_time_video_will_be_buffered">El tiempo máximo que su video almacenará por delante</string>
+
+    <!-- Message -->
+    <string name="message_account_created">Su cuenta ha sido creada, disfrute</string>
+    <string name="message_password_reset_successful">Password reset successful. Please check your email</string>
+    <string name="message_calendar_permission_denied">Permiso negado, no podrá agregar recordatorios</string>
+    <string name="message_content_not_available">Contenido no disponible</string>
+    <string name="message_trending_empty">Estamos recopilando datos para mostrarle \n los principales canales de tendencias, \n películas y programas de TV</string>
+    <string name="message_channel_empty">We’re unable to show you results for (filter)</string>
+    <string name="message_vod_empty">We’re collecting data to \n show you the best content</string>
+    <string name="message_vod_by_genre_empty">No hay peliculas para este género</string>
+    <string name="message_tv_show_empty">We’re collecting data to \n show you the best content</string>
+    <string name="message_tv_show_by_genre_empty">No hay programas de TV para este género</string>
+    <string name="message_insert_pin">Para ingresar este contenido, introduzca su PIN</string>
+    <string name="message_insert_purchase_pin">Por favor, introduzca su pin para comprar este contenido</string>
+    <string name="message_wrong_pin">PIN errado. Por favor, intentelo de nuevo!</string>
+    <string name="message_select_profile_for_rent">Por favor, seleccione perfil para seguir comprando</string>
+    <string name="message_select_pricing_for_rent">Por favor, seleccione el precio para seguir alquilando</string>
+    <string name="message_content_will_be_available">Película estará disponible&#160;</string>
+    <string name="message_content_rented">%1s ralquiler exitoso</string>
+    <string name="message_select_profile">Por favor, seleccione el perfil</string>
+    <string name="message_content_rated">Contenido calificado exitosamente</string>
+    <string name="message_profile_updated">Información de cuenta actualizada con éxito</string>
+    <string name="message_swipe_left_right">Desliza hacia la izquierda / derecha para cambiar de canal</string>
+    <string name="message_catchup_not_supported">Catchup no soportado para el tiempo seleccionado</string>
+    <string name="message_no_programmes">Uh oh! \n sin programas para el día seleccionado</string>
+    <string name="message_reminder_added">Recordatorio añadido exitosamente</string>
+    <string name="message_reminder_removed">Recordatorio eliminado con éxito</string>
+    <string name="message_reminder_updated">Tiempo de activación del recordatorio actualizado exitosamente</string>
+    <string name="message_you_are_not_subscribed">Usted no está suscrito a nuestro servicio. Si aún no ha iniciado sesión, inicie sesión o verifique su suscripción</string>
+
+    <!-- Error -->
+    <string name="error_email_can_not_be_empty">El campo de Email/Nombre de usuario no puede estar vacio</string>
+    <string name="error_password_can_not_be_empty">La contraseña no puede estar vacia</string>
+    <string name="error_password_min_length">La longitud mínima de la contraseña es  %1$d</string>
+    <string name="error_malformed_json">Oops! We hit an error. Try again later</string>
+    <string name="error_timeout">Oooops! We could not capture your request in time. Please try again</string>
+    <string name="error_no_internet_connection">Por favor revise su conexión a la internet</string>
+    <string name="error_unknown">Something went wrong!</string>
+    <string name="error_token_expired">Token expired, please log in again</string>
+    <string name="error_subscription_expired">Suscripción expirada o inválida</string>
+
+    <!-- Languages -->
+    <array name="languages">
+        <item>@string/english</item>
+        <item>@string/spanish</item>
+        <item>@string/brazilian</item>
+    </array>
+
+    <!-- Search -->
+    <string name="search">Busqueda</string>
+    <string name="search_result">No se encontraron resultados de búsqueda</string>
+    <string name="search_result_for">Resultado de búsqueda para \"%1$s\"</string>
+    <string-array name="filter">
+        <item>Ordenar por Nombre</item>
+        <item>Nombre: A - Z</item>
+        <item>Nombre: Z - A</item>
+    </string-array>
+
+</resources>

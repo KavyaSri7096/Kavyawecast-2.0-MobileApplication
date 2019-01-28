@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.live.channel.ChannelViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        style="@style/CustomCardView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/channel_card_height"
+        android:onClick="@{() -> viewModel.onItemClick()}">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="@{viewModel.isNotRented ? 0.3f : 1.0f}"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY"
+                    app:logoUrl="@{viewModel.logoUrl}" />
+
+                <TextView
+                    style="@style/TextView.Content.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/grayDark"
+                    android:ellipsize="marquee"
+                    android:padding="@dimen/standard_half"
+                    android:singleLine="true"
+                    android:text="@{viewModel.title}"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/standard_half"
+                android:layout_marginEnd="@dimen/standard_half"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_lock"
+                android:visibility="@{viewModel.isNotRented ? View.VISIBLE : View.GONE , default=gone}" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

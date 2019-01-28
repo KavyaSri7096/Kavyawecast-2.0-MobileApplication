@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.home.HomeHighlightedViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        style="@style/CustomCardView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/highlighted_card_height"
+        android:onClick="@{() -> viewModel.onItemClick()}">
+
+        <ImageView
+            android:id="@+id/poster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            app:highlightedUrl="@{viewModel.imageUrl}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_black_bottom_to_top"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:padding="@dimen/standard_half">
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/TextView.Title.Big.Bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.title}"
+                android:textAlignment="viewStart"
+                android:textColor="@color/white"
+                app:fontPath="fonts/helvetica_bold.ttf" />
+
+            <TextView
+                android:id="@+id/info"
+                style="@style/TextView.Content.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="@{viewModel.info}"
+                android:textAlignment="viewStart"
+                android:textColor="@color/whiteOverlay80" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

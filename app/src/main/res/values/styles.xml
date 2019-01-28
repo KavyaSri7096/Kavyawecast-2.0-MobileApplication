@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- TextView -->
+    <style name="TextView.Title.Large" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/title_large</item>
+    </style>
+
+    <style name="TextView.Title.Large.Bold" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/title_large</item>
+    </style>
+
+    <style name="TextView.Title.Big" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/title_big</item>
+    </style>
+
+    <style name="TextView.Title.Big.Bold" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/title_big</item>
+    </style>
+
+    <style name="TextView.Title.Medium" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/title_medium</item>
+    </style>
+
+    <style name="TextView.Title.Medium.Bold" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/title_medium</item>
+    </style>
+
+    <style name="TextView.Title.Small" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/title_small</item>
+    </style>
+
+    <style name="TextView.Title.Small.Bold" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/title_small</item>
+    </style>
+
+    <style name="TextView.Content.Big" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/content_big</item>
+    </style>
+
+    <style name="TextView.Content.Big.Bold" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/content_big</item>
+    </style>
+
+    <style name="TextView.Content.Medium" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/content_medium</item>
+    </style>
+
+    <style name="TextView.Content.Medium.Bold" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/content_medium</item>
+    </style>
+
+    <style name="TextView.Content.Small" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/content_small</item>
+    </style>
+
+    <style name="TextView.Content.Small.Bold" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/content_small</item>
+    </style>
+
+    <style name="TextView.Title.Toolbar" parent="android:TextAppearance">
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/title_medium</item>
+    </style>
+
+    <!-- Button -->
+    <style name="CustomButtonOval">
+        <item name="android:textSize">@dimen/content_big</item>
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:padding">@dimen/standard_small</item>
+        <item name="android:foreground">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="android:background">@drawable/bg_button_oval</item>
+    </style>
+
+    <style name="ComponentButton">
+        <item name="android:textSize">@dimen/content_big</item>
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="android:drawablePadding">@dimen/standard_small</item>
+    </style>
+
+    <style name="CustomDialogButton" parent="Base.TextAppearance.AppCompat.Widget.Button">
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/bg_ripple_effect</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textSize">@dimen/content_big</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- EditText -->
+    <style name="CustomTextInputLayout">
+        <item name="android:textColorHint">?attr/colorTextInactive</item>
+        <item name="android:textColorHighlight">?attr/colorTextInactive</item>
+        <item name="passwordToggleTint">?attr/colorTextActive</item>
+    </style>
+
+    <style name="CustomTextInputEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/standard</item>
+        <item name="android:textSize">@dimen/content_medium</item>
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textColorHint">?attr/colorTextInactive</item>
+        <item name="android:textColorHighlight">?attr/colorTextInactive</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
+    <style name="CustomEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/standard</item>
+        <item name="android:textColor">?attr/colorTextActive</item>
+        <item name="android:textSize">@dimen/content_medium</item>
+        <item name="android:textColorHighlight">?attr/colorTextInactive</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
+    <!-- TabLayout -->
+    <style name="CustomTabLayout">
+        <item name="tabBackground">@drawable/bg_tab_layout_selector</item>
+        <item name="tabIndicatorColor">@color/transparent</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabTextAppearance">@style/TabLayoutTextAppearance</item>
+    </style>
+
+    <style name="TabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">@dimen/content_small</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- CardView -->
+    <style name="CustomCardView" parent="CardView">
+        <item name="cardCornerRadius">2dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardBackgroundColor">@color/gray</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?android:selectableItemBackground</item>
+    </style>
+
+    <!-- ProgressBar -->
+    <style name="ProgressBar.Card" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/standard_small</item>
+    </style>
+
+    <!-- ImageView -->
+    <style name="CustomBackButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/standard</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="CustomBackButton.Black" parent="CustomBackButton">
+        <item name="android:src">@drawable/ic_arrow_back</item>
+    </style>
+
+    <style name="CustomBackButton.White" parent="CustomBackButton">
+        <item name="android:src">@drawable/ic_arrow_back_white</item>
+    </style>
+
+    <!-- RadialTimePicker -->
+    <style name="CustomRadialTimePickerDialog" parent="BetterPickersRadialTimePickerDialog.PrimaryColor">
+        <item name="bpPreHeaderBackgroundColor">@color/colorPrimaryPrism</item>
+        <item name="bpHeaderBackgroundColor">@color/colorPrimaryDarkPrism</item>
+        <item name="bpHeaderSelectedTextColor">@color/white</item>
+        <item name="bpHeaderUnselectedTextColor">@color/gray</item>
+        <item name="bpBodyBackgroundColor">@color/white</item>
+        <item name="bpBodySelectedTextColor">@color/gray</item>
+        <item name="bpBodyUnselectedTextColor">@android:color/white</item>
+        <item name="bpRadialBackgroundColor">#EEEEEE</item>
+        <item name="bpRadialTextColor">@color/colorPrimaryPrism</item>
+        <item name="bpRadialPointerColor">@color/colorPrimaryPrism</item>
+        <item name="bpButtonsBackgroundColor">@color/transparent</item>
+        <item name="bpButtonsTextColor">@color/colorPrimaryPrism</item>
+    </style>
+
+</resources>

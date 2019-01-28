@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.vod.VodViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        style="@style/CustomCardView"
+        android:layout_width="@dimen/vod_card_width"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.onItemClick()}">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/vod_card_width"
+                    android:layout_height="@dimen/vod_continue_card_height"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerCrop"
+                    app:coverUrl="@{viewModel.coverUrl}" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_play_trailer" />
+
+            </FrameLayout>
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="@style/ProgressBar.Card"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/transparent"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/progress_bar" />
+
+            <TextView
+                style="@style/TextView.Content.Big"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:ellipsize="marquee"
+                android:padding="@dimen/standard_small"
+                android:singleLine="true"
+                android:text="@{viewModel.title}" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

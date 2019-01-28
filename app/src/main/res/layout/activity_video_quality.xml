@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.settings.quality.VideoQualityActivityViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/component_toolbar_white" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/video_qualities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/standard_double" />
+
+        <TextView
+            style="@style/TextView.Content.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/video_qualities"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:padding="@dimen/standard_half"
+            android:text="@string/select_default_quality"
+            android:textColor="?attr/colorTextInactive" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

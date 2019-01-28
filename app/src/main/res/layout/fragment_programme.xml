@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.live.channel.details.progamme.ProgrammeFragmentViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.wefika.horizontalpicker.HorizontalPicker
+            android:id="@+id/picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/standard_double"
+            android:paddingTop="@dimen/standard"
+            android:paddingEnd="@dimen/standard_double"
+            android:paddingBottom="@dimen/standard_half"
+            android:textColor="@drawable/ic_picker_color_selector"
+            android:textSize="@dimen/title_small" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:background="@drawable/ic_picker_divider" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/data"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                android:overScrollMode="never" />
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/loader"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="@dimen/spinner_size"
+                android:layout_height="@dimen/spinner_size"
+                android:layout_centerInParent="true"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+            <include
+                android:id="@+id/noData"
+                layout="@layout/component_programme_empty" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>

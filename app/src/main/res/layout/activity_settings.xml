@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.settings.SettingsActivityViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/component_toolbar_white" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/standard">
+
+                <com.wecast.mobile.ui.widget.banner.BannerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/standard"
+                    app:box_position="settings_box" />
+
+                <TextView
+                    android:id="@+id/name"
+                    style="@style/TextView.Title.Big.Bold"
+                    fontPath="fonts/helvetica_bold.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_edit"
+                    android:drawablePadding="@dimen/standard"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="@{viewModel.fullName}"
+                    android:textAlignment="viewStart"
+                    android:visibility="@{viewModel.fullName != null ? View.VISIBLE : View.GONE}" />
+
+                <include
+                    layout="@layout/component_settings_text"
+                    android:visibility="@{viewModel.email != null ? View.VISIBLE : View.GONE}"
+                    app:subtitle="@{viewModel.email}"
+                    app:title="@{@string/email}" />
+
+                <include
+                    layout="@layout/component_settings_text"
+                    android:visibility="@{viewModel.age != null ? View.VISIBLE : View.GONE}"
+                    app:subtitle="@{viewModel.age}"
+                    app:title="@{@string/age}" />
+
+                <include
+                    layout="@layout/component_settings_text"
+                    android:visibility="@{viewModel.gender != null ? View.VISIBLE : View.GONE}"
+                    app:subtitle="@{viewModel.gender}"
+                    app:title="@{@string/gender}" />
+
+                <include
+                    layout="@layout/component_settings_text"
+                    android:visibility="@{viewModel.country != null ? View.VISIBLE : View.GONE}"
+                    app:subtitle="@{viewModel.country}"
+                    app:title="@{@string/country}" />
+
+                <include
+                    layout="@layout/component_settings_text"
+                    android:visibility="@{viewModel.city != null ? View.VISIBLE : View.GONE}"
+                    app:subtitle="@{viewModel.city}"
+                    app:title="@{@string/city}" />
+
+                <include layout="@layout/component_divider" />
+
+                <include
+                    android:id="@+id/subscription"
+                    layout="@layout/component_settings_next"
+                    app:title="@{@string/membership}" />
+
+                <include
+                    android:id="@+id/language"
+                    layout="@layout/component_settings_next"
+                    app:subtitle="@{viewModel.language}"
+                    app:title="@{@string/language}" />
+
+                <include
+                    android:id="@+id/quality"
+                    layout="@layout/component_settings_next"
+                    app:subtitle="@{viewModel.videoQuality}"
+                    app:title="@{@string/video_quality}" />
+
+                <include
+                    android:id="@+id/buffer"
+                    layout="@layout/component_settings_next"
+                    app:title="@{@string/buffer}" />
+
+                <include
+                    android:id="@+id/debug"
+                    layout="@layout/component_settings_toggle"
+                    app:checked="@{viewModel.debug}"
+                    app:title="@{@string/debug}" />
+
+                <include
+                    android:id="@+id/theme"
+                    layout="@layout/component_settings_toggle"
+                    app:checked="@{viewModel.theme}"
+                    app:title="@{@string/theme}" />
+
+
+                <include
+                    android:id="@+id/rtl"
+                    layout="@layout/component_settings_toggle"
+                    app:checked="@{viewModel.RTL}"
+                    app:title="@{@string/right_to_left}" />
+
+                <TextView
+                    android:id="@+id/logOut"
+                    style="@style/TextView.Content.Big"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_log_out"
+                    android:paddingTop="@dimen/standard_small"
+                    android:paddingBottom="@dimen/standard_small"
+                    android:text="@string/log_out"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="true" />
+
+                <TextView
+                    style="@style/TextView.Content.Big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/standard_half"
+                    android:text="@{viewModel.version}"
+                    android:textColor="?attr/colorTextInactive" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

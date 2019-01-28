@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Marble theme color palette -->
+    <color name="colorPrimaryMarble">#FFFFFF</color>
+    <color name="colorPrimaryDarkMarble">#FFFFFF</color>
+    <color name="colorAccentMarble">#0FA0DB</color>
+    <color name="colorBackgroundMarble">#EEEEEE</color>
+    <color name="colorTextActiveMarble">#0C0C0C</color>
+    <color name="colorTextInactiveMarble">#9B9B9B</color>
+    <color name="colorSplashBackgroundMarble">#FFFFFF</color>
+
+    <!-- Prism theme color palette     -->
+    <color name="colorPrimaryPrism">#0C0C0C</color>
+    <color name="colorPrimaryDarkPrism">#0C0C0C</color>
+    <color name="colorAccentPrism">#0FA0DB</color>
+    <color name="colorBackgroundPrism">#222222</color>
+    <color name="colorTextActivePrism">#FEFEFE</color>
+    <color name="colorTextInactivePrism">#9B9B9B</color>
+    <color name="colorSplashBackgroundPrism">#818181</color>
+
+    <color name="transparent">#00FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="whiteOverlay80">#CCFFFFFF</color>
+    <color name="gray">#9B9B9B</color>
+    <color name="grayDark">#4A4A4A</color>
+    <color name="grayOverlay70">#C1C1C1</color>
+    <color name="black">#0C0C0C</color>
+    <color name="blackOverlay80">#CC000000</color>
+    <color name="blackOverlay50">#80000000</color>
+    <color name="blackOverlay30">#4D000000</color>
+
+    <!--
+    100% — FF
+    95% — F2
+    90% — E6
+    85% — D9
+    80% — CC
+    75% — BF
+    70% — B3
+    65% — A6
+    60% — 99
+    55% — 8C
+    50% — 80
+    45% — 73
+    40% — 66
+    35% — 59
+    30% — 4D
+    25% — 40
+    20% — 33
+    15% — 26
+    10% — 1A
+    5% — 0D
+    0% — 00
+     -->
+
+</resources>
+

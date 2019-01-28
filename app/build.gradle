@@ -1,0 +1,83 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply from: '../flavors.gradle'
+apply from: '../libraries.gradle'
+
+android {
+
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        applicationId "com.wecast.mobile"
+        // Version
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.appVersionCode
+        versionName versions.appVersion
+        // Renderscript for blur
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
+        // Vector drawables
+        vectorDrawables.useSupportLibrary = true
+        // Testing
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // Common SDK integration IDs
+        manifestPlaceholders = [
+                ADMOB_APP_ID: "ca-app-pub-8022422195783695~7199223580",
+                HOCKEYAPP_APP_ID: "59e07effc02f41108cb4c7522042f5c8",
+                FABRIC_APP_ID: "efa99ecbf88759d98f7a16cc890df5964dabdbb8"
+        ]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "Mobile-${variant.name}-${variant.versionName}.apk"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':wecast-core')
+    implementation project(':wecast-player')
+
+    // Dependency Injection
+    implementation libraries.dagger.base
+    annotationProcessor libraries.dagger.compiler
+    implementation libraries.dagger.android
+    annotationProcessor libraries.dagger.androidProcessor
+    implementation libraries.dagger.androidSupport
+
+    // Glide
+    implementation 'com.facebook.fresco:fresco:1.10.0'
+
+    implementation libraries.glide.base
+    annotationProcessor 'androidx.annotation:annotation:1.0.1'
+    annotationProcessor libraries.glide.compiler
+
+    // LeakCanary
+    debugImplementation libraries.leakcanary.debug
+    releaseImplementation libraries.leakcanary.release
+
+    // Fabric
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.8@aar') {
+        transitive = true
+    }
+}

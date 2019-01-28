@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.gallery.GalleryActivityViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.github.mmin18.widget.RealtimeBlurView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:realtimeBlurRadius="20dp"
+            app:realtimeOverlayColor="@color/blackOverlay80" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/gallery"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="@dimen/standard_double"
+            android:overScrollMode="never" />
+
+        <com.wecast.mobile.ui.widget.CircleDotIndicator
+            android:id="@+id/galleryIndicator"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:padding="@dimen/standard"
+            app:selectedDotColor="?android:attr/colorAccent" />
+
+        <ImageView
+            android:id="@+id/back"
+            style="@style/CustomBackButton"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="@dimen/status_bar_height"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_close" />
+
+    </FrameLayout>
+
+</layout>

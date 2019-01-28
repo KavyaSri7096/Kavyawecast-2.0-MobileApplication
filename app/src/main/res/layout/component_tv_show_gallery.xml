@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/highlighted_card_height"
+        app:cardElevation="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/highlighted_card_height"
+                android:background="@drawable/gradient_black_bottom_and_top" />
+
+            <com.wecast.mobile.ui.widget.CircleDotIndicator
+                android:id="@+id/viewPagerIndicator"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="@dimen/standard_double"
+                android:layout_marginStart="@dimen/standard_double"
+                android:gravity="center"
+                android:padding="@dimen/standard_small"
+                app:selectedDotColor="?android:attr/colorAccent" />
+
+            <ImageView
+                android:id="@+id/trailer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_play_trailer" />
+
+            <ImageView
+                android:id="@+id/back"
+                style="@style/CustomBackButton.White"
+                android:layout_marginTop="@dimen/status_bar_height"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_arrow_back_white" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

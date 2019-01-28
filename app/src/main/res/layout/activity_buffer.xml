@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.settings.buffer.BufferActivityViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/component_toolbar_white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <TextView
+                android:id="@+id/buffer_live_value"
+                style="@style/TextView.Content.Big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/buffer_live_tv"
+                android:textAllCaps="true" />
+
+            <SeekBar
+                android:id="@+id/buffer_live"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standard_double"
+                android:max="40"
+                android:thumbTint="?attr/colorAccent" />
+
+            <TextView
+                android:id="@+id/buffer_vod_value"
+                style="@style/TextView.Content.Big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/buffer_vod"
+                android:textAllCaps="true" />
+
+            <SeekBar
+                android:id="@+id/buffer_vod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standard_double"
+                android:max="40"
+                android:thumbTint="?attr/colorAccent" />
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/TextView.Content.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:padding="@dimen/standard"
+            android:text="@string/maximum_time_video_will_be_buffered"
+            android:textColor="?attr/colorTextInactive" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

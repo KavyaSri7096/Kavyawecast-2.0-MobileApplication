@@ -1,0 +1,50 @@
+apply from: '../versions.gradle'
+
+android {
+    flavorDimensions "app"
+
+    productFlavors {
+
+        dev {
+            dimension "app"
+            applicationIdSuffix ".admin"
+            // Variables
+            buildConfigField "String", "API_URL", "\"http://api2.wecast.tv\""
+        }
+
+        demo {
+            dimension "app"
+            applicationIdSuffix ".demo"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api0.wecastdemo.com\""
+        }
+
+        nettv {
+            dimension "app"
+            applicationIdSuffix ".nettv"
+            // Variables
+            buildConfigField "String", "API_URL", "\"http://api.mynet-tv.com/\""
+        }
+
+        brasilnet {
+            dimension "app"
+            applicationIdSuffix ".brasilnet"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api.brasilnet.net.br\""
+        }
+
+        intv {
+            dimension "app"
+            applicationIdSuffix ".intv"
+            // Variables
+            buildConfigField "String", "API_URL", "\"http://api.in.tv.br\""
+        }
+
+        trendtv {
+            dimension "app"
+            applicationIdSuffix ".trendtv"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api0.wecastdemo.com\""
+        }
+    }
+}

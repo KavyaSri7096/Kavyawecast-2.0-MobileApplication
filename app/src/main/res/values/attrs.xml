@@ -1,0 +1,38 @@
+<resources>
+
+    <!-- General app colors -->
+    <attr name="colorBackground" format="reference" />
+    <attr name="colorTextActive" format="reference" />
+    <attr name="colorTextInactive" format="reference" />
+    <attr name="colorOverlayBox" format="reference" />
+    <attr name="colorTabBarBackground" format="reference" />
+    <attr name="colorSplashBackground" format="reference" />
+
+    <!-- List row container attributes -->
+    <declare-styleable name="ListRowContainer">
+        <attr name="emptyLayout" format="reference" />
+    </declare-styleable>
+
+    <!-- Banner row attributes -->
+    <declare-styleable name="BannerView">
+        <attr name="box_position" format="string" />
+    </declare-styleable>
+
+    <!-- View pager dots indicator attributes -->
+    <attr name="selectedDotColor" format="color" />
+    <attr name="unSelectedDotColor" format="color" />
+    <attr name="dotsSize" format="dimension" />
+    <attr name="dotsWidthFactor" format="float" />
+    <attr name="dotsSpacing" format="dimension" />
+    <attr name="dotsCornerRadius" format="dimension" />
+
+    <declare-styleable name="CircleDotIndicator">
+        <attr name="selectedDotColor" />
+        <attr name="unSelectedDotColor" />
+        <attr name="dotsSize" />
+        <attr name="dotsWidthFactor" />
+        <attr name="dotsSpacing" />
+        <attr name="dotsCornerRadius" />
+    </declare-styleable>
+
+</resources>

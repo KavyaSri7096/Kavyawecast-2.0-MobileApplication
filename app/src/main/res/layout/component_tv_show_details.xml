@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/standard"
+        android:paddingTop="@dimen/standard"
+        android:paddingEnd="@dimen/standard">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/TextView.Title.Large.Bold"
+            fontPath="fonts/helvetica_bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/info"
+                style="@style/TextView.Content.Big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                android:id="@+id/imdb"
+                style="@style/TextView.Content.Big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/standard_small" />
+
+        </LinearLayout>
+
+        <org.apmem.tools.layouts.FlowLayout
+            android:id="@+id/genres"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+
+        <org.apmem.tools.layouts.FlowLayout
+            android:id="@+id/showTypes"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+
+        <TextView
+            android:id="@+id/description"
+            style="@style/TextView.Content.Big"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_half"
+            android:layout_marginBottom="@dimen/standard_half"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            android:id="@+id/cast"
+            style="@style/TextView.Content.Big"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/standard_half"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            android:id="@+id/director"
+            style="@style/TextView.Content.Big"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/standard_half"
+            android:textAlignment="viewStart" />
+
+        <com.wecast.mobile.ui.widget.banner.BannerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_half"
+            app:box_position="tv_shows_details_box" />
+
+    </LinearLayout>
+
+</layout>

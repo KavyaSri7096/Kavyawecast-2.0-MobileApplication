@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.wecast.mobile.ui.screen.show.genre.TVShowGenreViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        style="@style/CustomCardView"
+        android:layout_width="@dimen/vod_genre_card_width"
+        android:layout_height="@dimen/vod_genre_card_height"
+        android:onClick="@{() -> viewModel.onItemClick()}"
+        app:cardBackgroundColor="@color/black">
+
+        <TextView
+            style="@style/TextView.Content.Small"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="@dimen/standard_small"
+            android:singleLine="true"
+            android:text="@{viewModel.name}"
+            android:textColor="@color/white" />
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

@@ -1,0 +1,27 @@
+package com.wecast.mobile.ui.widget.listRow;
+
+/**
+ * Created by ageech@live.com
+ */
+
+public enum ListRowType {
+    HIGHLIGHTED,
+    CHANNELS,
+    FAVORITE_CHANNELS,
+    MOVIES,
+    MOVIE_GENRES,
+    RECENTLY_ADDED_MOVIES,
+    NEWEST_MOVIES,
+    RECOMMENDED_MOVIES,
+    TRENDING_MOVIES,
+    CONTINUE_WATCHING,
+    TV_SHOWS,
+    TV_SHOW_GENRES,
+    EPISODES,
+    RECENTLY_ADDED_TV_SHOWS,
+    NEWEST_TV_SHOWS,
+    RECOMMENDED_TV_SHOWS,
+    TRENDING_TV_SHOWS,
+    RECOMMENDED_EPISODES,
+    TV_GUIDE
+}
