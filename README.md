@@ -1,33 +1,15 @@
 ﻿# WeCast 2.0 Mobile
 
-WeCast 2.0 is android IPTV/OTT application for android devices. 
+WeCast 2.0 is android IPTV/OTT application for android devices. <br/>
 To use this project you will need latest version of android studio because project is migrated to AndroidX.
 > AndroidX is the open-source project that the Android team uses to develop, test, package, version and release libraries within [Jetpack](https://developer.android.com/jetpack).
+>
 > Learn more about [AndroidX](https://developer.android.com/jetpack/androidx/).
 
-# Installation
+## Submodules
 
-Clone this repository and import into **Android Studio**
-
->git clone git@bitbucket.org:{username>}/{reponame}.git
-
-##  Build variants
-
-For develop we are using **dev** build variant,
-for demo we are using **demo** build variant.
-Other build variants are for customers :
-- nettv
-- brasilnet
-- intv
-- trendtv
-
-## Generating signed APK
-
-To crate signed app from Android Studio follow this steps:
-
-1.  _**Build**_  menu
-2.  _**Generate Signed APK...**_
-3.  Fill in the keystore information  _(you only need to do this once manually and then let Android Studio remember it)_
+- [wecast-core](https://bitbucket.org/harunagic/wecast-2.0-core)
+- [wecast-player](https://bitbucket.org/harunagic/wecast-2.0-player)
 
 ## Dependencies
 - [Dagger 2](https://github.com/google/dagger)
@@ -43,3 +25,30 @@ To crate signed app from Android Studio follow this steps:
 - [HockeyApp](https://github.com/bitstadium/HockeySDK-Android)
 - [LeakCanary](https://github.com/square/leakcanary)
 
+# Installation
+
+Clone this repository and import into **Android Studio**
+
+>git clone git@bitbucket.org:harunagic/wecast-2.0-mobile.git
+
+##  Build variants
+
+For develop we are using **dev** build variant,<br/>
+for demo we are using **demo** build variant.<br/>
+<br/>
+Other build variants are for customers :
+- nettv
+- brasilnet
+- intv
+- trendtv
+
+## Generating signed APK
+
+To crate signed app from Android Studio follow this steps:
+
+1.  _**Build**_  menu
+2.  _**Generate Signed APK...**_
+3.  Fill in the keystore information  _(you only need to do this once manually and then let Android Studio remember it)_
+
+
+Generated **.apk** file will be placed in root project inside **build** folder
