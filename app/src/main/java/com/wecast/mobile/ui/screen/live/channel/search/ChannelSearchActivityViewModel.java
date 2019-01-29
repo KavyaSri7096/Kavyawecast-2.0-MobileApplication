@@ -34,10 +34,10 @@ public class ChannelSearchActivityViewModel extends BaseViewModel<ChannelSearchA
                     if (response.isTokenExpired()) {
                         return ResponseWrapper.tokenExpired();
                     } else if (response.isSubscriptionExpired()) {
-                        List<Channel> data = response.getData();
+                        List<Channel> data = response.getData().getItems();
                         return ResponseWrapper.subscriptionExpired(data);
                     } else if (response.isSuccessful()) {
-                        List<Channel> data = response.getData();
+                        List<Channel> data = response.getData().getItems();
                         return ResponseWrapper.success(data);
                     } else {
                         return ResponseWrapper.error(response.getMessage());
