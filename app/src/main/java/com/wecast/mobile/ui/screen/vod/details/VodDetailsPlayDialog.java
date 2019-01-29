@@ -20,7 +20,7 @@ import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.DialogVodPlayBinding;
 import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseDialog;
-import com.wecast.mobile.ui.common.adapter.ItemSingleChoiceAdapter;
+import com.wecast.mobile.ui.common.adapter.SingleChoiceAdapter;
 import com.wecast.mobile.ui.screen.vod.VodType;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerActivity;
 import com.wecast.core.utils.ViewUtils;
@@ -33,7 +33,7 @@ import javax.inject.Inject;
  * Created by ageech@live.com
  */
 
-public class VodDetailsPlayDialog extends BaseDialog implements ItemSingleChoiceAdapter.OnCheckListener<VodSourceProfile> {
+public class VodDetailsPlayDialog extends BaseDialog implements SingleChoiceAdapter.OnCheckListener<VodSourceProfile> {
 
     public static final String TAG = VodDetailsPlayDialog.class.getName();
 

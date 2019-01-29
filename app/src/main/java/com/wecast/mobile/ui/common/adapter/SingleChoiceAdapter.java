@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wecast.core.data.db.pref.PreferenceManager;
-import com.wecast.mobile.ui.common.adapter.viewHolder.ItemSingleChoiceViewHolder;
+import com.wecast.mobile.ui.common.adapter.viewHolder.SingleChoiceViewHolder;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
  * Created by ageech@live.com
  */
 
-public abstract class ItemSingleChoiceAdapter<T, V extends ItemSingleChoiceViewHolder> extends RecyclerView.Adapter {
+public abstract class SingleChoiceAdapter<T, V extends SingleChoiceViewHolder> extends RecyclerView.Adapter {
 
     private final PreferenceManager preferenceManager;
     private final List<T> items;
@@ -26,7 +26,7 @@ public abstract class ItemSingleChoiceAdapter<T, V extends ItemSingleChoiceViewH
     private RecyclerView.LayoutManager layoutManager;
     private int lastCheckedPosition;
 
-    protected ItemSingleChoiceAdapter(PreferenceManager preferenceManager, List<T> arrayList, OnCheckListener<T> onCheckListener) {
+    protected SingleChoiceAdapter(PreferenceManager preferenceManager, List<T> arrayList, OnCheckListener<T> onCheckListener) {
         this.preferenceManager = preferenceManager;
         this.items = arrayList;
         this.onCheckListener = onCheckListener;

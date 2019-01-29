@@ -2,9 +2,6 @@ package com.wecast.mobile.ui.base;
 
 import android.view.View;
 
-import com.wecast.core.data.db.entities.ShowType;
-import com.wecast.mobile.ui.common.adapter.ItemMultiChoiceAdapter;
-
 import androidx.recyclerview.widget.RecyclerView;
 
 /**

@@ -10,8 +10,8 @@ import com.wecast.core.data.db.entities.Subscription;
 import com.wecast.core.data.db.pref.PreferenceManager;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.CardRadioButtonBinding;
-import com.wecast.mobile.ui.common.adapter.ItemSingleChoiceAdapter;
-import com.wecast.mobile.ui.common.adapter.viewHolder.ItemSingleChoiceViewHolder;
+import com.wecast.mobile.ui.common.adapter.SingleChoiceAdapter;
+import com.wecast.mobile.ui.common.adapter.viewHolder.SingleChoiceViewHolder;
 
 import java.util.List;
 
@@ -19,11 +19,11 @@ import java.util.List;
  * Created by ageech@live.com
  */
 
-public class ChannelDetailsProfileAdapter extends ItemSingleChoiceAdapter<ChannelProfile, ChannelDetailsProfileAdapter.ChannelProfileViewHolder> {
+public class ChannelDetailsProfileAdapter extends SingleChoiceAdapter<ChannelProfile, ChannelDetailsProfileAdapter.ChannelProfileViewHolder> {
 
     private PreferenceManager preferenceManager;
 
-    ChannelDetailsProfileAdapter(PreferenceManager preferenceManager, List<ChannelProfile> list, ItemSingleChoiceAdapter.OnCheckListener<ChannelProfile> listener) {
+    ChannelDetailsProfileAdapter(PreferenceManager preferenceManager, List<ChannelProfile> list, SingleChoiceAdapter.OnCheckListener<ChannelProfile> listener) {
         super(preferenceManager, list, listener);
         this.preferenceManager = preferenceManager;
     }
@@ -47,7 +47,7 @@ public class ChannelDetailsProfileAdapter extends ItemSingleChoiceAdapter<Channe
      * VIEW HOLDER
      */
 
-    public class ChannelProfileViewHolder extends ItemSingleChoiceViewHolder<ChannelProfile> {
+    public class ChannelProfileViewHolder extends SingleChoiceViewHolder<ChannelProfile> {
 
         private final CardRadioButtonBinding binding;
         private final PreferenceManager preferenceManager;

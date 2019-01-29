@@ -8,8 +8,8 @@ import com.wecast.core.data.db.entities.Language;
 import com.wecast.core.data.db.pref.PreferenceManager;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.CardRadioButtonBinding;
-import com.wecast.mobile.ui.common.adapter.ItemSingleChoiceAdapter;
-import com.wecast.mobile.ui.common.adapter.viewHolder.ItemSingleChoiceViewHolder;
+import com.wecast.mobile.ui.common.adapter.SingleChoiceAdapter;
+import com.wecast.mobile.ui.common.adapter.viewHolder.SingleChoiceViewHolder;
 import com.wecast.mobile.utils.CommonUtils;
 
 import java.util.List;
@@ -18,9 +18,9 @@ import java.util.List;
  * Created by ageech@live.com
  */
 
-public class LanguageAdapter extends ItemSingleChoiceAdapter<Language, LanguageAdapter.LanguageViewHolder> {
+public class LanguageAdapter extends SingleChoiceAdapter<Language, LanguageAdapter.LanguageViewHolder> {
 
-    LanguageAdapter(PreferenceManager preferenceManager, List<Language> list, ItemSingleChoiceAdapter.OnCheckListener<Language> listener) {
+    LanguageAdapter(PreferenceManager preferenceManager, List<Language> list, SingleChoiceAdapter.OnCheckListener<Language> listener) {
         super(preferenceManager, list, listener);
     }
 
@@ -43,7 +43,7 @@ public class LanguageAdapter extends ItemSingleChoiceAdapter<Language, LanguageA
      * VIEW HOLDER
      */
 
-    public class LanguageViewHolder extends ItemSingleChoiceViewHolder<Language> {
+    public class LanguageViewHolder extends SingleChoiceViewHolder<Language> {
 
         private final CardRadioButtonBinding binding;
 

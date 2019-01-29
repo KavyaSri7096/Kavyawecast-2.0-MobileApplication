@@ -16,7 +16,7 @@ import com.wecast.core.data.db.pref.PreferenceManager;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.DialogTrackBinding;
 import com.wecast.mobile.ui.base.BaseDialog;
-import com.wecast.mobile.ui.common.adapter.ItemSingleChoiceAdapter;
+import com.wecast.mobile.ui.common.adapter.SingleChoiceAdapter;
 import com.wecast.core.utils.ViewUtils;
 import com.wecast.player.data.model.WePlayerTrack;
 import com.wecast.player.data.player.exo.trackSelector.ExoPlayerTrackSelector;
@@ -29,7 +29,7 @@ import javax.inject.Inject;
  * Created by ageech@live.com
  */
 
-public class VodPlayerTextTrackDialog extends BaseDialog implements ItemSingleChoiceAdapter.OnCheckListener<WePlayerTrack> {
+public class VodPlayerTextTrackDialog extends BaseDialog implements SingleChoiceAdapter.OnCheckListener<WePlayerTrack> {
 
     public static final String TAG = VodPlayerTextTrackDialog.class.getName();
 
