@@ -27,31 +27,31 @@
                 android:layout_height="match_parent"
                 android:animateLayoutChanges="true"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/standard"
+                android:paddingBottom="@dimen/standard"
                 app:emptyLayout="@layout/component_tv_show_empty">
 
                 <com.wecast.mobile.ui.screen.show.TVShowRecommendedListRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard" />
+                    android:layout_marginBottom="@dimen/standard" />
 
                 <com.wecast.mobile.ui.widget.banner.BannerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/standard"
-                    android:layout_marginTop="@dimen/standard"
                     android:layout_marginEnd="@dimen/standard"
+                    android:layout_marginBottom="@dimen/standard"
                     app:box_position="tv_shows_box" />
 
                 <com.wecast.mobile.ui.screen.show.genre.TVShowGenreListRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard" />
+                    android:layout_marginBottom="@dimen/standard" />
 
                 <com.wecast.mobile.ui.screen.show.TVShowRecentlyAddedListRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard" />
+                    android:layout_marginBottom="@dimen/standard" />
 
             </com.wecast.mobile.ui.widget.listRow.ListRowContainer>
 

@@ -112,11 +112,7 @@ public class ChannelSearchActivity extends BaseActivity<ActivityChannelSearchBin
         binding.filter.setOnItemSelectedListener(new OnItemSelectListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 1) {
-                    sort(true);
-                } else {
-                    sort(false);
-                }
+                sort(position == 1);
             }
         });
     }

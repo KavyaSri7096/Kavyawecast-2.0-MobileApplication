@@ -34,6 +34,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -120,11 +121,7 @@ public class VodSearchActivity extends BaseActivity<ActivityVodSearchBinding, Vo
         binding.filter.setOnItemSelectedListener(new OnItemSelectListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 1) {
-                    sort(true);
-                } else {
-                    sort(false);
-                }
+                sort(position == 1);
             }
         });
     }
@@ -251,7 +248,7 @@ public class VodSearchActivity extends BaseActivity<ActivityVodSearchBinding, Vo
                         } else if (response.status == ApiStatus.ERROR) {
                             clear();
                         } else if (response.status == ApiStatus.TOKEN_EXPIRED) {
-                            refreshToken(this::getMovies);
+                            refreshToken(() -> filterSearch(showTypeList));
                         } else if (response.status == ApiStatus.SUBSCRIPTION_EXPIRED) {
                             showData(response.data);
                         }
