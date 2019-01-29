@@ -7,9 +7,9 @@ import android.view.View;
  * Created by ageech@live.com
  */
 
-public abstract class ItemSingleChoiceViewHolder<T> extends RecyclerView.ViewHolder {
+public abstract class SingleChoiceViewHolder<T> extends RecyclerView.ViewHolder {
 
-    protected ItemSingleChoiceViewHolder(View itemView) {
+    protected SingleChoiceViewHolder(View itemView) {
         super(itemView);
         itemView.setClickable(true);
     }

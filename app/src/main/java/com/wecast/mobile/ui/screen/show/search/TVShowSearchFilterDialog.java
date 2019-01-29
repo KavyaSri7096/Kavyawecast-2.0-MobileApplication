@@ -14,7 +14,8 @@ import com.wecast.core.data.repository.VodRepository;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.DialogSearchFilterBinding;
 import com.wecast.mobile.ui.base.BaseDialog;
-import com.wecast.mobile.ui.common.adapter.ItemMultiChoiceAdapter;
+import com.wecast.mobile.ui.common.adapter.ShowTypeFilterAdapter;
+import com.wecast.mobile.ui.common.listener.SearchFilterSelectListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by ageech@live.com
  */
 
-public class TVShowSearchFilterDialog extends BaseDialog implements ItemMultiChoiceAdapter.OnItemClickListener {
+public class TVShowSearchFilterDialog extends BaseDialog implements ShowTypeFilterAdapter.OnItemClickListener {
 
     public static final String TAG = TVShowSearchFilterDialog.class.getName();
 
@@ -41,8 +42,8 @@ public class TVShowSearchFilterDialog extends BaseDialog implements ItemMultiCho
     VodRepository vodRepository;
 
     private DialogSearchFilterBinding binding;
-    private TVShowDetailsSearchFilterSelectListener filterSelectListener;
-    private ItemMultiChoiceAdapter adapter;
+    private SearchFilterSelectListener<ShowType> filterSelectListener;
+    private ShowTypeFilterAdapter adapter;
     private List<ShowType> showTypeList;
 
     public static TVShowSearchFilterDialog newInstance() {
@@ -79,7 +80,7 @@ public class TVShowSearchFilterDialog extends BaseDialog implements ItemMultiCho
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.filters.setLayoutManager(layoutManager);
-        adapter = new ItemMultiChoiceAdapter();
+        adapter = new ShowTypeFilterAdapter();
         adapter.setOnItemClickListener(this);
         binding.filters.setAdapter(adapter);
 
@@ -124,7 +125,7 @@ public class TVShowSearchFilterDialog extends BaseDialog implements ItemMultiCho
         }
     }
 
-    void setFilterSelectListener(TVShowDetailsSearchFilterSelectListener filterSelectListener) {
+    void setFilterSelectListener(SearchFilterSelectListener<ShowType> filterSelectListener) {
         this.filterSelectListener = filterSelectListener;
     }
 }

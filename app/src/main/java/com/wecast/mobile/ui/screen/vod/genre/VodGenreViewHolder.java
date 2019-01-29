@@ -2,12 +2,10 @@ package com.wecast.mobile.ui.screen.vod.genre;
 
 import android.content.Context;
 
-import com.wecast.core.data.db.entities.ShowType;
 import com.wecast.core.data.db.entities.VodGenre;
 import com.wecast.mobile.databinding.CardVodGenreBinding;
 import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseViewHolder;
-import com.wecast.mobile.ui.common.adapter.ItemMultiChoiceAdapter;
 
 import androidx.databinding.ViewDataBinding;
 

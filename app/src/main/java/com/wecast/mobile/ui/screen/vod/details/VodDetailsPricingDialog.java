@@ -21,7 +21,7 @@ import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.DialogVodRentPricingBinding;
 import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseDialog;
-import com.wecast.mobile.ui.common.adapter.ItemSingleChoiceAdapter;
+import com.wecast.mobile.ui.common.adapter.SingleChoiceAdapter;
 import com.wecast.mobile.ui.screen.vod.VodType;
 import com.wecast.core.utils.ViewUtils;
 
@@ -38,7 +38,7 @@ import javax.inject.Inject;
  * Created by ageech@live.com
  */
 
-public class VodDetailsPricingDialog extends BaseDialog implements ItemSingleChoiceAdapter.OnCheckListener<VodSourceProfilePricing> {
+public class VodDetailsPricingDialog extends BaseDialog implements SingleChoiceAdapter.OnCheckListener<VodSourceProfilePricing> {
 
     public static final String TAG = VodDetailsPricingDialog.class.getName();
 

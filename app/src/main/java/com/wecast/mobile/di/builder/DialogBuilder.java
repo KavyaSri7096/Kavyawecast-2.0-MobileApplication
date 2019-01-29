@@ -7,6 +7,7 @@ import com.wecast.mobile.ui.common.dialog.PurchasePinDialog;
 import com.wecast.mobile.ui.screen.live.channel.ChannelGenresChildrenDialog;
 import com.wecast.mobile.ui.screen.live.channel.ChannelGenresDialog;
 import com.wecast.mobile.ui.screen.live.channel.details.ChannelDetailsRentDialog;
+import com.wecast.mobile.ui.screen.live.channel.search.ChannelSearchFilterDialog;
 import com.wecast.mobile.ui.screen.settings.logout.LogoutDialog;
 import com.wecast.mobile.ui.screen.show.search.TVShowSearchFilterDialog;
 import com.wecast.mobile.ui.screen.vod.details.VodDetailsPlayDialog;
@@ -47,6 +48,9 @@ public abstract class DialogBuilder {
 
     @ContributesAndroidInjector
     abstract ChannelDetailsRentDialog bindChannelDetailsRentDialog();
+
+    @ContributesAndroidInjector
+    abstract ChannelSearchFilterDialog bindChannelSearchFilterDialog();
 
     @ContributesAndroidInjector
     abstract VodDetailsRentDialog bindVodDetailsRentDialog();

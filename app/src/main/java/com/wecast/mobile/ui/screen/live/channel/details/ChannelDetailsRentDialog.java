@@ -21,7 +21,7 @@ import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.DialogChannelRentBinding;
 import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseDialog;
-import com.wecast.mobile.ui.common.adapter.ItemSingleChoiceAdapter;
+import com.wecast.mobile.ui.common.adapter.SingleChoiceAdapter;
 import com.wecast.mobile.ui.common.dialog.PurchasePinDialog;
 
 import java.util.List;
@@ -36,7 +36,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by ageech@live.com
  */
 
-public class ChannelDetailsRentDialog extends BaseDialog implements ItemSingleChoiceAdapter.OnCheckListener<ChannelProfile> {
+public class ChannelDetailsRentDialog extends BaseDialog implements SingleChoiceAdapter.OnCheckListener<ChannelProfile> {
 
     public static final String TAG = ChannelDetailsRentDialog.class.getName();
 

@@ -1,4 +1,4 @@
-package com.wecast.mobile.ui.screen.vod.search;
+package com.wecast.mobile.ui.screen.live.channel.search;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -9,12 +9,11 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.wecast.core.data.api.ApiStatus;
-import com.wecast.core.data.db.entities.ShowType;
-import com.wecast.core.data.repository.VodRepository;
+import com.wecast.core.data.db.entities.ChannelGenre;
+import com.wecast.core.data.repository.ChannelGenreRepository;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.DialogSearchFilterBinding;
 import com.wecast.mobile.ui.base.BaseDialog;
-import com.wecast.mobile.ui.common.adapter.ShowTypeFilterAdapter;
 import com.wecast.mobile.ui.common.listener.SearchFilterSelectListener;
 
 import java.util.ArrayList;
@@ -34,20 +33,20 @@ import io.reactivex.schedulers.Schedulers;
  * Created by ageech@live.com
  */
 
-public class VodSearchFilterDialog extends BaseDialog implements ShowTypeFilterAdapter.OnItemClickListener {
+public class ChannelSearchFilterDialog extends BaseDialog implements ChannelSearchFilterAdapter.OnItemClickListener {
 
-    public static final String TAG = VodSearchFilterDialog.class.getName();
+    public static final String TAG = ChannelSearchFilterDialog.class.getName();
 
     @Inject
-    VodRepository vodRepository;
+    ChannelGenreRepository channelGenreRepository;
 
     private DialogSearchFilterBinding binding;
-    private SearchFilterSelectListener<ShowType> filterSelectListener;
-    private ShowTypeFilterAdapter adapter;
-    private List<ShowType> showTypeList;
+    private SearchFilterSelectListener<ChannelGenre> filterSelectListener;
+    private ChannelSearchFilterAdapter adapter;
+    private List<ChannelGenre> channelGenreList;
 
-    public static VodSearchFilterDialog newInstance() {
-        return new VodSearchFilterDialog();
+    public static ChannelSearchFilterDialog newInstance() {
+        return new ChannelSearchFilterDialog();
     }
 
     @NonNull
@@ -76,11 +75,11 @@ public class VodSearchFilterDialog extends BaseDialog implements ShowTypeFilterA
     }
 
     private void setupUI() {
-        showTypeList = new ArrayList<>();
+        channelGenreList = new ArrayList<>();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.filters.setLayoutManager(layoutManager);
-        adapter = new ShowTypeFilterAdapter();
+        adapter = new ChannelSearchFilterAdapter();
         adapter.setOnItemClickListener(this);
         binding.filters.setAdapter(adapter);
 
@@ -90,14 +89,14 @@ public class VodSearchFilterDialog extends BaseDialog implements ShowTypeFilterA
     private void setupListeners() {
         binding.confirm.setOnClickListener(v -> {
             if (filterSelectListener != null) {
-                filterSelectListener.onFiltersSelected(showTypeList);
+                filterSelectListener.onFiltersSelected(channelGenreList);
                 dismiss();
             }
         });
     }
 
     private void getShowTypes() {
-        Disposable disposable = vodRepository.getShowTypes()
+        Disposable disposable = channelGenreRepository.getGenres(true)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
@@ -117,15 +116,15 @@ public class VodSearchFilterDialog extends BaseDialog implements ShowTypeFilterA
     }
 
     @Override
-    public void onClick(ShowType showType, boolean isChecked) {
+    public void onClick(ChannelGenre channelGenre, boolean isChecked) {
         if (isChecked) {
-            showTypeList.add(showType);
+            channelGenreList.add(channelGenre);
         } else {
-            showTypeList.remove(showType);
+            channelGenreList.remove(channelGenre);
         }
     }
 
-    void setFilterSelectListener(SearchFilterSelectListener<ShowType> filterSelectListener) {
+    void setFilterSelectListener(SearchFilterSelectListener<ChannelGenre> filterSelectListener) {
         this.filterSelectListener = filterSelectListener;
     }
 }

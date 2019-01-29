@@ -9,12 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wecast.core.data.db.entities.ShowType;
 import com.wecast.core.data.db.entities.TVGuideProgramme;
 import com.wecast.core.utils.TVGuideUtils;
 import com.wecast.mobile.databinding.CardProgrammeBinding;
 import com.wecast.mobile.ui.base.BaseViewHolder;
-import com.wecast.mobile.ui.common.adapter.ItemMultiChoiceAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
