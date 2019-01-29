@@ -148,6 +148,9 @@
     <string name="buffer_size_movies">Buffer time for Movies -&#160;%1$d</string>
     <string name="maximum_time_video_will_be_buffered">The maximum time your video will buffer ahead</string>
 
+    <!-- Search -->
+    <string name="filter_your_search">Filter your search</string>
+
     <!-- Message -->
     <string name="message_account_created">Your account is created, enjoy</string>
     <string name="message_password_reset_successful">Password reset successful. Please check your email</string>

@@ -46,6 +46,7 @@
                     <EditText
                         android:id="@+id/et_first_name"
                         style="@style/CustomEditText"
+                        android:gravity="start"
                         android:inputType="text"
                         android:text="@{viewModel.preferenceManager.authentication.profile.firstName}" />
 
@@ -67,6 +68,7 @@
                     <EditText
                         android:id="@+id/et_last_name"
                         style="@style/CustomEditText"
+                        android:gravity="start"
                         android:inputType="text"
                         android:text="@{viewModel.preferenceManager.authentication.profile.lastName}" />
 
@@ -88,6 +90,7 @@
                     <EditText
                         android:id="@+id/et_email"
                         style="@style/CustomEditText"
+                        android:gravity="start"
                         android:inputType="textEmailAddress"
                         android:text="@{viewModel.preferenceManager.authentication.profile.email}" />
 
@@ -109,6 +112,7 @@
                     <EditText
                         android:id="@+id/et_current_password"
                         style="@style/CustomEditText"
+                        android:gravity="start"
                         android:inputType="textPassword" />
 
                 </LinearLayout>
@@ -129,6 +133,7 @@
                     <EditText
                         android:id="@+id/et_new_password"
                         style="@style/CustomEditText"
+                        android:gravity="start"
                         android:inputType="textPassword" />
 
                 </LinearLayout>
@@ -149,6 +154,7 @@
                     <EditText
                         android:id="@+id/et_confirm_password"
                         style="@style/CustomEditText"
+                        android:gravity="start"
                         android:inputType="textPassword" />
 
                 </LinearLayout>
@@ -169,6 +175,7 @@
                     <EditText
                         android:id="@+id/et_pin"
                         style="@style/CustomEditText"
+                        android:gravity="start"
                         android:inputType="numberPassword"
                         android:maxLength="4"
                         android:text="@{viewModel.preferenceManager.authentication.profile.pin}" />
@@ -192,6 +199,7 @@
                     <EditText
                         android:id="@+id/et_purchase_pin"
                         style="@style/CustomEditText"
+                        android:gravity="start"
                         android:inputType="numberPassword"
                         android:maxLength="5"
                         android:text="@{viewModel.preferenceManager.authentication.account.purchasePin}" />

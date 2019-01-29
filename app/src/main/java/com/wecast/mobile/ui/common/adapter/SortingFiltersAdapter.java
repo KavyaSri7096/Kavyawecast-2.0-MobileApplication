@@ -16,12 +16,12 @@ import com.wecast.mobile.R;
  * Created by ageech@live.com
  */
 
-public class FiltersArrayAdapter extends ArrayAdapter<String> {
+public class SortingFiltersAdapter extends ArrayAdapter<String> {
 
     private Context context;
     private String[] items;
 
-    public FiltersArrayAdapter(@NonNull Context context, String[] items) {
+    public SortingFiltersAdapter(@NonNull Context context, String[] items) {
         super(context, R.layout.component_drop_down, items);
         this.context = context;
         this.items = items;

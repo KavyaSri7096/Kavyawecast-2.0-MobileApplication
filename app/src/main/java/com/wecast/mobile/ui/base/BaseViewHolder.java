@@ -16,6 +16,7 @@ public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
 
     /**
      * Bind data to the item and set listener if needed.
+     * @param item
      */
-    public abstract void onBind(T object);
+    public abstract void onBind(T item);
 }

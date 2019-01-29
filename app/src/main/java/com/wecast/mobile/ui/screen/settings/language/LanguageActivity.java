@@ -13,7 +13,7 @@ import com.wecast.mobile.WeApp;
 import com.wecast.mobile.databinding.ActivityLanguageBinding;
 import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
-import com.wecast.mobile.ui.common.adapter.SingleItemChoiceAdapter;
+import com.wecast.mobile.ui.common.adapter.SingleChoiceAdapter;
 import com.wecast.mobile.utils.LocaleUtils;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import javax.inject.Inject;
  */
 
 public class LanguageActivity extends BaseActivity<ActivityLanguageBinding, LanguageActivityViewModel> implements
-        LanguageActivityNavigator, SingleItemChoiceAdapter.OnCheckListener<Language> {
+        LanguageActivityNavigator, SingleChoiceAdapter.OnCheckListener<Language> {
 
     @Inject
     PreferenceManager preferenceManager;

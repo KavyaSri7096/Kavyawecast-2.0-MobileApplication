@@ -3,16 +3,19 @@ package com.wecast.mobile.ui.screen.live.channel.search;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.wecast.core.data.api.ApiStatus;
 import com.wecast.core.data.db.entities.Channel;
+import com.wecast.core.data.db.entities.ChannelGenre;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityChannelSearchBinding;
 import com.wecast.mobile.ui.base.BaseActivity;
-import com.wecast.mobile.ui.common.adapter.FiltersArrayAdapter;
+import com.wecast.mobile.ui.common.adapter.SortingFiltersAdapter;
 import com.wecast.mobile.ui.common.listener.OnItemSelectListener;
 import com.wecast.mobile.ui.common.listener.OnTextInputListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
@@ -85,6 +88,9 @@ public class ChannelSearchActivity extends BaseActivity<ActivityChannelSearchBin
         binding = getViewDataBinding();
         viewModel.setNavigator(this);
 
+        // Set custom toolbar
+        setSupportActionBar(binding.toolbar.toolbar);
+
         // Set toolbar title
         binding.toolbar.title.setText(getString(R.string.search));
 
@@ -98,7 +104,7 @@ public class ChannelSearchActivity extends BaseActivity<ActivityChannelSearchBin
 
         // Setup filters
         String[] filters = getResources().getStringArray(R.array.filter);
-        FiltersArrayAdapter arrayAdapter = new FiltersArrayAdapter(this, filters);
+        SortingFiltersAdapter arrayAdapter = new SortingFiltersAdapter(this, filters);
         binding.filter.setAdapter(arrayAdapter);
     }
 
@@ -112,11 +118,7 @@ public class ChannelSearchActivity extends BaseActivity<ActivityChannelSearchBin
         binding.filter.setOnItemSelectedListener(new OnItemSelectListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 1) {
-                    sort(true);
-                } else {
-                    sort(false);
-                }
+                sort(position == 1);
             }
         });
     }
@@ -140,7 +142,7 @@ public class ChannelSearchActivity extends BaseActivity<ActivityChannelSearchBin
     private void getChannels() {
         viewModel.setLoading(true);
 
-        Disposable disposable = viewModel.search(query)
+        Disposable disposable = viewModel.search(query, null)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
@@ -200,5 +202,55 @@ public class ChannelSearchActivity extends BaseActivity<ActivityChannelSearchBin
             }
         });
         adapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_filter:
+                openSearchFilter();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void openSearchFilter() {
+        ChannelSearchFilterDialog dialog = ChannelSearchFilterDialog.newInstance();
+        dialog.setFilterSelectListener(this::filterSearch);
+        dialog.show(getSupportFragmentManager());
+    }
+
+    private void filterSearch(List<ChannelGenre> channelGenreList) {
+        if (channelGenreList == null || channelGenreList.size() == 0
+                || query == null || query.isEmpty()) {
+            return;
+        }
+
+        viewModel.setLoading(true);
+
+        Disposable disposable = viewModel.search(query, channelGenreList)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    if (response != null) {
+                        if (response.status == ApiStatus.SUCCESS) {
+                            showData(response.data);
+                        } else if (response.status == ApiStatus.ERROR) {
+                            clear();
+                        } else if (response.status == ApiStatus.TOKEN_EXPIRED) {
+                            refreshToken(() -> filterSearch(channelGenreList));
+                        } else if (response.status == ApiStatus.SUBSCRIPTION_EXPIRED) {
+                            showData(response.data);
+                        }
+                    }
+                }, this::toast);
+        subscribe(disposable);
     }
 }

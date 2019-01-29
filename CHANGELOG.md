@@ -1,0 +1,96 @@
+# Change log
+
+### 2.6.2
+
+  ** New features **
+
+    * WC2-2229 Filter channel search by category
+
+    * WC2-2267 Filter vod search by show type
+    
+    * WC2-2298 Language selection on welcome screen
+    
+  ** Bug fixes **
+    
+    * WC2-2256 Channels filter icon on menu bar
+
+### 2.5.0
+
+  ** New features **
+
+    * WC2-2246 Image Gallery on Movies and TV Shows
+
+    * WC2-2232 Backup Source Support
+
+### 2.4.0
+
+  ** New features **
+
+    * WC2-2178 Reminders
+
+### 2.3.0
+
+  ** New features **
+
+    * WC2-2179 Advertisement banners
+
+  ** Bug fixes **
+
+    * WC2-2177 Refresh token logic
+
+### 2.2.5
+
+  ** Bug fixes **
+  
+    * WC2-2000 When the user name is too large the text goes over the edit button on the "Account" screen.
+    * BRAS-39 Current programme not showing real data
+
+### 2.2.4
+
+  ** Bug fixes **
+
+    * BRAS-39 Scroll to current programme
+
+### 2.2.3
+
+  ** Bug fixes **
+
+    * BRAS-32 Channel filters bug fix
+    * BRAS-33 Playing live channels SSL bug fix
+    * BRAS-25 Translations bug fix
+
+### 2.2.2
+
+  ** Bug fixes **
+
+    * Home screen rows bug fix
+
+### 2.2.1
+
+  ** New features **
+
+    * WC2-1905 Hockey app integration
+
+  ** Bug fixes **
+
+    * VoD details orientation bug fix
+
+### 2.2.0
+
+  ** New features **
+
+    * WC2-1806 Trending
+    * WC2-1888 Localisation (English & Spanish)
+
+  ** Bug fixes **
+
+    * WC2-1757 Login with username and password
+
+### 2.0.0
+
+  ** New features **
+
+    * WC2-1728 App Rebranding
+    * WC2-1729 Categories for Live Channels
+    * WC2-1749 App Widget
+    * WC2-1732 Continue Watching List

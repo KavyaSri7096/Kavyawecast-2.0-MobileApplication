@@ -27,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:animateLayoutChanges="true"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/standard"
+                android:paddingBottom="@dimen/standard"
                 app:emptyLayout="@layout/component_tv_show_empty">
 
                 <com.wecast.mobile.ui.screen.show.TVShowRecommendedListRow

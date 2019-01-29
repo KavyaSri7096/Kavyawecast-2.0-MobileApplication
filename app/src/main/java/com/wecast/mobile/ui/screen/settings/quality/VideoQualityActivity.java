@@ -10,7 +10,7 @@ import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityVideoQualityBinding;
 import com.wecast.mobile.ui.base.BaseActivity;
-import com.wecast.mobile.ui.common.adapter.SingleItemChoiceAdapter;
+import com.wecast.mobile.ui.common.adapter.SingleChoiceAdapter;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class VideoQualityActivity extends BaseActivity<ActivityVideoQualityBinding, VideoQualityActivityViewModel> implements
-        VideoQualityActivityNavigator, SingleItemChoiceAdapter.OnCheckListener<ChannelStreamingProfile> {
+        VideoQualityActivityNavigator, SingleChoiceAdapter.OnCheckListener<ChannelStreamingProfile> {
 
     @Inject
     PreferenceManager preferenceManager;

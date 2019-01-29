@@ -6,9 +6,9 @@ import android.widget.RadioButton;
 
 import com.wecast.core.data.db.pref.PreferenceManager;
 import com.wecast.mobile.R;
-import com.wecast.mobile.databinding.CardRadioButtonTrackBinding;
-import com.wecast.mobile.ui.common.adapter.SingleItemChoiceAdapter;
-import com.wecast.mobile.ui.common.viewHolder.SingleItemChoiceViewHolder;
+import com.wecast.mobile.databinding.CardTrackBinding;
+import com.wecast.mobile.ui.common.adapter.SingleChoiceAdapter;
+import com.wecast.mobile.ui.common.adapter.viewHolder.SingleChoiceViewHolder;
 import com.wecast.player.data.model.WePlayerTrack;
 import com.wecast.player.data.player.exo.trackSelector.ExoPlayerTrackSelector;
 
@@ -18,15 +18,15 @@ import java.util.List;
  * Created by ageech@live.com
  */
 
-public class VodPlayerTrackAdapter extends SingleItemChoiceAdapter<WePlayerTrack, VodPlayerTrackAdapter.TrackViewHolder> {
+public class VodPlayerTrackAdapter extends SingleChoiceAdapter<WePlayerTrack, VodPlayerTrackAdapter.TrackViewHolder> {
 
-    VodPlayerTrackAdapter(PreferenceManager preferenceManager, List<WePlayerTrack> arrayList, SingleItemChoiceAdapter.OnCheckListener<WePlayerTrack> onCheckListener) {
+    VodPlayerTrackAdapter(PreferenceManager preferenceManager, List<WePlayerTrack> arrayList, SingleChoiceAdapter.OnCheckListener<WePlayerTrack> onCheckListener) {
         super(preferenceManager, arrayList, onCheckListener);
     }
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.card_radio_button_track;
+        return R.layout.card_track;
     }
 
     @Override
@@ -56,13 +56,13 @@ public class VodPlayerTrackAdapter extends SingleItemChoiceAdapter<WePlayerTrack
      * VIEW HOLDER
      */
 
-    public class TrackViewHolder extends SingleItemChoiceViewHolder<WePlayerTrack> {
+    public class TrackViewHolder extends SingleChoiceViewHolder<WePlayerTrack> {
 
-        private final CardRadioButtonTrackBinding binding;
+        private final CardTrackBinding binding;
 
         TrackViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());
-            this.binding = (CardRadioButtonTrackBinding) binding;
+            this.binding = (CardTrackBinding) binding;
         }
 
         @Override

@@ -4,6 +4,7 @@ import com.wecast.core.data.api.ResponseWrapper;
 import com.wecast.core.data.api.manager.ChannelManager;
 import com.wecast.core.data.db.entities.Banner;
 import com.wecast.core.data.db.entities.Channel;
+import com.wecast.core.data.db.entities.ChannelGenre;
 import com.wecast.core.data.repository.BannerRepository;
 import com.wecast.mobile.ui.base.BaseViewModel;
 
@@ -27,16 +28,16 @@ public class ChannelSearchActivityViewModel extends BaseViewModel<ChannelSearchA
         setLoading(false);
     }
 
-    Observable<ResponseWrapper<List<Channel>>> search(String query) {
-        return channelManager.search(query)
+    Observable<ResponseWrapper<List<Channel>>> search(String query, List<ChannelGenre> channelGenreList) {
+        return channelManager.search(query, channelGenreList)
                 .map(response -> {
                     if (response.isTokenExpired()) {
                         return ResponseWrapper.tokenExpired();
                     } else if (response.isSubscriptionExpired()) {
-                        List<Channel> data = response.getData();
+                        List<Channel> data = response.getData().getItems();
                         return ResponseWrapper.subscriptionExpired(data);
                     } else if (response.isSuccessful()) {
-                        List<Channel> data = response.getData();
+                        List<Channel> data = response.getData().getItems();
                         return ResponseWrapper.success(data);
                     } else {
                         return ResponseWrapper.error(response.getMessage());
