@@ -17,6 +17,7 @@ import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerErrorDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerTextTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerVideoTrackDialog;
+import com.wecast.mobile.ui.screen.vod.search.VodSearchFilterDialog;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -72,6 +73,9 @@ public abstract class DialogBuilder {
 
     @ContributesAndroidInjector
     abstract VodPlayerErrorDialog bindVoDPlayerErrorDialog();
+
+    @ContributesAndroidInjector
+    abstract VodSearchFilterDialog bindVodSearchFilterDialog();
 
     @ContributesAndroidInjector
     abstract ExitDialog bindExitdialog();

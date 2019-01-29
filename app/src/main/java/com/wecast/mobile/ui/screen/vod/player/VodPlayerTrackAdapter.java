@@ -7,8 +7,8 @@ import android.widget.RadioButton;
 import com.wecast.core.data.db.pref.PreferenceManager;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.CardRadioButtonTrackBinding;
-import com.wecast.mobile.ui.common.adapter.SingleItemChoiceAdapter;
-import com.wecast.mobile.ui.common.viewHolder.SingleItemChoiceViewHolder;
+import com.wecast.mobile.ui.common.adapter.ItemSingleChoiceAdapter;
+import com.wecast.mobile.ui.common.adapter.viewHolder.ItemSingleChoiceViewHolder;
 import com.wecast.player.data.model.WePlayerTrack;
 import com.wecast.player.data.player.exo.trackSelector.ExoPlayerTrackSelector;
 
@@ -18,9 +18,9 @@ import java.util.List;
  * Created by ageech@live.com
  */
 
-public class VodPlayerTrackAdapter extends SingleItemChoiceAdapter<WePlayerTrack, VodPlayerTrackAdapter.TrackViewHolder> {
+public class VodPlayerTrackAdapter extends ItemSingleChoiceAdapter<WePlayerTrack, VodPlayerTrackAdapter.TrackViewHolder> {
 
-    VodPlayerTrackAdapter(PreferenceManager preferenceManager, List<WePlayerTrack> arrayList, SingleItemChoiceAdapter.OnCheckListener<WePlayerTrack> onCheckListener) {
+    VodPlayerTrackAdapter(PreferenceManager preferenceManager, List<WePlayerTrack> arrayList, ItemSingleChoiceAdapter.OnCheckListener<WePlayerTrack> onCheckListener) {
         super(preferenceManager, arrayList, onCheckListener);
     }
 
@@ -56,7 +56,7 @@ public class VodPlayerTrackAdapter extends SingleItemChoiceAdapter<WePlayerTrack
      * VIEW HOLDER
      */
 
-    public class TrackViewHolder extends SingleItemChoiceViewHolder<WePlayerTrack> {
+    public class TrackViewHolder extends ItemSingleChoiceViewHolder<WePlayerTrack> {
 
         private final CardRadioButtonTrackBinding binding;
 

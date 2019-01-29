@@ -26,6 +26,7 @@
             <com.wecast.mobile.ui.widget.listRow.ListRowContainer
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
                 android:paddingBottom="@dimen/standard"
                 app:emptyLayout="@layout/component_vod_empty">
 
@@ -38,8 +39,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/standard"
-                    android:layout_marginEnd="@dimen/standard"
                     android:layout_marginTop="@dimen/standard"
+                    android:layout_marginEnd="@dimen/standard"
                     app:box_position="movies_box" />
 
                 <com.wecast.mobile.ui.screen.vod.genre.VodGenreListRow

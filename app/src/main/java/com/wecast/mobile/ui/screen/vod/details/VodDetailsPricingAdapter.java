@@ -9,8 +9,8 @@ import com.wecast.core.data.db.entities.VodSourceProfilePricing;
 import com.wecast.core.data.db.pref.PreferenceManager;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.CardRadioButtonBinding;
-import com.wecast.mobile.ui.common.adapter.SingleItemChoiceAdapter;
-import com.wecast.mobile.ui.common.viewHolder.SingleItemChoiceViewHolder;
+import com.wecast.mobile.ui.common.adapter.ItemSingleChoiceAdapter;
+import com.wecast.mobile.ui.common.adapter.viewHolder.ItemSingleChoiceViewHolder;
 
 import java.util.List;
 
@@ -18,9 +18,9 @@ import java.util.List;
  * Created by ageech@live.com
  */
 
-public class VodDetailsPricingAdapter extends SingleItemChoiceAdapter<VodSourceProfilePricing, VodDetailsPricingAdapter.VodPricingViewHolder> {
+public class VodDetailsPricingAdapter extends ItemSingleChoiceAdapter<VodSourceProfilePricing, VodDetailsPricingAdapter.VodPricingViewHolder> {
 
-    VodDetailsPricingAdapter(PreferenceManager preferenceManager, List<VodSourceProfilePricing> list, SingleItemChoiceAdapter.OnCheckListener<VodSourceProfilePricing> listener) {
+    VodDetailsPricingAdapter(PreferenceManager preferenceManager, List<VodSourceProfilePricing> list, ItemSingleChoiceAdapter.OnCheckListener<VodSourceProfilePricing> listener) {
         super(preferenceManager, list, listener);
     }
 
@@ -43,7 +43,7 @@ public class VodDetailsPricingAdapter extends SingleItemChoiceAdapter<VodSourceP
      * VIEW HOLDER
      */
 
-    public class VodPricingViewHolder extends SingleItemChoiceViewHolder<VodSourceProfilePricing> {
+    public class VodPricingViewHolder extends ItemSingleChoiceViewHolder<VodSourceProfilePricing> {
 
         private final CardRadioButtonBinding binding;
 

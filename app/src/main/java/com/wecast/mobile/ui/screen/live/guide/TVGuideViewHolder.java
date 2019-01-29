@@ -2,10 +2,12 @@ package com.wecast.mobile.ui.screen.live.guide;
 
 import android.content.Context;
 
+import com.wecast.core.data.db.entities.ShowType;
 import com.wecast.core.data.db.entities.TVGuide;
 import com.wecast.mobile.databinding.CardTvGuideBinding;
 import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseViewHolder;
+import com.wecast.mobile.ui.common.adapter.ItemMultiChoiceAdapter;
 
 import androidx.databinding.ViewDataBinding;
 

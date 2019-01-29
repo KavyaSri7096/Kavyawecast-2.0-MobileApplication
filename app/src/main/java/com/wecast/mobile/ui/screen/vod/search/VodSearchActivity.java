@@ -3,16 +3,19 @@ package com.wecast.mobile.ui.screen.vod.search;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.wecast.core.data.api.ApiStatus;
+import com.wecast.core.data.db.entities.ShowType;
 import com.wecast.core.data.db.entities.Vod;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityVodSearchBinding;
 import com.wecast.mobile.ui.base.BaseActivity;
-import com.wecast.mobile.ui.common.adapter.FiltersArrayAdapter;
+import com.wecast.mobile.ui.common.adapter.SortingFiltersAdapter;
 import com.wecast.mobile.ui.common.listener.OnItemSelectListener;
 import com.wecast.mobile.ui.common.listener.OnTextInputListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
@@ -86,6 +89,9 @@ public class VodSearchActivity extends BaseActivity<ActivityVodSearchBinding, Vo
         binding = getViewDataBinding();
         viewModel.setNavigator(this);
 
+        // set custom toolbar
+        setSupportActionBar(binding.toolbar.toolbar);
+
         // Set toolbar title
         binding.toolbar.title.setText(getString(R.string.search));
 
@@ -100,7 +106,7 @@ public class VodSearchActivity extends BaseActivity<ActivityVodSearchBinding, Vo
 
         // Setup filters
         String[] filters = getResources().getStringArray(R.array.filter);
-        FiltersArrayAdapter arrayAdapter = new FiltersArrayAdapter(this, filters);
+        SortingFiltersAdapter arrayAdapter = new SortingFiltersAdapter(this, filters);
         binding.filter.setAdapter(arrayAdapter);
     }
 
@@ -142,7 +148,7 @@ public class VodSearchActivity extends BaseActivity<ActivityVodSearchBinding, Vo
     private void getMovies() {
         viewModel.setLoading(true);
 
-        Disposable disposable = viewModel.search(query)
+        Disposable disposable = viewModel.search(query, null)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
@@ -203,5 +209,54 @@ public class VodSearchActivity extends BaseActivity<ActivityVodSearchBinding, Vo
             }
         });
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_filter:
+                openSearchFilter();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void openSearchFilter() {
+        VodSearchFilterDialog dialog = VodSearchFilterDialog.newInstance();
+        dialog.setFilterSelectListener(this::filterSearch);
+        dialog.show(getSupportFragmentManager());
+    }
+
+    private void filterSearch(List<ShowType> showTypeList) {
+        if (showTypeList == null || showTypeList.size() == 0
+                || query == null || query.isEmpty()) {
+            return;
+        }
+
+        viewModel.setLoading(true);
+
+        Disposable disposable = viewModel.search(query, showTypeList)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    if (response != null) {
+                        if (response.status == ApiStatus.SUCCESS) {
+                            showData(response.data);
+                        } else if (response.status == ApiStatus.ERROR) {
+                            clear();
+                        } else if (response.status == ApiStatus.TOKEN_EXPIRED) {
+                            refreshToken(this::getMovies);
+                        } else if (response.status == ApiStatus.SUBSCRIPTION_EXPIRED) {
+                            showData(response.data);
+                        }
+                    }
+                }, this::toast);
+        subscribe(disposable);
     }
 }

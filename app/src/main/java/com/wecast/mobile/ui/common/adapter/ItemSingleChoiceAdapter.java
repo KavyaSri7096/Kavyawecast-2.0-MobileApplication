@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wecast.core.data.db.pref.PreferenceManager;
-import com.wecast.mobile.ui.common.viewHolder.SingleItemChoiceViewHolder;
+import com.wecast.mobile.ui.common.adapter.viewHolder.ItemSingleChoiceViewHolder;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
  * Created by ageech@live.com
  */
 
-public abstract class SingleItemChoiceAdapter<T, V extends SingleItemChoiceViewHolder> extends RecyclerView.Adapter {
+public abstract class ItemSingleChoiceAdapter<T, V extends ItemSingleChoiceViewHolder> extends RecyclerView.Adapter {
 
     private final PreferenceManager preferenceManager;
     private final List<T> items;
@@ -26,7 +26,7 @@ public abstract class SingleItemChoiceAdapter<T, V extends SingleItemChoiceViewH
     private RecyclerView.LayoutManager layoutManager;
     private int lastCheckedPosition;
 
-    protected SingleItemChoiceAdapter(PreferenceManager preferenceManager, List<T> arrayList, OnCheckListener<T> onCheckListener) {
+    protected ItemSingleChoiceAdapter(PreferenceManager preferenceManager, List<T> arrayList, OnCheckListener<T> onCheckListener) {
         this.preferenceManager = preferenceManager;
         this.items = arrayList;
         this.onCheckListener = onCheckListener;
@@ -35,8 +35,9 @@ public abstract class SingleItemChoiceAdapter<T, V extends SingleItemChoiceViewH
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ViewDataBinding dataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), getLayoutResId(), parent, false);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+        ViewDataBinding dataBinding = DataBindingUtil.inflate(inflater, getLayoutResId(), viewGroup, false);
         return getViewHolder(dataBinding);
     }
 

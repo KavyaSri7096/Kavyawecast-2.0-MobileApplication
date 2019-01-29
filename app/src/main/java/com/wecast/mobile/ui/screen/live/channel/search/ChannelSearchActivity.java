@@ -12,7 +12,7 @@ import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityChannelSearchBinding;
 import com.wecast.mobile.ui.base.BaseActivity;
-import com.wecast.mobile.ui.common.adapter.FiltersArrayAdapter;
+import com.wecast.mobile.ui.common.adapter.SortingFiltersAdapter;
 import com.wecast.mobile.ui.common.listener.OnItemSelectListener;
 import com.wecast.mobile.ui.common.listener.OnTextInputListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
@@ -98,7 +98,7 @@ public class ChannelSearchActivity extends BaseActivity<ActivityChannelSearchBin
 
         // Setup filters
         String[] filters = getResources().getStringArray(R.array.filter);
-        FiltersArrayAdapter arrayAdapter = new FiltersArrayAdapter(this, filters);
+        SortingFiltersAdapter arrayAdapter = new SortingFiltersAdapter(this, filters);
         binding.filter.setAdapter(arrayAdapter);
     }
 

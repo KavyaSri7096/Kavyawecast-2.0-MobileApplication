@@ -148,6 +148,9 @@
     <string name="buffer_size_movies">Tempo de buffer para filmes -&#160;%1$d</string>
     <string name="maximum_time_video_will_be_buffered">O tempo máximo que seu vídeo será armazenado em buffer</string>
 
+    <!-- Search -->
+    <string name="filter_your_search">Filter your search</string>
+
     <!-- Message -->
     <string name="message_account_created">Sua conta foi criada. Aproveite!</string>
     <string name="message_password_reset_successful">Redefinição de senha bem sucedida. Por favor verifique seu email</string>

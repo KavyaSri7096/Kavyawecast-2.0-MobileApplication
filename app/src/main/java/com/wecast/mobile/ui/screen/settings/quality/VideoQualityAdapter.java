@@ -8,8 +8,8 @@ import com.wecast.core.data.db.entities.ChannelStreamingProfile;
 import com.wecast.core.data.db.pref.PreferenceManager;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.CardRadioButtonBinding;
-import com.wecast.mobile.ui.common.adapter.SingleItemChoiceAdapter;
-import com.wecast.mobile.ui.common.viewHolder.SingleItemChoiceViewHolder;
+import com.wecast.mobile.ui.common.adapter.ItemSingleChoiceAdapter;
+import com.wecast.mobile.ui.common.adapter.viewHolder.ItemSingleChoiceViewHolder;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ import java.util.List;
  * Created by ageech@live.com
  */
 
-public class VideoQualityAdapter extends SingleItemChoiceAdapter<ChannelStreamingProfile, VideoQualityAdapter.VideoQualityViewHolder> {
+public class VideoQualityAdapter extends ItemSingleChoiceAdapter<ChannelStreamingProfile, VideoQualityAdapter.VideoQualityViewHolder> {
 
-    public VideoQualityAdapter(PreferenceManager preferenceManager, List<ChannelStreamingProfile> list, SingleItemChoiceAdapter.OnCheckListener<ChannelStreamingProfile> listener) {
+    public VideoQualityAdapter(PreferenceManager preferenceManager, List<ChannelStreamingProfile> list, ItemSingleChoiceAdapter.OnCheckListener<ChannelStreamingProfile> listener) {
         super(preferenceManager, list, listener);
     }
 
@@ -42,7 +42,7 @@ public class VideoQualityAdapter extends SingleItemChoiceAdapter<ChannelStreamin
      * VIEW HOLDER
      */
 
-    public class VideoQualityViewHolder extends SingleItemChoiceViewHolder<ChannelStreamingProfile> {
+    public class VideoQualityViewHolder extends ItemSingleChoiceViewHolder<ChannelStreamingProfile> {
 
         private final CardRadioButtonBinding binding;
 

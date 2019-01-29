@@ -1,4 +1,4 @@
-package com.wecast.mobile.ui.common.viewHolder;
+package com.wecast.mobile.ui.common.adapter.viewHolder;
 
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
@@ -7,9 +7,9 @@ import android.view.View;
  * Created by ageech@live.com
  */
 
-public abstract class SingleItemChoiceViewHolder<T> extends RecyclerView.ViewHolder {
+public abstract class ItemSingleChoiceViewHolder<T> extends RecyclerView.ViewHolder {
 
-    protected SingleItemChoiceViewHolder(View itemView) {
+    protected ItemSingleChoiceViewHolder(View itemView) {
         super(itemView);
         itemView.setClickable(true);
     }

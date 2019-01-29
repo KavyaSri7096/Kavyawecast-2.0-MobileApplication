@@ -3,6 +3,7 @@ package com.wecast.mobile.ui.screen.vod.search;
 import com.wecast.core.data.api.ResponseWrapper;
 import com.wecast.core.data.api.manager.VodManager;
 import com.wecast.core.data.db.entities.Banner;
+import com.wecast.core.data.db.entities.ShowType;
 import com.wecast.core.data.db.entities.Vod;
 import com.wecast.core.data.repository.BannerRepository;
 import com.wecast.mobile.ui.base.BaseViewModel;
@@ -27,8 +28,8 @@ public class VodSearchActivityViewModel extends BaseViewModel<VodSearchActivityN
         setLoading(false);
     }
 
-    Observable<ResponseWrapper<List<Vod>>> search(String query) {
-        return vodManager.search(query)
+    Observable<ResponseWrapper<List<Vod>>> search(String query, List<ShowType> showTypeList) {
+        return vodManager.search(query, showTypeList)
                 .map(response -> {
                     if (response.isTokenExpired()) {
                         return ResponseWrapper.tokenExpired();
