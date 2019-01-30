@@ -92,12 +92,12 @@ public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, Sett
         binding.rtl.root.setVisibility(BuildConfig.DEBUG ? View.VISIBLE : View.GONE);
 
         getSubscriptionInfo();
-        binding.subscription.next.setVisibility(View.GONE);
     }
 
     private void setupListeners() {
         binding.toolbar.back.setOnClickListener(v -> finish());
         binding.name.setOnClickListener(view -> ScreenRouter.openEditInfo(this));
+        binding.subscription.root.setOnClickListener(view -> ScreenRouter.openMembership(this));
         binding.language.root.setOnClickListener(view -> ScreenRouter.openLanguage(this));
         binding.quality.root.setOnClickListener(view -> ScreenRouter.openVideoQuality(this));
         binding.buffer.root.setOnClickListener(view -> ScreenRouter.openBuffer(this));

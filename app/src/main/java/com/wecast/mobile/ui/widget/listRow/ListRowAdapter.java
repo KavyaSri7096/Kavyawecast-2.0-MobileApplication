@@ -10,6 +10,7 @@ import com.wecast.mobile.ui.base.BaseViewHolder;
 import com.wecast.mobile.ui.screen.live.channel.ChannelFavoriteViewHolder;
 import com.wecast.mobile.ui.screen.live.channel.ChannelViewHolder;
 import com.wecast.mobile.ui.screen.live.guide.TVGuideViewHolder;
+import com.wecast.mobile.ui.screen.settings.membership.MembershipPaymentViewHolder;
 import com.wecast.mobile.ui.screen.show.TVShowViewHolder;
 import com.wecast.mobile.ui.screen.show.details.TVShowEpisodeViewHolder;
 import com.wecast.mobile.ui.screen.show.genre.TVShowGenreViewHolder;
@@ -57,7 +58,8 @@ public class ListRowAdapter extends BaseAdapter {
                 return new TVShowEpisodeViewHolder(getViewBinding(context, R.layout.card_episode, parent));
             case TV_GUIDE:
                 return new TVGuideViewHolder(getViewBinding(context, R.layout.card_tv_guide, parent));
-
+            case PAYMENT_HISTORY:
+                return new MembershipPaymentViewHolder(getViewBinding(context, R.layout.card_payment, parent));
             default:
                 throw new IllegalStateException("Unsupported ViewHolder type");
         }
