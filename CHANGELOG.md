@@ -1,3 +1,9 @@
+## 2.7.0
+
+  **New features**
+
+  - [WC2-2265](https://wetekdev.atlassian.net/browse/WC2-2265) Timeshift
+
 ## 2.6.2
 
   **New features**
