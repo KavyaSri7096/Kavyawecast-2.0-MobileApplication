@@ -30,6 +30,7 @@ import com.wecast.mobile.ui.screen.settings.SettingsActivity;
 import com.wecast.mobile.ui.screen.settings.buffer.BufferActivity;
 import com.wecast.mobile.ui.screen.settings.language.LanguageActivity;
 import com.wecast.mobile.ui.screen.settings.logout.LogoutDialog;
+import com.wecast.mobile.ui.screen.settings.membership.MembershipActivity;
 import com.wecast.mobile.ui.screen.settings.profile.EditProfileActivity;
 import com.wecast.mobile.ui.screen.settings.quality.VideoQualityActivity;
 import com.wecast.mobile.ui.screen.show.details.TVShowDetailsActivity;
@@ -83,6 +84,11 @@ public class ScreenRouter {
 
     public static void openSettings(Context context) {
         SettingsActivity.open(context);
+    }
+
+    public static void openMembership(AppCompatActivity activity) {
+        Intent intent = new Intent(activity, MembershipActivity.class);
+        activity.startActivityForResult(intent, 100);
     }
 
     public static void openEditInfo(AppCompatActivity activity) {

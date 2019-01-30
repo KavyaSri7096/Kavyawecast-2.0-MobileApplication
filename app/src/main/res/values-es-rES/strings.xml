@@ -126,6 +126,13 @@
     <string name="theme">MODO NOCTURNO</string>
     <string name="age">EDAD</string>
     <string name="gender">GÉNERO</string>
+    <!-- Membership Dialog -->
+    <string name="membership_title">Membership</string>
+    <string name="current_profile">CURRENT PROFILE</string>
+    <string name="expire_date">EXPIRE DATE</string>
+    <string name="expired">Expired</string>
+    <string name="renew_subscription">Renew subscription</string>
+    <string name="payment_history">Payment history</string>
     <!-- Edit Info Dialog -->
     <string name="edit_info">Editar Info</string>
     <string name="confirm_the_changes">Confirme los cambios haciendo clic en el botón superior derecho</string>
