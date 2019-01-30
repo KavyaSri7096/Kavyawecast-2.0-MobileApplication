@@ -32,6 +32,8 @@ import com.wecast.mobile.ui.screen.settings.buffer.BufferActivityModule;
 import com.wecast.mobile.ui.screen.settings.language.LanguageActivity;
 import com.wecast.mobile.ui.screen.settings.language.LanguageActivityModule;
 import com.wecast.mobile.ui.screen.settings.logout.LogoutDialog;
+import com.wecast.mobile.ui.screen.settings.membership.MembershipActivity;
+import com.wecast.mobile.ui.screen.settings.membership.MembershipActivityModule;
 import com.wecast.mobile.ui.screen.settings.profile.EditProfileActivity;
 import com.wecast.mobile.ui.screen.settings.profile.EditProfileActivityModule;
 import com.wecast.mobile.ui.screen.settings.quality.VideoQualityActivity;
@@ -150,6 +152,9 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {SettingsActivityModule.class})
     abstract SettingsActivity bindSettingsActivity();
+
+    @ContributesAndroidInjector(modules = {MembershipActivityModule.class})
+    abstract MembershipActivity bindMembershipActivity();
 
     @ContributesAndroidInjector(modules = {EditProfileActivityModule.class})
     abstract EditProfileActivity bindEditProfileActivity();

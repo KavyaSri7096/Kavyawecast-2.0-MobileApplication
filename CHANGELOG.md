@@ -1,3 +1,15 @@
+## 2.8.0
+
+  **New features**
+
+  - [WC2-2269](https://wetekdev.atlassian.net/browse/WC2-2269) Payment history
+
+## 2.7.0
+
+  **New features**
+
+  - [WC2-2265](https://wetekdev.atlassian.net/browse/WC2-2265) Timeshift
+
 ## 2.6.2
 
   **New features**
