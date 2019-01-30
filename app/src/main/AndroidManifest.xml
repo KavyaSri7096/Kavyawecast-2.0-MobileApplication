@@ -137,6 +137,11 @@
             android:theme="@style/AppTheme.Base.Transparent" />
 
         <activity
+            android:name=".ui.screen.settings.membership.MembershipActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base.Transparent" />
+
+        <activity
             android:name=".ui.screen.settings.profile.EditProfileActivity"
             android:label=""
             android:screenOrientation="portrait"
