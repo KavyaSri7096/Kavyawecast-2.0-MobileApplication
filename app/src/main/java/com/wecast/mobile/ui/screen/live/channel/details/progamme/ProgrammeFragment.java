@@ -2,9 +2,12 @@ package com.wecast.mobile.ui.screen.live.channel.details.progamme;
 
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.View;
 
 import com.wecast.core.data.api.ApiStatus;
@@ -12,6 +15,7 @@ import com.wecast.core.data.db.entities.Channel;
 import com.wecast.core.data.db.entities.TVGuide;
 import com.wecast.core.data.db.entities.TVGuideProgramme;
 import com.wecast.core.utils.DateUtils;
+import com.wecast.core.utils.ReminderUtils;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.FragmentProgrammeBinding;
@@ -32,10 +36,12 @@ import io.reactivex.schedulers.Schedulers;
  * Created by ageech@live.com
  */
 
-public class ProgrammeFragment extends BaseFragment<FragmentProgrammeBinding, ProgrammeFragmentViewModel> implements ProgrammeFragmentNavigator {
+public class ProgrammeFragment extends BaseFragment<FragmentProgrammeBinding, ProgrammeFragmentViewModel> implements ProgrammeFragmentNavigator, ProgrammeViewModel.OnClickListener {
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
+    @Inject
+    ReminderUtils reminderUtils;
 
     private FragmentProgrammeBinding binding;
     private ProgrammeFragmentViewModel viewModel;
@@ -94,7 +100,7 @@ public class ProgrammeFragment extends BaseFragment<FragmentProgrammeBinding, Pr
         // Setup recycler view for data
         layoutManager = new ProgrammeLayoutManager(getBaseActivity());
         binding.data.setLayoutManager(layoutManager);
-        adapter = new ProgrammeAdapter(getBaseActivity(), item -> ScreenRouter.openProgrammeDetails(getBaseActivity(), channel, item));
+        adapter = new ProgrammeAdapter(getBaseActivity(), reminderUtils, this);
         binding.data.setAdapter(adapter);
 
         // Load programmes for current day
@@ -195,5 +201,10 @@ public class ProgrammeFragment extends BaseFragment<FragmentProgrammeBinding, Pr
                 next.add(Calendar.DAY_OF_WEEK, 1);
                 return next.getTime();
         }
+    }
+
+    @Override
+    public void onItemClick(TVGuideProgramme item) {
+        ScreenRouter.openProgrammeDetails(getBaseActivity(), channel, item);
     }
 }

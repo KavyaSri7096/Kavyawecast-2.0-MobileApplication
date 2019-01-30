@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentManager;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -39,6 +38,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 
+import androidx.fragment.app.FragmentManager;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -141,6 +141,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         binding.controls.removeFromFavorites.setOnClickListener(v -> removeFromFavorites());
         binding.controls.up.setOnClickListener(view -> goNext());
         binding.controls.down.setOnClickListener(view -> goBack());
+        binding.controls.timeShift.setOnClickListener(v -> openTimeshiftDialog());
         binding.playerView.root.setOnClickListener(view -> {
             boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
             boolean controlsHidden = binding.controls.root.getVisibility() == View.GONE;
@@ -168,12 +169,19 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
     private void showData(Channel channel) {
         this.channel = channel;
 
+        if (channel == null) {
+            return;
+        }
+
         // Set toolbar title
         binding.toolbar.title.setText(channel.getTitle());
 
         // Update channel title and isFavorite in controls layout
         binding.controls.setTitle(channel.getTitle());
         binding.controls.setIsFavorite(channel.isFavorite());
+
+        // Set timeshift
+        binding.controls.timeShift.setVisibility(channel.isCatchupEnabled() ? View.VISIBLE : View.GONE);
 
         // Setup tv guide
         setupProgrammes();
@@ -188,7 +196,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         if (weExoPlayer != null) {
             weExoPlayer.setPlaybackStateListener(this);
             weExoPlayer.setErrorListener(this);
-            updatePlayerController(weExoPlayer);
+            weExoPlayer.setUseController(false);
             buildParams();
         }
     }
@@ -332,6 +340,12 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         }
     }
 
+    private void openTimeshiftDialog() {
+        ChannelDetailsTimeshiftDialog dialog = ChannelDetailsTimeshiftDialog.newInstance(channel);
+        dialog.setTimeshiftSelectListener(timeShiftStream -> buildParams(timeShiftStream.getStreamUrl()));
+        dialog.show(getSupportFragmentManager(), ChannelDetailsTimeshiftDialog.TAG);
+    }
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -350,7 +364,6 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         binding.toolbar.root.setVisibility(View.VISIBLE);
         binding.controls.root.setVisibility(View.GONE);
         binding.playerView.root.setOnTouchListener(this);
-        updatePlayerController(weExoPlayer);
         setupProgrammes();
     }
 
@@ -359,20 +372,6 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         binding.playerView.root.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         binding.toolbar.root.setVisibility(View.GONE);
         binding.playerView.root.setOnTouchListener(null);
-        updatePlayerController(weExoPlayer);
-    }
-
-    private void updatePlayerController(WeExoPlayer player) {
-        if (player != null) {
-            int orientation = getResources().getConfiguration().orientation;
-            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                player.setUseController(true);
-                findViewById(R.id.exo_aspect_ratio).setVisibility(View.GONE);
-                findViewById(R.id.exo_duration).setVisibility(View.GONE);
-            } else {
-                player.setUseController(false);
-            }
-        }
     }
 
     @Override
@@ -386,7 +385,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 104 && resultCode == Activity.RESULT_OK) {
             if (data != null) {
-                String url = data.getStringExtra("CATCHUP_URL");
+                String url = data.getStringExtra("OVERRIDE_URL");
                 buildParams(url);
             }
         }

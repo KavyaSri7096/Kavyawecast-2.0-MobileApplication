@@ -7,6 +7,8 @@ import com.wecast.mobile.ui.common.dialog.PurchasePinDialog;
 import com.wecast.mobile.ui.screen.live.channel.ChannelGenresChildrenDialog;
 import com.wecast.mobile.ui.screen.live.channel.ChannelGenresDialog;
 import com.wecast.mobile.ui.screen.live.channel.details.ChannelDetailsRentDialog;
+import com.wecast.mobile.ui.screen.live.channel.details.ChannelDetailsTimeshiftDialog;
+import com.wecast.mobile.ui.screen.live.channel.details.progamme.details.ProgrammeTimeshiftDialog;
 import com.wecast.mobile.ui.screen.live.channel.search.ChannelSearchFilterDialog;
 import com.wecast.mobile.ui.screen.settings.logout.LogoutDialog;
 import com.wecast.mobile.ui.screen.show.search.TVShowSearchFilterDialog;
@@ -51,6 +53,12 @@ public abstract class DialogBuilder {
 
     @ContributesAndroidInjector
     abstract ChannelSearchFilterDialog bindChannelSearchFilterDialog();
+
+    @ContributesAndroidInjector
+    abstract ChannelDetailsTimeshiftDialog bindChannelDetailsTimeshiftDialog();
+
+    @ContributesAndroidInjector
+    abstract ProgrammeTimeshiftDialog bindProgrammeTimeshiftDialog();
 
     @ContributesAndroidInjector
     abstract VodDetailsRentDialog bindVodDetailsRentDialog();

@@ -44,15 +44,42 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/standard_half"
                     android:layout_marginEnd="@dimen/standard_half"
-                    android:gravity="center_vertical"
                     android:orientation="vertical">
 
-                    <TextView
-                        style="@style/TextView.Title.Small"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:text="@{viewModel.title}" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/catchup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/standard_small"
+                            android:contentDescription="@string/app_name"
+                            android:src="@drawable/ic_catchup" />
+
+                        <ImageView
+                            android:id="@+id/reminder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/standard_small"
+                            android:contentDescription="@string/app_name"
+                            android:src="@drawable/ic_reminder" />
+
+                        <TextView
+                            android:id="@+id/title"
+                            style="@style/TextView.Title.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/standard_small"
+                            android:maxLines="1"
+                            android:text="@{viewModel.title}" />
+
+                    </LinearLayout>
+
 
                     <ProgressBar
                         android:id="@+id/progress"
@@ -61,6 +88,7 @@
                         android:layout_height="4dp"
                         android:layout_marginTop="@dimen/standard_small"
                         android:layout_marginBottom="@dimen/standard_small"
+                        android:gravity="center_vertical"
                         android:progressDrawable="@drawable/progress_bar" />
 
                     <TextView

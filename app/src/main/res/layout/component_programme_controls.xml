@@ -16,15 +16,16 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingStart="@dimen/standard"
-        android:paddingEnd="@dimen/standard">
+        android:padding="@dimen/standard"
+        android:weightSum="100">
 
         <Button
             android:id="@+id/play"
             style="@style/ComponentButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/standard_half"
+            android:layout_weight="25"
             android:alpha="0.3"
             android:drawableTop="@drawable/ic_go_channel"
             android:enabled="false"
@@ -33,33 +34,48 @@
         <Button
             android:id="@+id/reminder"
             style="@style/ComponentButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/standard_half"
+            android:layout_weight="25"
             android:alpha="0.3"
-            android:drawableTop="@drawable/ic_add_reminder"
+            android:drawableTop="@drawable/ic_reminder_off"
             android:enabled="false"
             android:text="@string/reminder" />
 
         <Button
             android:id="@+id/addFavorite"
             style="@style/ComponentButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/standard_half"
-            android:drawableTop="@drawable/ic_add_favorite"
+            android:layout_weight="25"
+            android:drawableTop="@drawable/ic_favorite_off"
             android:text="@string/favorite"
             android:visibility="@{isFavorite ? View.GONE : View.VISIBLE, default=gone}" />
 
         <Button
             android:id="@+id/removeFavorite"
             style="@style/ComponentButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/standard_half"
-            android:drawableTop="@drawable/ic_remove_favorite"
+            android:layout_weight="25"
+            android:drawableTop="@drawable/ic_favorite_on"
             android:text="@string/favorite"
             android:visibility="@{isFavorite ? View.VISIBLE : View.GONE, default=gone}" />
+
+        <Button
+            android:id="@+id/timeShift"
+            style="@style/ComponentButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_half"
+            android:layout_weight="25"
+            android:alpha="0.3"
+            android:drawableTop="@drawable/ic_timeshift_selector"
+            android:enabled="false"
+            android:text="@string/timeshift" />
 
     </LinearLayout>
 
