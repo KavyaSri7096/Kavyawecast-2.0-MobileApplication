@@ -1,6 +1,8 @@
 package com.wecast.mobile.ui.screen.home;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.wecast.mobile.BR;
@@ -42,6 +44,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public HomeFragmentViewModel getViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeFragmentViewModel.class);
         return viewModel;
@@ -57,5 +65,18 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = getViewDataBinding();
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem filter = menu.findItem(R.id.nav_filter);
+        if (filter != null) {
+            filter.setVisible(false);
+        }
+        MenuItem search = menu.findItem(R.id.nav_search);
+        if (search != null) {
+            search.setVisible(false);
+        }
+        super.onPrepareOptionsMenu(menu);
     }
 }

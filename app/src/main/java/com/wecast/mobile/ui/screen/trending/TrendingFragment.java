@@ -3,6 +3,8 @@ package com.wecast.mobile.ui.screen.trending;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.wecast.mobile.BR;
@@ -44,6 +46,12 @@ public class TrendingFragment extends BaseFragment<FragmentTrendingBinding, Tren
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public TrendingFragmentViewModel getViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(TrendingFragmentViewModel.class);
         return viewModel;
@@ -66,5 +74,18 @@ public class TrendingFragment extends BaseFragment<FragmentTrendingBinding, Tren
     private void setupUI() {
         Handler handler = new Handler(Looper.myLooper());
         handler.postDelayed(() -> viewModel.setLoading(false), 4000);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem filter = menu.findItem(R.id.nav_filter);
+        if (filter != null) {
+            filter.setVisible(false);
+        }
+        MenuItem search = menu.findItem(R.id.nav_search);
+        if (search != null) {
+            search.setVisible(false);
+        }
+        super.onPrepareOptionsMenu(menu);
     }
 }
