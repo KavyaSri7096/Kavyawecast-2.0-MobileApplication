@@ -80,6 +80,7 @@
     <string name="options">Opciones</string>
     <string name="reminder">Recordatorio</string>
     <string name="favorite">Favorito</string>
+    <string name="timeshift">Timeshift</string>
 
     <!-- Vod Details -->
     <string name="cast">Elenco:&#160;</string>
@@ -181,6 +182,7 @@
     <string name="message_reminder_removed">Recordatorio eliminado con éxito</string>
     <string name="message_reminder_updated">Tiempo de activación del recordatorio actualizado exitosamente</string>
     <string name="message_you_are_not_subscribed">Usted no está suscrito a nuestro servicio. Si aún no ha iniciado sesión, inicie sesión o verifique su suscripción</string>
+    <string name="message_timeshift_length">Please select timeshift length</string>
 
     <!-- Error -->
     <string name="error_email_can_not_be_empty">El campo de Email/Nombre de usuario no puede estar vacio</string>

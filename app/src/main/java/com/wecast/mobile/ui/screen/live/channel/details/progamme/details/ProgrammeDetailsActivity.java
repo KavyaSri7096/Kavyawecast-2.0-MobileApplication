@@ -3,13 +3,17 @@ package com.wecast.mobile.ui.screen.live.channel.details.progamme.details;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 
 import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFragment;
 import com.wecast.core.data.db.entities.Channel;
+import com.wecast.core.data.db.entities.ChannelTimeShiftStream;
 import com.wecast.core.data.db.entities.TVGuideProgramme;
 import com.wecast.core.data.db.entities.TVGuideReminder;
 import com.wecast.core.utils.ReminderUtils;
@@ -121,6 +125,7 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
         });
         binding.controls.addFavorite.setOnClickListener(view -> addToFavorites());
         binding.controls.removeFavorite.setOnClickListener(view -> removeFromFavorites());
+        binding.controls.timeShift.setOnClickListener(v -> openTimeshiftDialog());
     }
 
     private void showData() {
@@ -148,7 +153,7 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
             binding.title.setText(programme.getTitle());
         }
 
-        //Set programme start-end time
+        // Set programme start-end time
         binding.time.setText(TVGuideUtils.getStartEnd(programme));
 
         // Set programme description
@@ -170,9 +175,11 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
         // Set reminder add/remove icon
         long eventId = reminderUtils.getEventId(programme);
         if (eventId != -1) {
-            binding.controls.reminder.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_remove_reminder), null, null);
+            Drawable icon = getDrawable(R.drawable.ic_reminder_on);
+            binding.controls.reminder.setCompoundDrawablesWithIntrinsicBounds(null, icon, null, null);
         } else {
-            binding.controls.reminder.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_add_reminder), null, null);
+            Drawable icon = getDrawable(R.drawable.ic_reminder_off);
+            binding.controls.reminder.setCompoundDrawablesWithIntrinsicBounds(null, icon, null, null);
         }
 
         // Show/hide reminder option
@@ -189,9 +196,19 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
                 binding.controls.play.setEnabled(true);
             }
         }
+
+        // Show hide times shift option
+        if (channel.isTimeShiftEnabled()) {
+            binding.controls.timeShift.setAlpha(1);
+            binding.controls.timeShift.setEnabled(true);
+        }
     }
 
     private void playCatchup() {
+        if (channel == null || channel.getCatchupUrlParams() == null) {
+            return;
+        }
+
         String url = channel.getCatchupUrl();
         long startTime;
         long duration;
@@ -222,12 +239,25 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
             url = url.replace("{start_time}", String.valueOf(startTime));
             url = url.replace("{duration}", String.valueOf(duration));
             Intent returnIntent = new Intent();
-            returnIntent.putExtra("CATCHUP_URL", url);
+            returnIntent.putExtra("OVERRIDE_URL", url);
             setResult(Activity.RESULT_OK, returnIntent);
             finish();
         } else {
             toast(R.string.message_catchup_not_supported);
         }
+    }
+
+    private void openTimeshiftDialog() {
+        ProgrammeTimeshiftDialog dialog = ProgrammeTimeshiftDialog.newInstance(channel);
+        dialog.setTimeshiftSelectListener(this::playShifted);
+        dialog.show(getSupportFragmentManager(), ProgrammeTimeshiftDialog.TAG);
+    }
+
+    private void playShifted(ChannelTimeShiftStream timeShiftStream) {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("OVERRIDE_URL", timeShiftStream.getStreamUrl());
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
     }
 
     /**
@@ -347,13 +377,9 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
     }
 
     private void updateReminderIcon(boolean isAdded) {
-        if (isAdded) {
-            binding.controls.reminder.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_remove_reminder), null, null);
-            toast(R.string.message_reminder_added);
-        } else {
-            binding.controls.reminder.setCompoundDrawablesWithIntrinsicBounds(null, getDrawable(R.drawable.ic_add_reminder), null, null);
-            toast(R.string.message_reminder_removed);
-        }
+        Drawable icon = getDrawable(isAdded ? R.drawable.ic_reminder_on : R.drawable.ic_reminder_off);
+        binding.controls.reminder.setCompoundDrawablesWithIntrinsicBounds(null, icon, null, null);
+        toast(isAdded ? R.string.message_reminder_added : R.string.message_reminder_removed);
     }
 
     /**
