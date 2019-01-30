@@ -1,9 +1,8 @@
 ﻿# WeCast 2.0 Mobile
 
-WeCast 2.0 is android IPTV/OTT application for android devices. <br/>
+WeCast 2.0 is android IPTV/OTT application for android devices.
 To use this project you will need latest version of android studio because project is migrated to AndroidX.
 > AndroidX is the open-source project that the Android team uses to develop, test, package, version and release libraries within [Jetpack](https://developer.android.com/jetpack).
->
 > Learn more about [AndroidX](https://developer.android.com/jetpack/androidx/).
 
 ## Submodules
@@ -16,8 +15,9 @@ To use this project you will need latest version of android studio because proje
 - [Java RX](https://github.com/ReactiveX/RxJava)
 - [Stream](https://github.com/aNNiMON/Lightweight-Stream-API)
 - [Retrofit 2](https://square.github.io/retrofit/)
-- [OkHttp Logging](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)
+- [Logging Interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)
 - [Gson](https://github.com/google/gson)
+- [Realm](https://github.com/realm/realm-java)
 - [Calligraphy](https://github.com/chrisjenx/Calligraphy)
 - [Glide](https://github.com/bumptech/glide)
 - [Exo Player](https://github.com/google/ExoPlayer)
@@ -29,14 +29,17 @@ To use this project you will need latest version of android studio because proje
 
 Clone this repository and import into **Android Studio**
 
->git clone git@bitbucket.org:harunagic/wecast-2.0-mobile.git
+    git clone git@bitbucket.org:harunagic/wecast-2.0-mobile.git
 
 ##  Build variants
 
-For develop we are using **dev** build variant,<br/>
-for demo we are using **demo** build variant.<br/>
-<br/>
-Other build variants are for customers :
+Develop build variant
+- dev
+
+Demo build variant
+- demo
+
+Build variant for other clients
 - nettv
 - brasilnet
 - intv
