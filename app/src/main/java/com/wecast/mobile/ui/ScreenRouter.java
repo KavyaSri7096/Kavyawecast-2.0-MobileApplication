@@ -198,7 +198,7 @@ public class ScreenRouter {
         }
     }
 
-    public static void openVodPlayer(Context context, Vod vod, VodSourceProfile profile, long playType) {
+    public static void openVodPlayer(Context context, Vod vod, VodSourceProfile profile, int playType) {
         if (WeApp.SUBSCRIPTION_EXPIRED) {
             Toast.makeText(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
         } else {
@@ -206,25 +206,25 @@ public class ScreenRouter {
         }
     }
 
-    public static void openVodVideoTrackDialog(Context context, VodPlayerOnTrackChangedListener listener) {
+    public static void showVodVideoTracks(Context context, VodPlayerOnTrackChangedListener listener) {
         VodPlayerVideoTrackDialog dialog = new VodPlayerVideoTrackDialog();
         dialog.setTrackSelectedListener(listener);
         dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), VodPlayerVideoTrackDialog.TAG);
     }
 
-    public static void openVodAudioTrackDialog(Context context, VodPlayerOnTrackChangedListener listener) {
+    public static void showVodAudioTracks(Context context, VodPlayerOnTrackChangedListener listener) {
         VodPlayerAudioTrackDialog dialog = new VodPlayerAudioTrackDialog();
         dialog.setTrackSelectedListener(listener);
         dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), VodPlayerAudioTrackDialog.TAG);
     }
 
-    public static void openVodTextTrackDialog(Context context, VodPlayerOnTrackChangedListener listener) {
+    public static void showVodTextTrack(Context context, VodPlayerOnTrackChangedListener listener) {
         VodPlayerTextTrackDialog dialog = new VodPlayerTextTrackDialog();
         dialog.setTrackSelectedListener(listener);
         dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), VodPlayerTextTrackDialog.TAG);
     }
 
-    public static void openVodPlayerError(Context context, VodPlayerErrorDialog.OnRetryListener listener) {
+    public static void showVodPlayerError(Context context, VodPlayerErrorDialog.OnRetryListener listener) {
         VodPlayerErrorDialog dialog = new VodPlayerErrorDialog();
         dialog.setOnRetryListener(listener);
         dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), VodPlayerErrorDialog.TAG);

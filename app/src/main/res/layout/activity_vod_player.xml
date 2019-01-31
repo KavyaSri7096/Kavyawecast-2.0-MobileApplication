@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -14,14 +15,16 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
         android:background="@android:color/black"
         android:keepScreenOn="true">
 
         <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-            android:id="@+id/simple_exo_view"
+            android:id="@+id/simpleExoView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:auto_show="false"
+            app:controller_layout_id="@layout/component_vod_player_controls"
+            app:show_timeout="0" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,11 +45,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <include
+                <com.wecast.mobile.ui.screen.vod.player.VodPlayerParentalRatingView
                     android:id="@+id/parentalRating"
-                    layout="@layout/component_vod_parental_rating" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true" />
 
                 <LinearLayout
+                    android:id="@+id/topControls"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -62,9 +68,40 @@
                         android:src="@drawable/ic_arrow_back"
                         android:tint="@color/white" />
 
-                    <include
-                        android:id="@+id/actions"
-                        layout="@layout/component_vod_player_actions" />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageButton
+                        android:id="@+id/subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:contentDescription="@string/app_name"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_subtitles"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/video"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:contentDescription="@string/app_name"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_video"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/audio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:contentDescription="@string/app_name"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_audio"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -78,24 +115,6 @@
             android:layout_height="@dimen/spinner_size"
             android:layout_gravity="center"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
-
-        <LinearLayout
-            android:id="@+id/info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="45dp"
-            android:orientation="vertical"
-            android:padding="@dimen/standard">
-
-            <TextView
-                android:id="@+id/title"
-                style="@style/TextView.Title.Big.Bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white" />
-
-        </LinearLayout>
 
     </FrameLayout>
 

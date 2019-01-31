@@ -27,6 +27,7 @@ import com.google.android.exoplayer2.util.Util;
 
 import java.util.Formatter;
 import java.util.Locale;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * Created by ageech@live.com
@@ -71,7 +72,7 @@ public class TimeBarView extends DefaultTimeBar implements TimeBar {
     private final Formatter formatter;
     private final Runnable stopScrubbingRunnable;
 
-    private OnScrubListener listener;
+    private final CopyOnWriteArraySet<OnScrubListener> listeners;
     private int keyCountIncrement;
     private long keyTimeIncrement;
     private int lastCoarseScrubXPosition;
@@ -100,6 +101,7 @@ public class TimeBarView extends DefaultTimeBar implements TimeBar {
         playedAdMarkerPaint = new Paint();
         scrubberPaint = new Paint();
         scrubberPaint.setAntiAlias(true);
+        listeners = new CopyOnWriteArraySet<>();
 
         // Calculate the dimensions and paints for drawn elements.
         Resources res = context.getResources();
@@ -173,7 +175,7 @@ public class TimeBarView extends DefaultTimeBar implements TimeBar {
 
     @Override
     public void addListener(OnScrubListener listener) {
-        this.listener = listener;
+        listeners.add(listener);
     }
 
     @Override
@@ -223,7 +225,7 @@ public class TimeBarView extends DefaultTimeBar implements TimeBar {
 
     @Override
     public void removeListener(OnScrubListener listener) {
-
+        listeners.remove(listener);
     }
 
     @Override
@@ -271,7 +273,7 @@ public class TimeBarView extends DefaultTimeBar implements TimeBar {
                         positionScrubber(x);
                     }
                     scrubPosition = getScrubberPosition();
-                    if (listener != null) {
+                    for (OnScrubListener listener : listeners) {
                         listener.onScrubMove(this, scrubPosition);
                     }
                     update();
@@ -412,7 +414,7 @@ public class TimeBarView extends DefaultTimeBar implements TimeBar {
         if (parent != null) {
             parent.requestDisallowInterceptTouchEvent(true);
         }
-        if (listener != null) {
+        for (OnScrubListener listener : listeners) {
             listener.onScrubStart(this, getScrubberPosition());
         }
     }
@@ -424,7 +426,7 @@ public class TimeBarView extends DefaultTimeBar implements TimeBar {
             parent.requestDisallowInterceptTouchEvent(false);
         }
         invalidate();
-        if (listener != null) {
+        for (OnScrubListener listener : listeners) {
             listener.onScrubStop(this, getScrubberPosition(), canceled);
         }
     }
@@ -538,7 +540,7 @@ public class TimeBarView extends DefaultTimeBar implements TimeBar {
         if (!scrubbing) {
             startScrubbing();
         }
-        if (listener != null) {
+        for (OnScrubListener listener : listeners) {
             listener.onScrubMove(this, scrubPosition);
         }
         update();

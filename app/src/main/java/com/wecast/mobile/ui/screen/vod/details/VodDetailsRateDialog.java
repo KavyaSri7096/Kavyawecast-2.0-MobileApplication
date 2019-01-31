@@ -97,7 +97,7 @@ public class VodDetailsRateDialog extends BaseDialog {
             return;
         }
 
-        Disposable disposable = vodManager.rate(vod.getId(), rate, vod.getMultiEventVodId() != null)
+        Disposable disposable = vodManager.rate(vod.getId(), rate, vod.getMultiEventVodId() != 0)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {

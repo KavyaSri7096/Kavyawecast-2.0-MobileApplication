@@ -45,7 +45,7 @@ public class VodDetailsActivity extends BaseActivity<ActivityVodDetailsBinding, 
     public static void open(Context context, Vod vod) {
         Intent intent = new Intent(context, VodDetailsActivity.class);
         intent.putExtra("ID", vod.getId());
-        intent.putExtra("IS_EPISODE", vod.getMultiEventVodId() != null);
+        intent.putExtra("IS_EPISODE", vod.getMultiEventVodId() != 0);
         context.startActivity(intent);
     }
 

@@ -25,7 +25,6 @@ public final class BindingUtils {
     public static void bindHighlighted(ImageView view, String imageUrl) {
         GlideApp.with(view.getContext())
                 .load(imageUrl)
-                .placeholder(R.drawable.placeholder_banner)
                 .error(R.drawable.placeholder_banner)
                 .centerCrop()
                 .transition(DrawableTransitionOptions.withCrossFade())

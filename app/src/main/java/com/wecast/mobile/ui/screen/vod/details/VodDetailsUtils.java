@@ -18,7 +18,7 @@ import java.util.List;
  * Created by ageech@live.com
  */
 
-class VodDetailsUtils {
+public class VodDetailsUtils {
 
     static List<VodImage> getImages(Vod vod) {
         List<VodImage> images = new ArrayList<>();
@@ -44,7 +44,7 @@ class VodDetailsUtils {
         return new SpannableString(source);
     }
 
-    static ArrayList<VodSourceProfile> getSourceProfiles(Vod vod, boolean rented) {
+    public static ArrayList<VodSourceProfile> getSourceProfiles(Vod vod, boolean rented) {
         if (vod != null && vod.getMovieSource() != null && vod.getMovieSource().getProfiles() != null) {
             List<VodSourceProfile> profiles = vod.getMovieSource().getProfiles();
             return Stream.of(profiles)

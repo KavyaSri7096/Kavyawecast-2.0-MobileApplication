@@ -7,7 +7,7 @@ import android.app.Service;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.ads.MobileAds;
 import com.squareup.leakcanary.LeakCanary;
-import com.wecast.core.Logger;
+import com.wecast.core.logger.Logger;
 import com.wecast.core.WeCore;
 import com.wecast.core.data.db.pref.PreferenceManager;
 import com.wecast.mobile.di.component.AppComponent;

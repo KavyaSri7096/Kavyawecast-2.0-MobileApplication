@@ -54,7 +54,7 @@ public class VodDetailsPlayDialog extends BaseDialog implements SingleChoiceAdap
         VodDetailsPlayDialog dialog = new VodDetailsPlayDialog();
         Bundle bundle = new Bundle();
         bundle.putInt("ID", vod.getId());
-        bundle.putBoolean("IS_EPISODE", vod.getMultiEventVodId() != null);
+        bundle.putBoolean("IS_EPISODE", vod.getMultiEventVodId() != 0);
         dialog.setArguments(bundle);
         return dialog;
     }

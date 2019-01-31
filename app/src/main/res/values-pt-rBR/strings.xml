@@ -101,6 +101,7 @@
     <string name="subtitles">Legendas</string>
     <string name="retry">Tentar novamente</string>
     <string name="parental_rating">Parental\nrating</string>
+    <string name="next_episode">Next episode in %1$d</string>
 
     <!-- TV Show Details -->
     <string name="seasons_count">%1$d&#160;Temporada(s)</string>
