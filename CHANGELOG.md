@@ -1,3 +1,9 @@
+## 2.9.0
+
+  **New features**
+
+  - [WC2-2304](https://wetekdev.atlassian.net/browse/WC2-2304) Continuity Playlist for TV Shows
+
 ## 2.8.0
 
   **New features**

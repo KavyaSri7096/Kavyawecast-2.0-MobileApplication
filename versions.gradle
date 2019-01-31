@@ -4,8 +4,8 @@ ext.versions = [
         compileSdk             : 28,
         targetSdk              : 28,
         minSdk                 : 21,
-        appVersion             : "2.8.0",
-        appVersionCode         : 8,
+        appVersion             : "2.9.0",
+        appVersionCode         : 9,
 
         // Libraries
         supportLibraryVersion  : '28.0.0',
