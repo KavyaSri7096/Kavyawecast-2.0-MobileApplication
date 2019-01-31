@@ -40,10 +40,10 @@ public class VodDetailsRateDialog extends BaseDialog {
     private DialogVodRateBinding binding;
     private Vod vod;
 
-    public static VodDetailsRateDialog newInstance(Vod item) {
+    public static VodDetailsRateDialog newInstance(Vod vod) {
         VodDetailsRateDialog dialog = new VodDetailsRateDialog();
         Bundle bundle = new Bundle();
-        bundle.putInt("ID", item.getId());
+        bundle.putInt("ID", vod.getId());
         dialog.setArguments(bundle);
         return dialog;
     }
@@ -97,7 +97,7 @@ public class VodDetailsRateDialog extends BaseDialog {
             return;
         }
 
-        Disposable disposable = vodManager.rate(vod.getId(), rate, vod.getMultiEventVodId() != null)
+        Disposable disposable = vodManager.rate(vod.getId(), rate, vod.getMultiEventVodId() != 0)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {

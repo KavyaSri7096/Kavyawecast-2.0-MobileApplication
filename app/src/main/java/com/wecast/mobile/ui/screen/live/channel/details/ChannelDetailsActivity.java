@@ -118,7 +118,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
             getByID();
         }
 
-        // Setup debug mode
+        // Based on user choice in setting show/hide debug view
         boolean debug = preferenceManager.getDebug();
         binding.playerView.debug.setVisibility(debug ? View.VISIBLE : View.GONE);
 
@@ -127,8 +127,11 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
     }
 
     private void setupListeners() {
+        // Set back button listeners
         binding.toolbar.back.setOnClickListener(v -> onBackPressed());
         binding.controls.back.setOnClickListener(view -> onBackPressed());
+
+        // Set swipe detector listener
         gestureDetector = new GestureDetector(this, new ChannelDetailsOnSwipeListener() {
             @Override
             public boolean onSwipe(Direction direction) {
@@ -137,20 +140,32 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
                 return true;
             }
         });
+
+        // Set add/remove favorite listeners
         binding.controls.addToFavorites.setOnClickListener(v -> addToFavorites());
         binding.controls.removeFromFavorites.setOnClickListener(v -> removeFromFavorites());
+
+        // Set up/dow buttons listener
         binding.controls.up.setOnClickListener(view -> goNext());
         binding.controls.down.setOnClickListener(view -> goBack());
+
+        // Set timeshift button listener
         binding.controls.timeShift.setOnClickListener(v -> openTimeshiftDialog());
+
+        // Update controls visibility depending on screen orientation
         binding.playerView.root.setOnClickListener(view -> {
             boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
             boolean controlsHidden = binding.controls.root.getVisibility() == View.GONE;
             binding.controls.root.setVisibility(isLandscape && controlsHidden ? View.VISIBLE : View.GONE);
         });
+
+        // Update controls visibility depending on screen orientation
         binding.playerView.simpleExoView.setControllerVisibilityListener(visibility -> {
             boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
             binding.controls.root.setVisibility(isLandscape ? visibility : View.GONE);
         });
+
+        // Set retry button listener
         binding.playerView.error.retry.setOnClickListener(view -> buildParams());
     }
 
@@ -220,6 +235,10 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         subscribe(disposable);
     }
 
+    /**
+     * To prevent showing rent dialog while left/right swipe
+     * remove all channels that are not rented from list
+     */
     private void addRentedChannelsToList(List<Channel> data) {
         channelList = new ArrayList<>();
 
@@ -285,8 +304,13 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         }
     }
 
+    /**
+     * Get channel position in list
+     */
     private void getChannelPosition(Channel channel) {
-        if (channelList == null || channelList.size() == 0) return;
+        if (channelList == null || channelList.size() == 0) {
+            return;
+        }
 
         for (int i = 0; i < channelList.size(); i++) {
             if (channelList.get(i).getId() == channel.getId()) {
@@ -296,6 +320,11 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         }
     }
 
+    /**
+     * If current channel is pin protected
+     * while switching channel if next channel is also pin protected
+     * play that channel without asking for pin
+     */
     private void checkParentalAccess(Channel channel) {
         if (this.channel.isPinProtected()) {
             playChannel(channel);
@@ -311,6 +340,10 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         }
     }
 
+    /**
+     * Stop playing current channel and play new one
+     * also reload programmes for new channels
+     */
     private void playChannel(Channel newChannel) {
         channel = newChannel;
         id = channel.getId();
@@ -328,6 +361,10 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
                 .commit();
     }
 
+    /**
+     * If current channel is first channel in list hide down button,
+     * if current channel is the last channel in list then hide up button
+     */
     public void setupUpDownButtons() {
         getChannelPosition(channel);
         if (channelPosition == 0) {
@@ -346,6 +383,9 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         dialog.show(getSupportFragmentManager(), ChannelDetailsTimeshiftDialog.TAG);
     }
 
+    /**
+     * Show/hide player controls based on scree orientation
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -458,6 +498,10 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         super.onDestroy();
     }
 
+    /**
+     * Since user has option to show debug in settings
+     * we have to start or stop default exo player debug view
+     */
     private void startDebugViewHelper() {
         debugViewHelper = new DebugTextViewHelper(weExoPlayer.getPlayer(), binding.playerView.debug);
         debugViewHelper.start();

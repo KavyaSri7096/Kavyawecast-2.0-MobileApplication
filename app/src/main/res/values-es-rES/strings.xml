@@ -101,6 +101,8 @@
     <string name="audio_profiles">Perfiles de Audio</string>
     <string name="subtitles">Subtitulos</string>
     <string name="retry">Intentar otra vez</string>
+    <string name="parental_rating">Parental\nrating</string>
+    <string name="next_episode">Next episode in %1$d</string>
 
     <!-- TV Show Details -->
     <string name="seasons_count">%1$d&#160;Temporada(s)</string>

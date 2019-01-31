@@ -9,6 +9,7 @@ import com.wecast.core.data.db.entities.ShowType;
 import com.wecast.core.data.db.entities.Vod;
 import com.wecast.core.data.db.entities.VodGenre;
 import com.wecast.core.data.db.entities.VodImage;
+import com.wecast.core.data.db.entities.VodSourceProfile;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityVodDetailsBinding;
@@ -44,7 +45,7 @@ public class VodDetailsActivity extends BaseActivity<ActivityVodDetailsBinding, 
     public static void open(Context context, Vod vod) {
         Intent intent = new Intent(context, VodDetailsActivity.class);
         intent.putExtra("ID", vod.getId());
-        intent.putExtra("IS_EPISODE", vod.getMultiEventVodId() != null);
+        intent.putExtra("IS_EPISODE", vod.getMultiEventVodId() != 0);
         context.startActivity(intent);
     }
 
@@ -91,10 +92,26 @@ public class VodDetailsActivity extends BaseActivity<ActivityVodDetailsBinding, 
 
     private void setupListeners() {
         binding.gallery.back.setOnClickListener(v -> onBackPressed());
-        binding.actions.rent.setOnClickListener(v -> ScreenRouter.openVodRentDialog(VodDetailsActivity.this, vod));
-        binding.actions.play.setOnClickListener(v -> ScreenRouter.openVodPlayDialog(VodDetailsActivity.this, vod));
-        binding.actions.rate.setOnClickListener(v -> ScreenRouter.openVodRateDialog(VodDetailsActivity.this, vod));
-        binding.actions.trailer.setOnClickListener(v -> ScreenRouter.openVodPlayer(VodDetailsActivity.this, vod, null, VodPlayerActivity.PLAY_TRAILER));
+        binding.actions.rent.setOnClickListener(v -> {
+            if (vod != null) {
+                ScreenRouter.openVodRentDialog(VodDetailsActivity.this, vod);
+            }
+        });
+        binding.actions.play.setOnClickListener(v -> {
+            if (vod != null) {
+                checkForSingleProfile();
+            }
+        });
+        binding.actions.rate.setOnClickListener(v -> {
+            if (vod != null) {
+                ScreenRouter.openVodRateDialog(VodDetailsActivity.this, vod);
+            }
+        });
+        binding.actions.trailer.setOnClickListener(v -> {
+            if (vod != null) {
+                ScreenRouter.openVodPlayer(VodDetailsActivity.this, vod, null, VodPlayerActivity.PLAY_TRAILER);
+            }
+        });
     }
 
     private void getByID(int id, boolean isEpisode) {
@@ -204,5 +221,23 @@ public class VodDetailsActivity extends BaseActivity<ActivityVodDetailsBinding, 
         return binding.details.info.getText().length() > 0
                 ? binding.details.info.getText() + " | " + string
                 : string;
+    }
+
+    /**
+     * If vod has only one profile for movie source
+     * play that profile without opening play dialog
+     */
+    private void checkForSingleProfile() {
+        List<VodSourceProfile> profiles = VodDetailsUtils.getSourceProfiles(vod, true);
+        if (profiles != null) {
+            if (profiles.size() == 1) {
+                VodSourceProfile vodSourceProfile = profiles.get(0);
+                if (vodSourceProfile.isSubscribed()) {
+                    ScreenRouter.openVodPlayer(this, vod, vodSourceProfile, VodPlayerActivity.PLAY_MOVIE);
+                }
+            } else {
+                ScreenRouter.openVodPlayDialog(this, vod);
+            }
+        }
     }
 }
