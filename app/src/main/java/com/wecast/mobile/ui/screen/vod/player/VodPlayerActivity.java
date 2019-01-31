@@ -58,7 +58,6 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
     private ActivityVodPlayerBinding binding;
     // Exo player
     private Vod vod;
-    private int id;
     private int profileId;
     private String profileBusinessModel;
     private long playAction;
@@ -122,23 +121,13 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            id = bundle.getInt("ID");
+            int id = bundle.getInt("ID");
             boolean isEpisode = bundle.getBoolean("IS_EPISODE");
             profileId = bundle.getInt("PROFILE_ID");
             profileBusinessModel = bundle.getString("BUSINESS_MODEL");
             playAction = bundle.getLong("PLAY_ACTION");
             seekTo = bundle.getInt("SEEK_TO");
-            // Fetch vod details from server
-            Disposable disposable = viewModel.getByID(id, isEpisode)
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(response -> {
-                        if (response != null) {
-                            vod = response;
-                            setupData();
-                        }
-                    }, this::toast);
-            subscribe(disposable);
+            getById(id, isEpisode);
         }
 
         binding.debug.setVisibility(preferenceManager.getDebug() ? View.VISIBLE : View.GONE);
@@ -180,13 +169,38 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
         binding.actions.root.setVisibility(visibility);
     }
 
+    private void getById(int id, boolean isEpisode) {
+        Disposable disposable = viewModel.getByID(id, isEpisode)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    if (response != null) {
+                        vod = response;
+                        setupData();
+                    }
+                }, this::toast);
+        subscribe(disposable);
+    }
+
     private void setupData() {
+        // Set vod title
         if (vod != null && vod.getTitle() != null) {
             binding.title.setText(vod.getTitle());
         } else {
             binding.title.setVisibility(View.GONE);
         }
 
+        // Set vod parental rating
+        if (vod.getParentalRating() != null) {
+            String code = vod.getParentalRating().getCode();
+            binding.parentalRating.code.setText(code);
+            // Hide parental rating after 5 seconds
+            hideParentalRating();
+        } else {
+            binding.parentalRating.root.setVisibility(View.GONE);
+        }
+
+        // Initialize exo player
         weCastExoPlayer = (WeExoPlayer) WePlayerFactory.get(WePlayerType.EXO_PLAYER, this, binding.simpleExoView);
         if (weCastExoPlayer != null) {
             weCastExoPlayer.setPlaybackStateListener(this);
@@ -194,6 +208,14 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
             weCastExoPlayer.setUseController(true);
             play();
         }
+    }
+
+    private void hideParentalRating() {
+        Handler handler = new Handler(Looper.myLooper());
+        handler.postDelayed(() -> binding.parentalRating.root.animate()
+                .alpha(0f)
+                .setDuration(2000)
+                .start(), 5000);
     }
 
     /**

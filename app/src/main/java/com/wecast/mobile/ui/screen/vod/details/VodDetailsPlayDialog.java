@@ -5,17 +5,21 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.wecast.core.data.db.dao.VodDao;
 import com.wecast.core.data.db.entities.Vod;
 import com.wecast.core.data.db.entities.VodSourceProfile;
 import com.wecast.core.data.db.entities.VodSourceProfilePricing;
 import com.wecast.core.data.db.pref.PreferenceManager;
+import com.wecast.core.data.repository.VodRepository;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.DialogVodPlayBinding;
 import com.wecast.mobile.ui.ScreenRouter;
@@ -40,16 +44,17 @@ public class VodDetailsPlayDialog extends BaseDialog implements SingleChoiceAdap
     @Inject
     PreferenceManager preferenceManager;
     @Inject
-    VodDao vodDao;
+    VodRepository vodRepository;
 
     private DialogVodPlayBinding binding;
     private Vod vod;
     private VodSourceProfile profile = null;
 
-    public static VodDetailsPlayDialog newInstance(Vod item) {
+    public static VodDetailsPlayDialog newInstance(Vod vod) {
         VodDetailsPlayDialog dialog = new VodDetailsPlayDialog();
         Bundle bundle = new Bundle();
-        bundle.putInt("ID", item.getId());
+        bundle.putInt("ID", vod.getId());
+        bundle.putBoolean("IS_EPISODE", vod.getMultiEventVodId() != null);
         dialog.setArguments(bundle);
         return dialog;
     }
@@ -84,9 +89,30 @@ public class VodDetailsPlayDialog extends BaseDialog implements SingleChoiceAdap
         Bundle bundle = getArguments();
         if (bundle != null) {
             int id = bundle.getInt("ID");
-            vod = vodDao.getById(id);
+            boolean isEpisode = bundle.getBoolean("IS_EPISODE");
+            getByID(id, isEpisode);
         }
+    }
 
+    private void setupListeners() {
+        binding.confirm.setOnClickListener(v -> playVod());
+        binding.cancel.setOnClickListener(v -> dismiss());
+    }
+
+    private void getByID(int id, boolean isEpisode) {
+        Disposable disposable = vodRepository.getByID(id, isEpisode)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    if (response != null) {
+                        vod = response;
+                        setupProfiles();
+                    }
+                }, this::toast);
+        subscribe(disposable);
+    }
+
+    private void setupProfiles() {
         if (vod == null) {
             return;
         }
@@ -101,11 +127,6 @@ public class VodDetailsPlayDialog extends BaseDialog implements SingleChoiceAdap
         binding.profiles.setLayoutManager(new LinearLayoutManager(getActivity()));
         VodDetailsProfileAdapter adapter = new VodDetailsProfileAdapter(preferenceManager, profiles, this);
         binding.profiles.setAdapter(adapter);
-    }
-
-    private void setupListeners() {
-        binding.confirm.setOnClickListener(v -> playVod());
-        binding.cancel.setOnClickListener(v -> dismiss());
     }
 
     private void playVod() {
