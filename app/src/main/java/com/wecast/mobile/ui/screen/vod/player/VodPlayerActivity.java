@@ -33,7 +33,6 @@ import com.wecast.player.data.player.AbstractPlayer;
 import com.wecast.player.data.player.exo.WeExoPlayer;
 import com.wecast.player.data.player.exo.trackSelector.ExoPlayerTrackSelector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -83,14 +82,6 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
         intent.putExtra("PLAY_ACTION", playAction);
         intent.putExtra("PROFILE_ID", profile != null ? profile.getId() : null);
         intent.putExtra("BUSINESS_MODEL", profile != null ? profile.getBusinessModel() : null);
-        context.startActivity(intent);
-    }
-
-    public static void open(Context context, Vod item) {
-        Intent intent = new Intent(context, VodPlayerActivity.class);
-        intent.putExtra("ID", item.getId());
-        intent.putExtra("IS_EPISODE", item.getMultiEventVodId() != 0);
-        intent.putExtra("PLAY_ACTION", PLAY_MOVIE);
         intent.putExtra("SEEK_TO", item.getContinueWatching() != null ? item.getContinueWatching().getStoppedTime() : null);
         context.startActivity(intent);
     }
