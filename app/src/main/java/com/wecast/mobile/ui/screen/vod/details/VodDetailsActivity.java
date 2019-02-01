@@ -10,6 +10,7 @@ import com.wecast.core.data.db.entities.Vod;
 import com.wecast.core.data.db.entities.VodGenre;
 import com.wecast.core.data.db.entities.VodImage;
 import com.wecast.core.data.db.entities.VodSourceProfile;
+import com.wecast.core.logger.Logger;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityVodDetailsBinding;
@@ -109,7 +110,7 @@ public class VodDetailsActivity extends BaseActivity<ActivityVodDetailsBinding, 
         });
         binding.actions.trailer.setOnClickListener(v -> {
             if (vod != null) {
-                ScreenRouter.openVodPlayer(VodDetailsActivity.this, vod, null, VodPlayerActivity.PLAY_TRAILER);
+                ScreenRouter.openVodPlayer(VodDetailsActivity.this, vod, null, VodPlayerActivity.PLAY_TRAILER, 0);
             }
         });
     }
@@ -229,15 +230,18 @@ public class VodDetailsActivity extends BaseActivity<ActivityVodDetailsBinding, 
      */
     private void checkForSingleProfile() {
         List<VodSourceProfile> profiles = VodDetailsUtils.getSourceProfiles(vod, true);
-        if (profiles != null) {
-            if (profiles.size() == 1) {
-                VodSourceProfile vodSourceProfile = profiles.get(0);
-                if (vodSourceProfile.isSubscribed()) {
-                    ScreenRouter.openVodPlayer(this, vod, vodSourceProfile, VodPlayerActivity.PLAY_MOVIE);
+        Logger.e("Profiles count -> " + profiles.size());
+        if (profiles.size() == 1) {
+            VodSourceProfile vodSourceProfile = profiles.get(0);
+            if (vodSourceProfile.isSubscribed()) {
+                if (vod.getContinueWatching() != null) {
+                    ScreenRouter.openVodStartOverDialog(this, vod, vodSourceProfile);
+                } else {
+                    ScreenRouter.openVodPlayer(this, vod, vodSourceProfile, VodPlayerActivity.PLAY_MOVIE, 0);
                 }
-            } else {
-                ScreenRouter.openVodPlayDialog(this, vod);
             }
+        } else {
+            ScreenRouter.openVodPlayDialog(this, vod);
         }
     }
 }

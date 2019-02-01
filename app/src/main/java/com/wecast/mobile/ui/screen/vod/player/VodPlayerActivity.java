@@ -78,14 +78,14 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
     private Runnable nextEpisodeRunnable = () -> nextEpisodeView.startCounter();
     private List<Vod> episodes;
 
-    public static void open(Context context, Vod item, VodSourceProfile profile, int playAction) {
+    public static void open(Context context, Vod item, VodSourceProfile profile, int playAction, int seekTo) {
         Intent intent = new Intent(context, VodPlayerActivity.class);
         intent.putExtra("ID", item.getId());
         intent.putExtra("IS_EPISODE", item.getMultiEventVodId() != 0);
         intent.putExtra("PLAY_ACTION", playAction);
         intent.putExtra("PROFILE_ID", profile != null ? profile.getId() : null);
         intent.putExtra("BUSINESS_MODEL", profile != null ? profile.getBusinessModel() : null);
-        intent.putExtra("SEEK_TO", item.getContinueWatching() != null ? item.getContinueWatching().getStoppedTime() : null);
+        intent.putExtra("SEEK_TO", seekTo);
         context.startActivity(intent);
     }
 
@@ -385,11 +385,6 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
 
         // Setup options for audio, video and track options
         setupTrackOptions();
-
-        // In case of continue watching seekTo stopped position
-        if (seekTo > -1) {
-            weExoPlayer.seekToPosition(seekTo);
-        }
     }
 
     /**
@@ -583,12 +578,22 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
         }
     }
 
+    /**
+     * Seek to selected position
+     */
+    private void seekToPosition() {
+        if (seekTo > -1) {
+            weExoPlayer.seekToPosition(seekTo);
+        }
+    }
+
     @Override
     public void onPlaybackState(int playbackState) {
         switch (playbackState) {
             case Player.STATE_BUFFERING:
                 viewModel.setLoading(true);
                 bufferTime = System.currentTimeMillis();
+                seekToPosition();
                 break;
             case Player.STATE_ENDED:
                 trackSocketWatchedTime();

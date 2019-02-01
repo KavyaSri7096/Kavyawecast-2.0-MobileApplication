@@ -17,6 +17,7 @@ import com.wecast.mobile.ui.screen.vod.details.VodDetailsPricingDialog;
 import com.wecast.mobile.ui.screen.vod.details.VodDetailsRateDialog;
 import com.wecast.mobile.ui.screen.vod.details.VodDetailsRentDialog;
 import com.wecast.mobile.ui.screen.vod.details.VodDetailsRentPreviewDialog;
+import com.wecast.mobile.ui.screen.vod.details.VodDetailsStartOverDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerErrorDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerTextTrackDialog;
@@ -74,6 +75,9 @@ public abstract class DialogBuilder {
 
     @ContributesAndroidInjector
     abstract VodDetailsRateDialog bindVodRateDialog();
+
+    @ContributesAndroidInjector
+    abstract VodDetailsStartOverDialog bindVodDetailsStartOverDialog();
 
     @ContributesAndroidInjector
     abstract VodPlayerVideoTrackDialog bindVodPlayerVideoTrackDialog();

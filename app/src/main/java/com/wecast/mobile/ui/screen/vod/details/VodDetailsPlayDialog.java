@@ -1,7 +1,9 @@
 package com.wecast.mobile.ui.screen.vod.details;
 
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -143,9 +145,12 @@ public class VodDetailsPlayDialog extends BaseDialog implements SingleChoiceAdap
             return;
         }
 
-        // Play selected profile
-        ScreenRouter.openVodPlayer(getActivity(), vod, profile, VodPlayerActivity.PLAY_MOVIE);
         dismiss();
+        if (vod.getContinueWatching() != null) {
+            ScreenRouter.openVodStartOverDialog(getActivity(), vod, profile);
+        } else {
+            ScreenRouter.openVodPlayer(getActivity(), vod, profile, VodPlayerActivity.PLAY_MOVIE, 0);
+        }
     }
 
     @Override
