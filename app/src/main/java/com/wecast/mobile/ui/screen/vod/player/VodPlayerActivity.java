@@ -582,8 +582,10 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
      * Seek to selected position
      */
     private void seekToPosition() {
-        if (seekTo > -1) {
-            weExoPlayer.seekToPosition((int) seekTo);
+        if (weExoPlayer != null && weExoPlayer.getPlayer() != null) {
+            if (seekTo > -1 && weExoPlayer.getPlayer().getCurrentPosition() == 0) {
+                weExoPlayer.seekToPosition((int) seekTo);
+            }
         }
     }
 
