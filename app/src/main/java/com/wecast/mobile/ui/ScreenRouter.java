@@ -44,6 +44,8 @@ import com.wecast.mobile.ui.screen.vod.details.VodDetailsPricingDialog;
 import com.wecast.mobile.ui.screen.vod.details.VodDetailsRateDialog;
 import com.wecast.mobile.ui.screen.vod.details.VodDetailsRentDialog;
 import com.wecast.mobile.ui.screen.vod.details.VodDetailsRentPreviewDialog;
+import com.wecast.mobile.ui.screen.vod.details.VodDetailsStartOverDialog;
+import com.wecast.mobile.ui.screen.vod.details.VodDetailsUtils;
 import com.wecast.mobile.ui.screen.vod.genre.VodByGenreActivity;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerActivity;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioTrackDialog;
@@ -54,7 +56,10 @@ import com.wecast.mobile.ui.screen.vod.player.VodPlayerVideoTrackDialog;
 import com.wecast.mobile.ui.screen.vod.search.VodSearchActivity;
 import com.wecast.mobile.ui.screen.welcome.WelcomeActivity;
 
+import java.util.List;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 /**
  * Created by ageech@live.com
@@ -62,6 +67,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ScreenRouter {
 
+    /**
+     * On boarding
+     */
     public static void openSplash(Context context) {
         SplashActivity.open(context);
     }
@@ -82,6 +90,14 @@ public class ScreenRouter {
         RegistrationActivity.open(context);
     }
 
+    public static void openNavigation(Context context) {
+        NavigationActivity.open(context);
+        ((AppCompatActivity) context).finish();
+    }
+
+    /**
+     * Settings
+     */
     public static void openSettings(Context context) {
         SettingsActivity.open(context);
     }
@@ -112,14 +128,17 @@ public class ScreenRouter {
 
     public static void openLogout(Context context) {
         LogoutDialog dialog = LogoutDialog.newInstance();
-        dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), LogoutDialog.TAG);
+        dialog.show(getFragmentManager(context), LogoutDialog.TAG);
     }
 
-    public static void openNavigation(Context context) {
-        NavigationActivity.open(context);
-        ((AppCompatActivity) context).finish();
+    public static void openExit(Context context) {
+        ExitDialog dialog = ExitDialog.newInstance();
+        dialog.show(getFragmentManager(context), ExitDialog.TAG);
     }
 
+    /**
+     * Highlighted
+     */
     public static void openHighlighted(Context context, Highlighted highlighted) {
         if (highlighted.getType() == HighlightedType.CHANNEL) {
             openChannelDetails(context, highlighted.getChannelModel());
@@ -130,13 +149,16 @@ public class ScreenRouter {
         }
     }
 
+    /**
+     * Channel
+     */
     public static void openChannelDetails(Context context, Channel channel) {
         if (WeApp.SUBSCRIPTION_EXPIRED) {
             Toast.makeText(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
         } else {
             if (channel.isNotRented()) {
                 ChannelDetailsRentDialog dialog = ChannelDetailsRentDialog.newInstance(channel);
-                dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), ChannelDetailsRentDialog.TAG);
+                dialog.show(getFragmentManager(context), ChannelDetailsRentDialog.TAG);
             } else {
                 ChannelDetailsActivity.open(context, channel);
             }
@@ -155,11 +177,14 @@ public class ScreenRouter {
         ProgrammeDetailsActivity.open(activity, channel, programme);
     }
 
+    /**
+     * Vod
+     */
     public static void openVodDetails(Context context, Vod vod) {
         if (vod.getParentalRating() != null && vod.getParentalRating().isRequirePin()) {
             ParentalPinDialog dialog = ParentalPinDialog.newInstance();
             dialog.setOnPinInputListener(() -> openVod(context, vod));
-            dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), ParentalPinDialog.TAG);
+            dialog.show(getFragmentManager(context), ParentalPinDialog.TAG);
         } else {
             openVod(context, vod);
         }
@@ -175,72 +200,93 @@ public class ScreenRouter {
 
     public static void openVodRentDialog(Context context, Vod vod) {
         VodDetailsRentDialog dialog = VodDetailsRentDialog.newInstance(vod);
-        dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), VodDetailsRentDialog.TAG);
+        dialog.show(getFragmentManager(context), VodDetailsRentDialog.TAG);
     }
 
 
     public static void openVodRentPricingDialog(Context context, Vod vod, VodSourceProfile profile) {
         VodDetailsPricingDialog dialog = VodDetailsPricingDialog.newInstance(vod, profile);
-        dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), VodDetailsPricingDialog.TAG);
+        dialog.show(getFragmentManager(context), VodDetailsPricingDialog.TAG);
     }
 
     public static void openVodRentPreviewDialog(Context context, Vod vod, VodSourceProfile profile, VodSourceProfilePricing pricing) {
         VodDetailsRentPreviewDialog dialog = VodDetailsRentPreviewDialog.newInstance(vod, profile, pricing);
-        dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), VodDetailsRentPreviewDialog.TAG);
+        dialog.show(getFragmentManager(context), VodDetailsRentPreviewDialog.TAG);
     }
 
     public static void openVodPlayDialog(Context context, Vod vod) {
         if (WeApp.SUBSCRIPTION_EXPIRED) {
             Toast.makeText(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
-        } else {
-            VodDetailsPlayDialog dialog = VodDetailsPlayDialog.newInstance(vod);
-            dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), VodDetailsPlayDialog.TAG);
+            return;
         }
+
+        VodDetailsPlayDialog dialog = VodDetailsPlayDialog.newInstance(vod);
+        dialog.show(getFragmentManager(context), VodDetailsPlayDialog.TAG);
+
     }
 
-    public static void openVodPlayer(Context context, Vod vod, VodSourceProfile profile, long playType) {
+    public static void openVodPlayer(Context context, Vod vod, VodSourceProfile profile, int playType, int seekTo) {
         if (WeApp.SUBSCRIPTION_EXPIRED) {
             Toast.makeText(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
-        } else {
-            VodPlayerActivity.open(context, vod, profile, playType);
+            return;
         }
+
+        VodPlayerActivity.open(context, vod, profile, playType, seekTo);
     }
 
-    public static void openVodVideoTrackDialog(Context context, VodPlayerOnTrackChangedListener listener) {
+    public static void showVodVideoTracks(Context context, VodPlayerOnTrackChangedListener listener) {
         VodPlayerVideoTrackDialog dialog = new VodPlayerVideoTrackDialog();
         dialog.setTrackSelectedListener(listener);
-        dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), VodPlayerVideoTrackDialog.TAG);
+        dialog.show(getFragmentManager(context), VodPlayerVideoTrackDialog.TAG);
     }
 
-    public static void openVodAudioTrackDialog(Context context, VodPlayerOnTrackChangedListener listener) {
+    public static void showVodAudioTracks(Context context, VodPlayerOnTrackChangedListener listener) {
         VodPlayerAudioTrackDialog dialog = new VodPlayerAudioTrackDialog();
         dialog.setTrackSelectedListener(listener);
-        dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), VodPlayerAudioTrackDialog.TAG);
+        dialog.show(getFragmentManager(context), VodPlayerAudioTrackDialog.TAG);
     }
 
-    public static void openVodTextTrackDialog(Context context, VodPlayerOnTrackChangedListener listener) {
+    public static void showVodTextTrack(Context context, VodPlayerOnTrackChangedListener listener) {
         VodPlayerTextTrackDialog dialog = new VodPlayerTextTrackDialog();
         dialog.setTrackSelectedListener(listener);
-        dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), VodPlayerTextTrackDialog.TAG);
+        dialog.show(getFragmentManager(context), VodPlayerTextTrackDialog.TAG);
     }
 
-    public static void openVodPlayerError(Context context, VodPlayerErrorDialog.OnRetryListener listener) {
+    public static void showVodPlayerError(Context context, VodPlayerErrorDialog.OnRetryListener listener) {
         VodPlayerErrorDialog dialog = new VodPlayerErrorDialog();
         dialog.setOnRetryListener(listener);
-        dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), VodPlayerErrorDialog.TAG);
+        dialog.show(getFragmentManager(context), VodPlayerErrorDialog.TAG);
+    }
+
+    public static void openVodStartOverDialog(Context context, Vod vod, VodSourceProfile vodSourceProfile) {
+        VodDetailsStartOverDialog dialog = VodDetailsStartOverDialog.newInstance(vod, vodSourceProfile);
+        dialog.show(getFragmentManager(context), VodDetailsStartOverDialog.TAG);
     }
 
     public static void continuePlaying(Context context, Vod vod) {
         if (WeApp.SUBSCRIPTION_EXPIRED) {
             Toast.makeText(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        List<VodSourceProfile> profiles = VodDetailsUtils.getSourceProfiles(vod, true);
+        if (profiles.size() == 1) {
+            VodSourceProfile vodSourceProfile = profiles.get(0);
+            if (vodSourceProfile.isSubscribed()) {
+                if (vod.getContinueWatching() != null) {
+                    openVodStartOverDialog(context, vod, vodSourceProfile);
+                } else {
+                    openVodPlayer(context, vod, vodSourceProfile, VodPlayerActivity.PLAY_MOVIE, 0);
+                }
+            }
         } else {
-            VodPlayerActivity.open(context, vod);
+            openVodPlayDialog(context, vod);
         }
     }
 
     public static void openVodRateDialog(Context context, Vod vod) {
         VodDetailsRateDialog dialog = VodDetailsRateDialog.newInstance(vod);
-        dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), VodDetailsRateDialog.TAG);
+        dialog.show(getFragmentManager(context), VodDetailsRateDialog.TAG);
     }
 
     public static void openVodByGenre(Context context, VodGenre vodGenre) {
@@ -251,11 +297,14 @@ public class ScreenRouter {
         VodSearchActivity.open(context);
     }
 
+    /**
+     * TV Show
+     */
     public static void openTVShowDetails(Context context, TVShow tvShow) {
         if (tvShow.getParentalRating() != null && tvShow.getParentalRating().isRequirePin()) {
             ParentalPinDialog dialog = ParentalPinDialog.newInstance();
             dialog.setOnPinInputListener(() -> openTVShow(context, tvShow));
-            dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), ParentalPinDialog.TAG);
+            dialog.show(getFragmentManager(context), ParentalPinDialog.TAG);
         } else {
             openTVShow(context, tvShow);
         }
@@ -280,14 +329,18 @@ public class ScreenRouter {
     public static void openTVShowPlayer(Context context, TVShow tvShow) {
         if (WeApp.SUBSCRIPTION_EXPIRED) {
             Toast.makeText(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
-        } else {
-            TVShowPlayerActivity.open(context, tvShow);
+            return;
         }
+
+        TVShowPlayerActivity.open(context, tvShow);
     }
 
-    public static void openExit(Context context) {
-        ExitDialog dialog = ExitDialog.newInstance();
-        dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), ExitDialog.TAG);
+    /**
+     * Get support fragment manager from context
+     */
+    private static FragmentManager getFragmentManager(Context context) {
+        AppCompatActivity appCompatActivity = (AppCompatActivity) context;
+        return appCompatActivity.getSupportFragmentManager();
     }
 }
 

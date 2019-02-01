@@ -11,7 +11,7 @@ public interface Constants {
     String DB_NAME = "wecast.db";
 
     // Reminders sync timeout (15 minutes)
-    long REMINDERS_SYNC_TIMEOUT = 15 * 60 & 1000;
+    long REMINDERS_SYNC_TIMEOUT = 15 * 60 * 1000;
 
     // Advertisement banner config for Google ADS
     String ADMOB_APP_ID = "ca-app-pub-3940256099942544/6300978111";

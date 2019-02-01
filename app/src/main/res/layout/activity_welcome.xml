@@ -93,7 +93,7 @@
                         android:layout_height="@dimen/splash_logo_height"
                         android:layout_gravity="center"
                         android:contentDescription="@string/app_name"
-                        android:src="@drawable/app_logo_inactive" />
+                        android:src="@drawable/app_logo" />
 
                 </FrameLayout>
 

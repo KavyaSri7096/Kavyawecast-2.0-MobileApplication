@@ -7,10 +7,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.Player;
-import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.DebugTextViewHelper;
 import com.wecast.core.data.db.entities.TVShow;
 import com.wecast.core.data.db.pref.PreferenceManager;
@@ -20,6 +20,7 @@ import com.wecast.mobile.databinding.ActivityTvShowPlayerBinding;
 import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
 import com.wecast.mobile.ui.base.BaseDialog;
+import com.wecast.mobile.ui.screen.vod.player.VodPlayerAspectRatioView;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerOnTrackChangedListener;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerTextTrackDialog;
@@ -55,8 +56,7 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
     // Exo player
     private TVShow tvShow;
     private DebugTextViewHelper debugViewHelper;
-    private WeExoPlayer weCastExoPlayer;
-    private int aspectRatioType = 1;
+    private WeExoPlayer weExoPlayer;
 
     public static void open(Context context, TVShow item) {
         Intent intent = new Intent(context, TVShowPlayerActivity.class);
@@ -100,70 +100,74 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             int id = bundle.getInt("ID");
-            // Fetch tv show details from server
-            Disposable disposable = viewModel.getByID(id)
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(response -> {
-                        if (response != null) {
-                            tvShow = response;
-                            setupData();
-                        }
-                    }, this::toast);
-            subscribe(disposable);
+            getById(id);
         }
 
-        binding.debug.setVisibility(preferenceManager.getDebug() ? View.VISIBLE : View.GONE);
+        // Based on user choice in setting show/hide debug view
+        boolean debug = preferenceManager.getDebug();
+        binding.debug.setVisibility(debug ? View.VISIBLE : View.GONE);
+
+        // Hide next and previous button
+        ImageButton nextEpisode = findViewById(R.id.skipNext);
+        nextEpisode.setVisibility(View.GONE);
+        ImageButton previousEpisode = findViewById(R.id.skipPrevious);
+        previousEpisode.setVisibility(View.GONE);
     }
 
     private void setupListeners() {
+        // Set back button listener
         binding.back.setOnClickListener(view -> onBackPressed());
 
-        binding.simpleExoView.requestFocus();
-        binding.simpleExoView.setControllerShowTimeoutMs(0);
-        binding.simpleExoView.setControllerAutoShow(false);
-        updateControllerVisibility(View.GONE);
+        // Set exo player view controller
+        binding.topControls.setVisibility(View.GONE);
         binding.simpleExoView.setControllerVisibilityListener(v -> {
             if (v == View.GONE) {
                 goToFullScreen();
             }
-            updateControllerVisibility(v);
+            binding.topControls.setVisibility(v);
         });
 
-        ImageButton aspectRatio = binding.simpleExoView.findViewById(R.id.exo_aspect_ratio);
-        aspectRatio.setOnClickListener(v -> {
-            if (aspectRatioType == 1) {
-                ImageButton image = (ImageButton) v;
-                image.setImageResource(R.drawable.ic_original_ratio);
-                weCastExoPlayer.setAspectRatioResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL);
-                aspectRatioType = 0;
-            } else {
-                ImageButton image = (ImageButton) v;
-                image.setImageResource(R.drawable.ic_fit_screen);
-                weCastExoPlayer.setAspectRatioResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
-                aspectRatioType = 1;
-            }
-        });
+        // Set aspect ratio
+        VodPlayerAspectRatioView aspectRatio = findViewById(R.id.aspectRatio);
+        if (aspectRatio != null) {
+            aspectRatio.setOnClickListener(v -> aspectRatio.changeAspectRatio(weExoPlayer));
+        }
     }
 
-    private void updateControllerVisibility(int visibility) {
-        binding.back.setVisibility(visibility);
-        binding.info.setVisibility(visibility);
-        binding.actions.root.setVisibility(visibility);
+    private void getById(int id) {
+        Disposable disposable = viewModel.getByID(id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    if (response != null) {
+                        tvShow = response;
+                        setupData();
+                    }
+                }, this::toast);
+        subscribe(disposable);
     }
 
     private void setupData() {
+        // Set vod title
+        TextView title = findViewById(R.id.title);
         if (tvShow != null && tvShow.getTitle() != null) {
-            binding.title.setText(tvShow.getTitle());
+            title.setText(tvShow.getTitle());
         } else {
-            binding.title.setVisibility(View.GONE);
+            title.setVisibility(View.GONE);
         }
 
-        weCastExoPlayer = (WeExoPlayer) WePlayerFactory.get(WePlayerType.EXO_PLAYER, this, binding.simpleExoView);
-        if (weCastExoPlayer != null) {
-            weCastExoPlayer.setPlaybackStateListener(this);
-            weCastExoPlayer.setErrorListener(this);
-            weCastExoPlayer.setUseController(true);
+        // Set vod parental rating
+        if (tvShow.getParentalRating() != null) {
+            String code = tvShow.getParentalRating().getCode();
+            binding.parentalRating.setText(code);
+        }
+
+        // Initialize exo player
+        weExoPlayer = (WeExoPlayer) WePlayerFactory.get(WePlayerType.EXO_PLAYER, this, binding.simpleExoView);
+        if (weExoPlayer != null) {
+            weExoPlayer.setPlaybackStateListener(this);
+            weExoPlayer.setErrorListener(this);
+            weExoPlayer.setUseController(true);
             play();
         }
     }
@@ -181,6 +185,10 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
         setupTrackOptions();
     }
 
+    /**
+     * Since we are playing trailer we do not
+     * need to do additional API call to get real url.
+     */
     private void playTrailer(int maxBitrate) {
         WePlayerParams playerSource = new WePlayerParams.Builder()
                 .setUrl(tvShow.getTrailerSource().getUrl())
@@ -189,12 +197,15 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
                 .setBuffer(preferenceManager.getVodBuffer())
                 .setSubtitles(tvShow.getTrailerSource().getSubtitles())
                 .build();
-        weCastExoPlayer.play(playerSource);
+        weExoPlayer.play(playerSource);
     }
 
-
+    /**
+     * Show track option buttons visibility with delay of 3 seconds because
+     * defaultTrackSelector will need some time to watch current mapped track info
+     */
     private void setupTrackOptions() {
-        ExoPlayerTrackSelector trackSelector = weCastExoPlayer.getTrackSelector();
+        ExoPlayerTrackSelector trackSelector = weExoPlayer.getTrackSelector();
         // Edit buttons visibility with delay of 3 sec because defaultTrackSelector
         // will need some time to watch current mapped track info
         Handler handler = new Handler(Looper.getMainLooper());
@@ -208,29 +219,29 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
     }
 
     private void setupVideoTracks(ExoPlayerTrackSelector selector) {
+        binding.subtitle.setVisibility(View.GONE);
+        // Show subtitle options if stream has multiple text tracks
         if (selector.getSubtitleTracks() != null && selector.getSubtitleTracks().size() > 1) {
-            binding.actions.subtitle.setOnClickListener(v -> ScreenRouter.openVodTextTrackDialog(this, this));
-            binding.actions.subtitle.setVisibility(View.VISIBLE);
-        } else {
-            binding.actions.subtitle.setVisibility(View.GONE);
+            binding.subtitle.setOnClickListener(v -> ScreenRouter.showVodTextTrack(this, this));
+            binding.subtitle.setVisibility(View.VISIBLE);
         }
     }
 
     private void setupAudioTracks(ExoPlayerTrackSelector selector) {
+        binding.audio.setVisibility(View.GONE);
+        // Show audio options if stream has multiple audio tracks
         if (selector.getAudioTracks() != null && !selector.getAudioTracks().isEmpty()) {
-            binding.actions.audio.setOnClickListener(v -> ScreenRouter.openVodAudioTrackDialog(this, this));
-            binding.actions.audio.setVisibility(View.VISIBLE);
-        } else {
-            binding.actions.audio.setVisibility(View.GONE);
+            binding.audio.setOnClickListener(v -> ScreenRouter.showVodAudioTracks(this, this));
+            binding.audio.setVisibility(View.VISIBLE);
         }
     }
 
     private void setupSubtitleTracks(ExoPlayerTrackSelector selector) {
+        binding.video.setVisibility(View.GONE);
+        // Show video options if stream has multiple video tracks
         if (selector.getVideoTracks() != null && !selector.getVideoTracks().isEmpty()) {
-            binding.actions.video.setOnClickListener(v -> ScreenRouter.openVodVideoTrackDialog(this, this));
-            binding.actions.video.setVisibility(View.VISIBLE);
-        } else {
-            binding.actions.video.setVisibility(View.GONE);
+            binding.video.setOnClickListener(v -> ScreenRouter.showVodVideoTracks(this, this));
+            binding.video.setVisibility(View.VISIBLE);
         }
     }
 
@@ -238,19 +249,19 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
     public void onTrackDialogCreated(BaseDialog dialog) {
         if (dialog instanceof VodPlayerVideoTrackDialog) {
             VodPlayerVideoTrackDialog dialog1 = (VodPlayerVideoTrackDialog) dialog;
-            dialog1.setTrackSelector(weCastExoPlayer.getTrackSelector());
+            dialog1.setTrackSelector(weExoPlayer.getTrackSelector());
         } else if (dialog instanceof VodPlayerAudioTrackDialog) {
             VodPlayerAudioTrackDialog dialog1 = (VodPlayerAudioTrackDialog) dialog;
-            dialog1.setTrackSelector(weCastExoPlayer.getTrackSelector());
+            dialog1.setTrackSelector(weExoPlayer.getTrackSelector());
         } else if (dialog instanceof VodPlayerTextTrackDialog) {
             VodPlayerTextTrackDialog dialog1 = (VodPlayerTextTrackDialog) dialog;
-            dialog1.setTrackSelector(weCastExoPlayer.getTrackSelector());
+            dialog1.setTrackSelector(weExoPlayer.getTrackSelector());
         }
     }
 
     @Override
     public void onTrackChanged(WePlayerTrack track) {
-        weCastExoPlayer.getTrackSelector().changeTrack(track);
+        weExoPlayer.getTrackSelector().changeTrack(track);
 
         switch (track.getTrackType()) {
             case ExoPlayerTrackSelector.TRACK_TYPE_VIDEO:
@@ -259,16 +270,16 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
                 break;
             case ExoPlayerTrackSelector.TRACK_TYPE_AUDIO:
                 preferenceManager.setLastAudioTrack(track.getName());
-                weCastExoPlayer.getTrackSelector().changeTrack(track);
+                weExoPlayer.getTrackSelector().changeTrack(track);
                 break;
             case ExoPlayerTrackSelector.TRACK_TYPE_TEXT:
                 preferenceManager.setLastTextTrack(track.getName());
                 if (track.isOff()) {
-                    weCastExoPlayer.updateSubtitleVisibility(false);
+                    weExoPlayer.updateSubtitleVisibility(false);
                 } else {
-                    weCastExoPlayer.getTrackSelector().changeTrack(track);
-                    if (!weCastExoPlayer.isSubtitleViewVisible()) {
-                        weCastExoPlayer.updateSubtitleVisibility(true);
+                    weExoPlayer.getTrackSelector().changeTrack(track);
+                    if (!weExoPlayer.isSubtitleViewVisible()) {
+                        weExoPlayer.updateSubtitleVisibility(true);
                     }
                 }
                 break;
@@ -276,7 +287,7 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
     }
 
     private void playWithDifferentTrack(WePlayerTrack track) {
-        weCastExoPlayer.dispose();
+        weExoPlayer.dispose();
 
         int maxBitrate = track.getMaxBitrate() * 1000;
         playTrailer(maxBitrate);
@@ -285,38 +296,42 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
     @Override
     public void onResume() {
         super.onResume();
-        if (weCastExoPlayer != null) {
-            weCastExoPlayer.onResume();
+        if (weExoPlayer != null) {
+            weExoPlayer.onResume();
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (weCastExoPlayer != null) {
-            weCastExoPlayer.onPause();
+        if (weExoPlayer != null) {
+            weExoPlayer.onPause();
         }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (weCastExoPlayer != null) {
-            weCastExoPlayer.onStop();
+        if (weExoPlayer != null) {
+            weExoPlayer.onStop();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (weCastExoPlayer != null) {
-            weCastExoPlayer.onDestroy();
+        if (weExoPlayer != null) {
+            weExoPlayer.onDestroy();
             releaseDebugViewHelper();
         }
     }
 
+    /**
+     * Since user has option to show debug in settings
+     * we have to start or stop default exo player debug view
+     */
     private void startDebugViewHelper() {
-        debugViewHelper = new DebugTextViewHelper(weCastExoPlayer.getPlayer(), binding.debug);
+        debugViewHelper = new DebugTextViewHelper(weExoPlayer.getPlayer(), binding.debug);
         debugViewHelper.start();
     }
 
@@ -347,7 +362,6 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
     @Override
     public void onError(ExoPlaybackException exception) {
         exception.printStackTrace();
-        // Show error dialog
-        ScreenRouter.openVodPlayerError(this, this::play);
+        ScreenRouter.showVodPlayerError(this, this::play);
     }
 }

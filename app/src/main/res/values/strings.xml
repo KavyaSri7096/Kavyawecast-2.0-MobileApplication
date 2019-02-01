@@ -100,6 +100,12 @@
     <string name="audio_profiles">Audio Profiles</string>
     <string name="subtitles">Subtitles</string>
     <string name="retry">Retry</string>
+    <string name="parental_rating">Parental\nrating</string>
+    <string name="next_episode">Next episode in %1$d</string>
+    <!-- VOD Start over or resume dialog -->
+    <string name="start_over">Start Over</string>
+    <string name="resume">Resume</string>
+    <string name="start_from_beginning_or_resume">Start from the beginning or \nresume where you left?</string>
 
     <!-- TV Show Details -->
     <string name="seasons_count">%1$d&#160;Season(s)</string>

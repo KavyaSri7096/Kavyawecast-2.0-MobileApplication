@@ -117,6 +117,7 @@ public class ChannelDetailsTimeshiftDialog extends BaseDialog implements SingleC
     public void onItemChecked(ChannelTimeShiftStream item) {
         if (timeshiftSelectListener != null) {
             timeshiftSelectListener.onSelect(item);
+            dismiss();
         }
     }
 
