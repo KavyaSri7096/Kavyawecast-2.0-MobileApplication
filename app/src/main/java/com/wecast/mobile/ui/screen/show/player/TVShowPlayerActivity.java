@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -105,6 +106,12 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
         // Based on user choice in setting show/hide debug view
         boolean debug = preferenceManager.getDebug();
         binding.debug.setVisibility(debug ? View.VISIBLE : View.GONE);
+
+        // Hide next and previous button
+        ImageButton nextEpisode = findViewById(R.id.skipNext);
+        nextEpisode.setVisibility(View.GONE);
+        ImageButton previousEpisode = findViewById(R.id.skipPrevious);
+        previousEpisode.setVisibility(View.GONE);
     }
 
     private void setupListeners() {
