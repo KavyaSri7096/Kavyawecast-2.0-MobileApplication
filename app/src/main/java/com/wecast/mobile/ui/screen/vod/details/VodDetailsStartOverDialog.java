@@ -90,7 +90,7 @@ public class VodDetailsStartOverDialog extends BaseDialog {
         binding.resume.setOnClickListener(v -> play(vod.getContinueWatching().getStoppedTime()));
     }
 
-    private void play(int seekTo) {
+    private void play(float seekTo) {
         ScreenRouter.openVodPlayer(getBaseActivity(), vod, vodSourceProfile, VodPlayerActivity.PLAY_MOVIE, seekTo);
         dismiss();
     }

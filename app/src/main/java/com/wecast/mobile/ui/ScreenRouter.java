@@ -225,7 +225,7 @@ public class ScreenRouter {
 
     }
 
-    public static void openVodPlayer(Context context, Vod vod, VodSourceProfile profile, int playType, int seekTo) {
+    public static void openVodPlayer(Context context, Vod vod, VodSourceProfile profile, int playType, float seekTo) {
         if (WeApp.SUBSCRIPTION_EXPIRED) {
             Toast.makeText(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
             return;

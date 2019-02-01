@@ -30,7 +30,7 @@ public class VodContinueViewHolder extends BaseViewHolder<Vod> implements VodVie
         binding.setViewModel(viewModel);
 
         if (item.getContinueWatching() != null) {
-            binding.progress.setProgress(item.getContinueWatching().getStoppedTime());
+            binding.progress.setProgress((int) item.getContinueWatching().getStoppedTime());
             binding.progress.setMax((int) item.getContinueWatching().getDuration());
         } else {
             binding.progress.setVisibility(View.GONE);
