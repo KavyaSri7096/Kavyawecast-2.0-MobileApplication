@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -71,6 +72,8 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
     private int seekTo = -1;
     // Playlist continuity
     private VodPlayerNextEpisodeView nextEpisodeView;
+    private ImageButton nextEpisode;
+    private ImageButton previousEpisode;
     private Handler nextEpisodeHandler;
     private Runnable nextEpisodeRunnable = () -> nextEpisodeView.startCounter();
     private List<Vod> episodes;
@@ -132,6 +135,8 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
 
         // Find views by id
         nextEpisodeView = findViewById(R.id.nextEpisode);
+        nextEpisode = findViewById(R.id.skipNext);
+        previousEpisode = findViewById(R.id.skipPrevious);
 
         // Based on user choice in setting show/hide debug view
         boolean debug = preferenceManager.getDebug();
@@ -169,6 +174,12 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
         if (timeBarView != null) {
             timeBarView.addListener(new VodPlayerScrubListener(timeBar -> startNextEpisodeCounter()));
         }
+
+        // Set next episode button listener
+        nextEpisode.setOnClickListener(v -> playNextEpisode());
+
+        // Set previous episode button listener
+        previousEpisode.setOnClickListener(v -> playPreviousEpisode());
     }
 
     private void getById(int id, boolean isEpisode) {
@@ -208,10 +219,20 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
             play();
         }
 
-        // Get episodes from the same season
-        if (vod.getMultiEventVodId() != 0 || playAction == PLAY_MOVIE) {
+        if (vod.getMultiEventVodId() != 0) {
+            // Get episodes from the same season
             int seasonId = vod.getMultiEventVodSeasonId();
             episodes = viewModel.getEpisodes(seasonId);
+            // Check if next button should be shown
+            int position = getEpisodePosition(vod);
+            boolean hasNext = (position < episodes.size() - 1) && playAction == PLAY_MOVIE;
+            nextEpisode.setVisibility(hasNext ? View.VISIBLE : View.INVISIBLE);
+            // Check if previous button should be shown
+            boolean hasPrevious = (position > 0) && playAction == PLAY_MOVIE;
+            previousEpisode.setVisibility(hasPrevious ? View.VISIBLE : View.INVISIBLE);
+        } else {
+            nextEpisode.setVisibility(View.INVISIBLE);
+            previousEpisode.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -243,17 +264,19 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
         // Stop previous delayed action
         stopNextEpisodeRunnable();
 
-        long thumbPosition = weExoPlayer.getPlayer().getCurrentPosition();
-        long duration = weExoPlayer.getPlayer().getDuration();
-        long delay = (duration - thumbPosition) - 5000;
-        // If user scrolls to the end of progress bar
-        // automatically start next episode if possible
-        if ((duration - thumbPosition) >= 5000) {
-            // Start new delayed action
-            nextEpisodeHandler = new Handler(Looper.myLooper());
-            nextEpisodeHandler.postDelayed(nextEpisodeRunnable, delay);
-        } else {
-            playNextEpisode();
+        if (weExoPlayer != null && weExoPlayer.getPlayer() != null) {
+            long thumbPosition = weExoPlayer.getPlayer().getCurrentPosition();
+            long duration = weExoPlayer.getPlayer().getDuration();
+            long delay = (duration - thumbPosition) - 5000;
+            // If user scrolls to the end of progress bar
+            // automatically start next episode if possible
+            if ((duration - thumbPosition) >= 5000) {
+                // Start new delayed action
+                nextEpisodeHandler = new Handler(Looper.myLooper());
+                nextEpisodeHandler.postDelayed(nextEpisodeRunnable, delay);
+            } else {
+                playNextEpisode();
+            }
         }
     }
 
@@ -265,7 +288,6 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
     }
 
     private void playNextEpisode() {
-        // Play next episode
         int position = getEpisodePosition(vod);
         if (position < episodes.size() - 1) {
             Vod nextEpisode = episodes.get(position + 1);
@@ -333,9 +355,11 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
      * Get episode position in list
      */
     private int getEpisodePosition(Vod vod) {
-        for (int i = 0; i < episodes.size(); i++) {
-            if (episodes.get(i).getId() == vod.getId()) {
-                return i;
+        if (episodes != null && episodes.size() > 0) {
+            for (int i = 0; i < episodes.size(); i++) {
+                if (episodes.get(i).getId() == vod.getId()) {
+                    return i;
+                }
             }
         }
         return 0;
