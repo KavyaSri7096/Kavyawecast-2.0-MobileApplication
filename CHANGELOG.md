@@ -1,3 +1,10 @@
+## 2.10.0
+
+  **New features**
+
+  - [WC2-2268](https://wetekdev.atlassian.net/browse/WC2-2268) Next and previous buttons for TV Shows
+
+
 ## 2.9.0
 
   **New features**
