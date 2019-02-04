@@ -19,6 +19,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
@@ -35,6 +36,10 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  */
 
 public class WeApp extends Application implements HasActivityInjector, HasSupportFragmentInjector, HasServiceInjector {
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
 
     @Inject
     DispatchingAndroidInjector<Activity> activityInjector;

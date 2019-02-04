@@ -69,7 +69,7 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
     private DebugTextViewHelper debugViewHelper;
     private WeExoPlayer weExoPlayer;
     private long bufferTime = 0;
-    private int seekTo = -1;
+    private float seekTo = -1;
     // Playlist continuity
     private VodPlayerNextEpisodeView nextEpisodeView;
     private ImageButton nextEpisode;
@@ -78,7 +78,7 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
     private Runnable nextEpisodeRunnable = () -> nextEpisodeView.startCounter();
     private List<Vod> episodes;
 
-    public static void open(Context context, Vod item, VodSourceProfile profile, int playAction, int seekTo) {
+    public static void open(Context context, Vod item, VodSourceProfile profile, int playAction, float seekTo) {
         Intent intent = new Intent(context, VodPlayerActivity.class);
         intent.putExtra("ID", item.getId());
         intent.putExtra("IS_EPISODE", item.getMultiEventVodId() != 0);
@@ -129,7 +129,7 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
             profileId = bundle.getInt("PROFILE_ID");
             profileBusinessModel = bundle.getString("BUSINESS_MODEL");
             playAction = bundle.getInt("PLAY_ACTION");
-            seekTo = bundle.getInt("SEEK_TO");
+            seekTo = bundle.getFloat("SEEK_TO");
             getById(id, isEpisode);
         }
 
@@ -582,8 +582,10 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
      * Seek to selected position
      */
     private void seekToPosition() {
-        if (seekTo > -1) {
-            weExoPlayer.seekToPosition(seekTo);
+        if (weExoPlayer != null && weExoPlayer.getPlayer() != null) {
+            if (seekTo > -1 && weExoPlayer.getPlayer().getCurrentPosition() == 0) {
+                weExoPlayer.seekToPosition((int) seekTo);
+            }
         }
     }
 

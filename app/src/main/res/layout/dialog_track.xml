@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_close" />
+                    app:srcCompat="@drawable/ic_close" />
 
             </LinearLayout>
 

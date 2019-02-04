@@ -142,7 +142,8 @@ public class ScreenRouter {
     public static void openHighlighted(Context context, Highlighted highlighted) {
         if (highlighted.getType() == HighlightedType.CHANNEL) {
             openChannelDetails(context, highlighted.getChannelModel());
-        } else if (highlighted.getType() == HighlightedType.MOVIE || highlighted.getType() == HighlightedType.EPISODE) {
+        } else if (highlighted.getType() == HighlightedType.MOVIE
+                || highlighted.getType() == HighlightedType.EPISODE) {
             openVodDetails(context, highlighted.getMovieModel());
         } else if (highlighted.getType() == HighlightedType.TV_SHOW) {
             openTVShowDetails(context, highlighted.getTVShowModel());
@@ -225,7 +226,7 @@ public class ScreenRouter {
 
     }
 
-    public static void openVodPlayer(Context context, Vod vod, VodSourceProfile profile, int playType, int seekTo) {
+    public static void openVodPlayer(Context context, Vod vod, VodSourceProfile profile, int playType, float seekTo) {
         if (WeApp.SUBSCRIPTION_EXPIRED) {
             Toast.makeText(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
             return;

@@ -38,7 +38,7 @@
                 style="@style/CustomBackButton.White"
                 android:layout_marginTop="@dimen/status_bar_height"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_arrow_back_white" />
+                app:srcCompat="@drawable/ic_arrow_back_white" />
 
         </RelativeLayout>
 

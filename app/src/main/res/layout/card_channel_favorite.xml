@@ -55,8 +55,8 @@
                 android:layout_marginTop="@dimen/standard_half"
                 android:layout_marginEnd="@dimen/standard_half"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_lock"
-                android:visibility="@{viewModel.isNotRented ? View.VISIBLE : View.GONE , default=gone}" />
+                android:visibility="@{viewModel.isNotRented ? View.VISIBLE : View.GONE , default=gone}"
+                app:srcCompat="@drawable/ic_lock" />
 
         </RelativeLayout>
 

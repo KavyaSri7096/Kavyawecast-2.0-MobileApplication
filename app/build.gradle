@@ -17,8 +17,6 @@ android {
         // Renderscript for blur
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
-        // Vector drawables
-        vectorDrawables.useSupportLibrary = true
         // Testing
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // Common SDK integration IDs

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -48,8 +49,8 @@
                 android:background="?selectableItemBackgroundBorderless"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/standard"
-                android:src="@drawable/ic_star_empty"
-                android:visibility="@{isFavorite ? View.GONE : View.VISIBLE, default=gone}" />
+                android:visibility="@{isFavorite ? View.GONE : View.VISIBLE, default=gone}"
+                app:srcCompat="@drawable/ic_star_empty" />
 
             <ImageView
                 android:id="@+id/removeFromFavorites"
@@ -58,8 +59,8 @@
                 android:background="?selectableItemBackgroundBorderless"
                 android:contentDescription="@string/app_name"
                 android:padding="@dimen/standard"
-                android:src="@drawable/ic_star_filled_white"
-                android:visibility="@{isFavorite ? View.VISIBLE : View.GONE, default=gone}" />
+                android:visibility="@{isFavorite ? View.VISIBLE : View.GONE, default=gone}"
+                app:srcCompat="@drawable/ic_star_filled_white" />
 
         </LinearLayout>
 
@@ -78,7 +79,7 @@
                 android:layout_marginBottom="@dimen/standard"
                 android:background="?selectableItemBackgroundBorderless"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_channel_up" />
+                app:srcCompat="@drawable/ic_channel_up" />
 
             <ImageView
                 android:id="@+id/down"
@@ -86,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:background="?selectableItemBackgroundBorderless"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_channel_down" />
+                app:srcCompat="@drawable/ic_channel_down" />
 
         </LinearLayout>
 
@@ -98,8 +99,8 @@
             android:layout_alignParentBottom="true"
             android:contentDescription="@string/app_name"
             android:padding="@dimen/standard"
-            android:src="@drawable/ic_timeshift"
-            android:tint="@color/white" />
+            android:tint="@color/white"
+            app:srcCompat="@drawable/ic_timeshift" />
 
     </RelativeLayout>
 

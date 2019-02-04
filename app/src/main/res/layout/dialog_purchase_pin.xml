@@ -23,7 +23,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/standard_half"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_fingerprint" />
+                app:srcCompat="@drawable/ic_fingerprint" />
 
             <TextView
                 android:id="@+id/title"
