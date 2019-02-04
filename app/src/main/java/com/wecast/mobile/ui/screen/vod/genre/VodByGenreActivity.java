@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.wecast.core.data.api.ApiStatus;
+import com.wecast.core.data.db.entities.Vod;
 import com.wecast.core.data.db.entities.VodGenre;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityVodByGenreBinding;
+import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
 import com.wecast.mobile.ui.widget.listRow.ListRowLoadMoreListener;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowType;
 import com.wecast.mobile.utils.CommonUtils;
 
@@ -97,6 +100,7 @@ public class VodByGenreActivity extends BaseActivity<ActivityVodByGenreBinding, 
         binding.data.setHasFixedSize(true);
         binding.data.setNestedScrollingEnabled(false);
         adapter = new ListRowAdapter(this, ListRowType.MOVIES);
+        adapter.setOnClickListener((ListRowOnClickListener<Vod>) (item, view) -> ScreenRouter.openVodDetails(this, item));
         binding.data.setAdapter(adapter);
 
         getByGenreID();

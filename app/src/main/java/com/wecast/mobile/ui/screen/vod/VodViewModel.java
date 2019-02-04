@@ -13,13 +13,11 @@ public class VodViewModel {
     public final ObservableField<String> title;
     public final ObservableField<String> coverUrl;
     public final ObservableField<String> bannerUrl;
-    public final OnClickListener listener;
 
     private final Vod vod;
 
-    public VodViewModel(Vod vod, OnClickListener listener) {
+    public VodViewModel(Vod vod) {
         this.vod = vod;
-        this.listener = listener;
 
         // Set title
         this.title = new ObservableField<>(vod.getTitle());
@@ -32,14 +30,5 @@ public class VodViewModel {
         if (vod.getBanners() != null && vod.getBanners().size() > 0) {
             this.bannerUrl.set(vod.getBanners().get(0).getPreviewAr());
         }
-    }
-
-    public void onItemClick() {
-        listener.onItemClick(vod);
-    }
-
-    public interface OnClickListener {
-
-        void onItemClick(Vod item);
     }
 }

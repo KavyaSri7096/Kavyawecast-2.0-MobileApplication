@@ -6,14 +6,17 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.wecast.core.data.api.ApiStatus;
+import com.wecast.core.data.db.entities.TVShow;
 import com.wecast.core.data.db.entities.TVShowGenre;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityTvShowByGenreBinding;
+import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
 import com.wecast.mobile.ui.screen.vod.genre.VodByGenreActivityNavigator;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
 import com.wecast.mobile.ui.widget.listRow.ListRowLoadMoreListener;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowType;
 import com.wecast.mobile.utils.CommonUtils;
 
@@ -97,6 +100,7 @@ public class TVShowByGenreActivity extends BaseActivity<ActivityTvShowByGenreBin
         binding.data.setHasFixedSize(true);
         binding.data.setNestedScrollingEnabled(false);
         adapter = new ListRowAdapter(this, ListRowType.TV_SHOWS);
+        adapter.setOnClickListener((ListRowOnClickListener<TVShow>) (item, view) -> ScreenRouter.openTVShowDetails(this, item));
         binding.data.setAdapter(adapter);
 
         getByGenreID();

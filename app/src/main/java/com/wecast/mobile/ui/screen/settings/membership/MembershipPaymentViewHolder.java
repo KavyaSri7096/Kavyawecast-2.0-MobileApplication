@@ -1,10 +1,13 @@
 package com.wecast.mobile.ui.screen.settings.membership;
 
+import android.content.Context;
+
 import com.wecast.core.data.db.entities.PaymentHistory;
 import com.wecast.mobile.databinding.CardPaymentBinding;
+import com.wecast.mobile.ui.base.BaseOnClickListener;
 import com.wecast.mobile.ui.base.BaseViewHolder;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,7 +29,7 @@ public class MembershipPaymentViewHolder extends BaseViewHolder<PaymentHistory> 
     }
 
     @Override
-    public void onBind(PaymentHistory item) {
+    public void onBind(Context context, BaseOnClickListener onClickListener, PaymentHistory item) {
         // Set date
         Date expirationDate;
         try {
@@ -43,5 +46,11 @@ public class MembershipPaymentViewHolder extends BaseViewHolder<PaymentHistory> 
 
         // Set title
         binding.title.setText(item.getRecordTitle());
+    }
+
+    private void attachOnClickListener(ListRowOnClickListener onClickListener, PaymentHistory item) {
+        if (onClickListener != null) {
+
+        }
     }
 }

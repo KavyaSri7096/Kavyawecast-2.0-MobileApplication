@@ -21,7 +21,7 @@ public abstract class BaseAdapter<T, VH extends BaseViewHolder<T>> extends Recyc
 
     private final LayoutInflater layoutInflater;
     private final List<T> items;
-    private BaseOnClickListener listener;
+    private BaseOnClickListener onClickListener;
 
     public BaseAdapter(Context context) {
         layoutInflater = LayoutInflater.from(context);
@@ -43,8 +43,7 @@ public abstract class BaseAdapter<T, VH extends BaseViewHolder<T>> extends Recyc
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         T item = items.get(position);
-        //holder.onBind(item, listener, layoutInflater.getContext());
-        holder.onBind(item);
+        holder.onBind(layoutInflater.getContext(), onClickListener, item);
     }
 
     public void setItems(List<T> items) {
@@ -132,12 +131,12 @@ public abstract class BaseAdapter<T, VH extends BaseViewHolder<T>> extends Recyc
     }
 
     /**
-     * Set click listener, which must extend {@link BaseOnClickListener}
+     * Set click onClickListener, which must extend {@link BaseOnClickListener}
      *
-     * @param listener click listener
+     * @param onClickListener click onClickListener
      */
-    public void setClickListener(BaseOnClickListener listener) {
-        this.listener = listener;
+    public void setOnClickListener(BaseOnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
     /**

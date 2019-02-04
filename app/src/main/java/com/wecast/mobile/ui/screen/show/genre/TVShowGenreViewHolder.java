@@ -5,7 +5,9 @@ import android.content.Context;
 import com.wecast.core.data.db.entities.TVShowGenre;
 import com.wecast.mobile.databinding.CardTvShowGenreBinding;
 import com.wecast.mobile.ui.ScreenRouter;
+import com.wecast.mobile.ui.base.BaseOnClickListener;
 import com.wecast.mobile.ui.base.BaseViewHolder;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 
 import androidx.databinding.ViewDataBinding;
 
@@ -13,7 +15,7 @@ import androidx.databinding.ViewDataBinding;
  * Created by ageech@live.com
  */
 
-public class TVShowGenreViewHolder extends BaseViewHolder<TVShowGenre> implements TVShowGenreViewModel.OnClickListener {
+public class TVShowGenreViewHolder extends BaseViewHolder<TVShowGenre> {
 
     private CardTvShowGenreBinding binding;
     private TVShowGenreViewModel viewModel;
@@ -24,9 +26,10 @@ public class TVShowGenreViewHolder extends BaseViewHolder<TVShowGenre> implement
     }
 
     @Override
-    public void onBind(TVShowGenre item) {
-        // Setup binding
-        viewModel = new TVShowGenreViewModel(item, this);
+    public void onBind(Context context, BaseOnClickListener onClickListener, TVShowGenre item) {
+        attachOnClickListener((ListRowOnClickListener) onClickListener, item);
+
+        viewModel = new TVShowGenreViewModel(item);
         binding.setViewModel(viewModel);
 
         // Immediate Binding
@@ -36,11 +39,9 @@ public class TVShowGenreViewHolder extends BaseViewHolder<TVShowGenre> implement
         binding.executePendingBindings();
     }
 
-    @Override
-    public void onItemClick(TVShowGenre item) {
-        if (item != null) {
-            Context context = binding.getRoot().getContext();
-            ScreenRouter.openTVShowByGenre(context, item);
+    private void attachOnClickListener(ListRowOnClickListener onClickListener, TVShowGenre item) {
+        if (onClickListener != null) {
+            itemView.setOnClickListener(view -> onClickListener.onClick(item, view));
         }
     }
 }

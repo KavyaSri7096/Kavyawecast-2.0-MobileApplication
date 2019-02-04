@@ -14,11 +14,13 @@ import com.wecast.core.data.db.entities.ChannelGenre;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityChannelSearchBinding;
+import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
 import com.wecast.mobile.ui.common.adapter.SortingFiltersAdapter;
 import com.wecast.mobile.ui.common.listener.OnItemSelectListener;
 import com.wecast.mobile.ui.common.listener.OnTextInputListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowType;
 
 import java.util.Collections;
@@ -100,6 +102,7 @@ public class ChannelSearchActivity extends BaseActivity<ActivityChannelSearchBin
         binding.data.setHasFixedSize(true);
         binding.data.setNestedScrollingEnabled(false);
         adapter = new ListRowAdapter(this, ListRowType.CHANNELS);
+        adapter.setOnClickListener((ListRowOnClickListener<Channel>) (item, view) -> ScreenRouter.openChannelDetails(this, item));
         binding.data.setAdapter(adapter);
 
         // Setup filters

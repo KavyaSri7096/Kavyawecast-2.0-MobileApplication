@@ -14,8 +14,7 @@
     <androidx.cardview.widget.CardView
         style="@style/CustomCardView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/channel_card_height"
-        android:onClick="@{() -> viewModel.onItemClick()}">
+        android:layout_height="@dimen/channel_card_height">
 
         <RelativeLayout
             android:layout_width="match_parent"

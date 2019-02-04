@@ -8,9 +8,11 @@ import com.wecast.core.data.db.entities.Vod;
 import com.wecast.core.data.repository.VodRepository;
 import com.wecast.mobile.R;
 import com.wecast.mobile.di.component.AppComponent;
+import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
 import com.wecast.mobile.ui.widget.listRow.ListRowItemDecoration;
 import com.wecast.mobile.ui.widget.listRow.ListRowLoadMoreListener;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowType;
 import com.wecast.mobile.ui.widget.listRow.ListRowView;
 
@@ -77,7 +79,9 @@ public class HomeContinueListRow extends ListRowView<Vod> {
 
     @Override
     protected ListRowAdapter adapter() {
-        return new ListRowAdapter(getContext(), ListRowType.CONTINUE_WATCHING);
+        ListRowAdapter adapter = new ListRowAdapter(getContext(), ListRowType.CONTINUE_WATCHING);
+        adapter.setOnClickListener((ListRowOnClickListener<Vod>) (item, view) -> ScreenRouter.continuePlaying(getContext(), item));
+        return adapter;
     }
 
     @Override

@@ -2,10 +2,14 @@ package com.wecast.mobile.ui.screen.live.guide;
 
 import android.content.Context;
 
+import com.wecast.core.data.db.dao.ChannelDao;
 import com.wecast.core.data.db.entities.TVGuide;
 import com.wecast.mobile.databinding.CardTvGuideBinding;
-import com.wecast.mobile.ui.ScreenRouter;
+import com.wecast.mobile.ui.base.BaseOnClickListener;
 import com.wecast.mobile.ui.base.BaseViewHolder;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
+
+import javax.inject.Inject;
 
 import androidx.databinding.ViewDataBinding;
 
@@ -13,10 +17,13 @@ import androidx.databinding.ViewDataBinding;
  * Created by ageech@live.com
  */
 
-public class TVGuideViewHolder extends BaseViewHolder<TVGuide> implements TVGuideViewModel.OnClickListener {
+public class TVGuideViewHolder extends BaseViewHolder<TVGuide> {
 
     private CardTvGuideBinding binding;
     private TVGuideViewModel viewModel;
+
+    @Inject
+    ChannelDao channelDao;
 
     public TVGuideViewHolder(ViewDataBinding binding) {
         super(binding.getRoot());
@@ -24,8 +31,10 @@ public class TVGuideViewHolder extends BaseViewHolder<TVGuide> implements TVGuid
     }
 
     @Override
-    public void onBind(TVGuide item) {
-        viewModel = new TVGuideViewModel(item, this);
+    public void onBind(Context context, BaseOnClickListener onClickListener, TVGuide item) {
+        attachOnClickListener((ListRowOnClickListener) onClickListener, item);
+
+        viewModel = new TVGuideViewModel(item);
         binding.setViewModel(viewModel);
 
         // Immediate Binding
@@ -35,11 +44,9 @@ public class TVGuideViewHolder extends BaseViewHolder<TVGuide> implements TVGuid
         binding.executePendingBindings();
     }
 
-    @Override
-    public void onItemClick(TVGuide item) {
-        if (item != null) {
-            Context context = binding.getRoot().getContext();
-            ScreenRouter.openChannelDetails(context, item.getId());
+    private void attachOnClickListener(ListRowOnClickListener onClickListener, TVGuide item) {
+        if (onClickListener != null) {
+            itemView.setOnClickListener(view -> onClickListener.onClick(item, view));
         }
     }
 }
