@@ -2,6 +2,7 @@
 
   **Bug fixes**
 
+  - [WC2-2347](https://wetekdev.atlassian.net/browse/WC2-2347) Parental pin on channel
   - [WC2-1729](https://wetekdev.atlassian.net/browse/WC2-1729) Hide loader on live tv screen if there is no more items to load
   - [WC2-2341](https://wetekdev.atlassian.net/browse/WC2-2341) Highlighted item details
 
