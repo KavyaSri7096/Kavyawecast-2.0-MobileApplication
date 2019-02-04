@@ -73,12 +73,6 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         context.startActivity(intent);
     }
 
-    public static void open(Context context, int id) {
-        Intent intent = new Intent(context, ChannelDetailsActivity.class);
-        intent.putExtra("ID", id);
-        context.startActivity(intent);
-    }
-
     @Override
     public int getBindingVariable() {
         return BR.viewModel;

@@ -14,8 +14,7 @@
     <androidx.cardview.widget.CardView
         style="@style/CustomCardView"
         android:layout_width="@dimen/channel_card_favorite_width"
-        android:layout_height="wrap_content"
-        android:onClick="@{() -> viewModel.onItemClick()}">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"

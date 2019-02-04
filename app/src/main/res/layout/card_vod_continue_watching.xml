@@ -12,8 +12,7 @@
     <androidx.cardview.widget.CardView
         style="@style/CustomCardView"
         android:layout_width="@dimen/vod_card_width"
-        android:layout_height="wrap_content"
-        android:onClick="@{() -> viewModel.onItemClick()}">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"

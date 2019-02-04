@@ -14,13 +14,11 @@ public class ProgrammeViewModel {
     public final ObservableField<String> title;
     public final ObservableField<String> description;
     public final ObservableField<String> time;
-    public final OnClickListener listener;
 
     private final TVGuideProgramme tvGuideProgramme;
 
-    ProgrammeViewModel(TVGuideProgramme tvGuideProgramme, OnClickListener listener) {
+    ProgrammeViewModel(TVGuideProgramme tvGuideProgramme) {
         this.tvGuideProgramme = tvGuideProgramme;
-        this.listener = listener;
 
         // Set programme title
         this.title = new ObservableField<>(tvGuideProgramme.getTitle());
@@ -30,14 +28,5 @@ public class ProgrammeViewModel {
 
         // Set programme time
         this.time = new ObservableField<>(TVGuideUtils.getStart(tvGuideProgramme));
-    }
-
-    public void onItemClick() {
-        listener.onItemClick(tvGuideProgramme);
-    }
-
-    public interface OnClickListener {
-
-        void onItemClick(TVGuideProgramme item);
     }
 }

@@ -11,24 +11,13 @@ import androidx.databinding.ObservableField;
 public class VodGenreViewModel {
 
     public final ObservableField<String> name;
-    public final OnClickListener listener;
 
     private final VodGenre vodGenre;
 
-    public VodGenreViewModel(VodGenre vodGenre, OnClickListener listener) {
+    public VodGenreViewModel(VodGenre vodGenre) {
         this.vodGenre = vodGenre;
-        this.listener = listener;
 
         // Set vod genre name
         this.name = new ObservableField<>(vodGenre.getName());
-    }
-
-    public void onItemClick() {
-        listener.onItemClick(vodGenre);
-    }
-
-    public interface OnClickListener {
-
-        void onItemClick(VodGenre item);
     }
 }

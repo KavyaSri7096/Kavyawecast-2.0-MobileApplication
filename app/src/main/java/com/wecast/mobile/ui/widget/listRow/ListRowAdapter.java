@@ -4,11 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.wecast.core.utils.ReminderUtils;
 import com.wecast.mobile.R;
 import com.wecast.mobile.ui.base.BaseAdapter;
 import com.wecast.mobile.ui.base.BaseViewHolder;
 import com.wecast.mobile.ui.screen.live.channel.ChannelFavoriteViewHolder;
 import com.wecast.mobile.ui.screen.live.channel.ChannelViewHolder;
+import com.wecast.mobile.ui.screen.live.channel.details.progamme.ProgrammeViewHolder;
 import com.wecast.mobile.ui.screen.live.guide.TVGuideViewHolder;
 import com.wecast.mobile.ui.screen.settings.membership.MembershipPaymentViewHolder;
 import com.wecast.mobile.ui.screen.show.TVShowViewHolder;
@@ -29,10 +31,17 @@ import androidx.databinding.ViewDataBinding;
 public class ListRowAdapter extends BaseAdapter {
 
     private ListRowType listRowType;
+    private ReminderUtils reminderUtils;
 
     public ListRowAdapter(Context context, ListRowType listRowType) {
         super(context);
         this.listRowType = listRowType;
+    }
+
+    public ListRowAdapter(Context context, ListRowType listRowType, ReminderUtils reminderUtils) {
+        super(context);
+        this.listRowType = listRowType;
+        this.reminderUtils = reminderUtils;
     }
 
     @NonNull
@@ -58,6 +67,8 @@ public class ListRowAdapter extends BaseAdapter {
                 return new TVShowEpisodeViewHolder(getViewBinding(context, R.layout.card_episode, parent));
             case TV_GUIDE:
                 return new TVGuideViewHolder(getViewBinding(context, R.layout.card_tv_guide, parent));
+            case TV_GUIDE_PROGRAMME:
+                return new ProgrammeViewHolder(getViewBinding(context, R.layout.card_programme, parent), reminderUtils);
             case PAYMENT_HISTORY:
                 return new MembershipPaymentViewHolder(getViewBinding(context, R.layout.card_payment, parent));
             default:
@@ -67,6 +78,7 @@ public class ListRowAdapter extends BaseAdapter {
 
     @Override
     public int getItemCount() {
+        // If there is no items return 0
         return getItems() == null ? 0 : getItems().size();
     }
 

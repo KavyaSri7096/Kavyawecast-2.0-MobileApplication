@@ -21,6 +21,9 @@ import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.FragmentProgrammeBinding;
 import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseFragment;
+import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
+import com.wecast.mobile.ui.widget.listRow.ListRowType;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -36,7 +39,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by ageech@live.com
  */
 
-public class ProgrammeFragment extends BaseFragment<FragmentProgrammeBinding, ProgrammeFragmentViewModel> implements ProgrammeFragmentNavigator, ProgrammeViewModel.OnClickListener {
+public class ProgrammeFragment extends BaseFragment<FragmentProgrammeBinding, ProgrammeFragmentViewModel> implements ProgrammeFragmentNavigator {
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
@@ -47,7 +50,7 @@ public class ProgrammeFragment extends BaseFragment<FragmentProgrammeBinding, Pr
     private ProgrammeFragmentViewModel viewModel;
     private int id;
     private Channel channel;
-    private ProgrammeAdapter adapter;
+    private ListRowAdapter adapter;
     private ProgrammeLayoutManager layoutManager;
 
     public static ProgrammeFragment newInstance(Channel channel) {
@@ -100,7 +103,8 @@ public class ProgrammeFragment extends BaseFragment<FragmentProgrammeBinding, Pr
         // Setup recycler view for data
         layoutManager = new ProgrammeLayoutManager(getBaseActivity());
         binding.data.setLayoutManager(layoutManager);
-        adapter = new ProgrammeAdapter(getBaseActivity(), reminderUtils, this);
+        adapter = new ListRowAdapter(getBaseActivity(), ListRowType.TV_GUIDE_PROGRAMME, reminderUtils);
+        adapter.setOnClickListener((ListRowOnClickListener<TVGuideProgramme>) (item, view) -> ScreenRouter.openProgrammeDetails(getBaseActivity(), channel, item));
         binding.data.setAdapter(adapter);
 
         // Load programmes for current day
@@ -113,7 +117,7 @@ public class ProgrammeFragment extends BaseFragment<FragmentProgrammeBinding, Pr
         String end = DateUtils.endOfDay(date);
 
         viewModel.setLoading(true);
-        adapter.clearItems();
+        adapter.clear();
 
         Disposable disposable = viewModel.getProgrammes(true, 1, id, start, end)
                 .subscribeOn(Schedulers.io())
@@ -145,7 +149,7 @@ public class ProgrammeFragment extends BaseFragment<FragmentProgrammeBinding, Pr
 
         List<TVGuideProgramme> programmes = data.getProgrammes();
         if (programmes != null && programmes.size() > 0) {
-            adapter.addItems(programmes);
+            adapter.addAll(programmes);
             hideLoading();
         } else {
             showNoData();
@@ -168,7 +172,7 @@ public class ProgrammeFragment extends BaseFragment<FragmentProgrammeBinding, Pr
     private void scrollToCurrentProgramme() {
         int position = 0;
         for (int i = 0; i < adapter.getItemCount(); i++) {
-            TVGuideProgramme programme = adapter.getItem(i);
+            TVGuideProgramme programme = (TVGuideProgramme) adapter.getItem(i);
             if (programme.isCurrent()) {
                 position = i;
                 break;
@@ -201,10 +205,5 @@ public class ProgrammeFragment extends BaseFragment<FragmentProgrammeBinding, Pr
                 next.add(Calendar.DAY_OF_WEEK, 1);
                 return next.getTime();
         }
-    }
-
-    @Override
-    public void onItemClick(TVGuideProgramme item) {
-        ScreenRouter.openProgrammeDetails(getBaseActivity(), channel, item);
     }
 }

@@ -20,13 +20,10 @@ public class TVGuideViewModel {
     public final ObservableField<Integer> max;
     public final ObservableField<Integer> progress;
 
-    public final OnClickListener listener;
-
     private final TVGuide tvGuide;
 
-    TVGuideViewModel(TVGuide tvGuide, OnClickListener listener) {
+    TVGuideViewModel(TVGuide tvGuide) {
         this.tvGuide = tvGuide;
-        this.listener = listener;
 
         // Set programme title
         this.title = new ObservableField<>(String.format(Locale.getDefault(), "%1$d - %2$s", tvGuide.getChannelNumber(), tvGuide.getTitle()));
@@ -46,14 +43,5 @@ public class TVGuideViewModel {
                 this.progress.set((TVGuideUtils.getProgress(programme)));
             }
         }
-    }
-
-    public void onItemClick() {
-        listener.onItemClick(tvGuide);
-    }
-
-    public interface OnClickListener {
-
-        void onItemClick(TVGuide item);
     }
 }

@@ -8,10 +8,12 @@ import com.wecast.core.data.db.entities.TVShowGenre;
 import com.wecast.core.data.repository.TVShowGenreRepository;
 import com.wecast.mobile.R;
 import com.wecast.mobile.di.component.AppComponent;
-import com.wecast.mobile.ui.widget.listRow.ListRowView;
+import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
 import com.wecast.mobile.ui.widget.listRow.ListRowLoadMoreListener;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowType;
+import com.wecast.mobile.ui.widget.listRow.ListRowView;
 
 import javax.inject.Inject;
 
@@ -76,7 +78,9 @@ public class TVShowGenreListRow extends ListRowView<TVShowGenre> {
 
     @Override
     protected ListRowAdapter adapter() {
-        return new ListRowAdapter(getContext(), ListRowType.TV_SHOW_GENRES);
+        ListRowAdapter adapter = new ListRowAdapter(getContext(), ListRowType.TV_SHOW_GENRES);
+        adapter.setOnClickListener((ListRowOnClickListener<TVShowGenre>) (item, view) -> ScreenRouter.openTVShowByGenre(getContext(), item));
+        return adapter;
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.wecast.core.data.db.entities.Channel;
 import com.wecast.core.data.db.entities.Highlighted;
 import com.wecast.core.data.db.entities.HighlightedType;
+import com.wecast.core.data.db.entities.TVGuide;
 import com.wecast.core.data.db.entities.TVGuideProgramme;
 import com.wecast.core.data.db.entities.TVShow;
 import com.wecast.core.data.db.entities.TVShowGenre;
@@ -162,16 +163,20 @@ public class ScreenRouter {
                 dialog.show(getFragmentManager(context), ChannelDetailsRentDialog.TAG);
             } else if (channel.isPinProtected()) {
                 ParentalPinDialog dialog = ParentalPinDialog.newInstance();
-                dialog.setOnPinInputListener(() -> ChannelDetailsActivity.open(context, channel));
+                dialog.setOnPinInputListener(() -> openChannel(context, channel));
                 dialog.show(getFragmentManager(context), ParentalPinDialog.TAG);
             } else {
-                ChannelDetailsActivity.open(context, channel);
+                openChannel(context, channel);
             }
         }
     }
 
-    public static void openChannelDetails(Context context, int id) {
-        ChannelDetailsActivity.open(context, id);
+    private static void openChannel(Context context, Channel channel) {
+        ChannelDetailsActivity.open(context, channel);
+        // If function is triggered from the same context, finish previous one
+        if (context instanceof ChannelDetailsActivity) {
+            ((ChannelDetailsActivity) context).finish();
+        }
     }
 
     public static void openChannelSearch(Context context) {

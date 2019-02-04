@@ -8,6 +8,8 @@ import com.wecast.core.data.db.entities.VodGenre;
 import com.wecast.core.data.repository.VodGenreRepository;
 import com.wecast.mobile.R;
 import com.wecast.mobile.di.component.AppComponent;
+import com.wecast.mobile.ui.ScreenRouter;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowView;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
 import com.wecast.mobile.ui.widget.listRow.ListRowLoadMoreListener;
@@ -76,7 +78,9 @@ public class VodGenreListRow extends ListRowView<VodGenre> {
 
     @Override
     protected ListRowAdapter adapter() {
-        return new ListRowAdapter(getContext(), ListRowType.MOVIE_GENRES);
+        ListRowAdapter adapter = new ListRowAdapter(getContext(), ListRowType.MOVIE_GENRES);
+        adapter.setOnClickListener((ListRowOnClickListener<VodGenre>) (item, view) -> ScreenRouter.openVodByGenre(getContext(), item));
+        return adapter;
     }
 
     @Override

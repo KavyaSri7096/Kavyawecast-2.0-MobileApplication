@@ -5,8 +5,9 @@ import android.view.View;
 
 import com.wecast.core.data.db.entities.Vod;
 import com.wecast.mobile.databinding.CardVodContinueWatchingBinding;
-import com.wecast.mobile.ui.ScreenRouter;
+import com.wecast.mobile.ui.base.BaseOnClickListener;
 import com.wecast.mobile.ui.base.BaseViewHolder;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 
 import androidx.databinding.ViewDataBinding;
 
@@ -14,7 +15,7 @@ import androidx.databinding.ViewDataBinding;
  * Created by ageech@live.com
  */
 
-public class VodContinueViewHolder extends BaseViewHolder<Vod> implements VodViewModel.OnClickListener {
+public class VodContinueViewHolder extends BaseViewHolder<Vod> {
 
     private CardVodContinueWatchingBinding binding;
     private VodViewModel viewModel;
@@ -25,8 +26,10 @@ public class VodContinueViewHolder extends BaseViewHolder<Vod> implements VodVie
     }
 
     @Override
-    public void onBind(Vod item) {
-        viewModel = new VodViewModel(item, this);
+    public void onBind(Context context, BaseOnClickListener onClickListener, Vod item) {
+        attachOnClickListener((ListRowOnClickListener) onClickListener, item);
+
+        viewModel = new VodViewModel(item);
         binding.setViewModel(viewModel);
 
         if (item.getContinueWatching() != null) {
@@ -43,11 +46,9 @@ public class VodContinueViewHolder extends BaseViewHolder<Vod> implements VodVie
         binding.executePendingBindings();
     }
 
-    @Override
-    public void onItemClick(Vod item) {
-        if (item != null) {
-            Context context = binding.getRoot().getContext();
-            ScreenRouter.continuePlaying(context, item);
+    private void attachOnClickListener(ListRowOnClickListener onClickListener, Vod item) {
+        if (onClickListener != null) {
+            itemView.setOnClickListener(view -> onClickListener.onClick(item, view));
         }
     }
 }

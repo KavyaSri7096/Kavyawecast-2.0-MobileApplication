@@ -1,5 +1,6 @@
 package com.wecast.mobile.ui.base;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,9 +15,5 @@ public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
         super(view);
     }
 
-    /**
-     * Bind data to the item and set listener if needed.
-     * @param item
-     */
-    public abstract void onBind(T item);
+    public abstract void onBind(Context context, BaseOnClickListener onClickListener, T item);
 }

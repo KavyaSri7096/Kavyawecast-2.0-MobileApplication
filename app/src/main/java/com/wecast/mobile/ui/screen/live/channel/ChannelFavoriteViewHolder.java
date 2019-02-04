@@ -5,7 +5,9 @@ import android.content.Context;
 import com.wecast.core.data.db.entities.Channel;
 import com.wecast.mobile.databinding.CardChannelFavoriteBinding;
 import com.wecast.mobile.ui.ScreenRouter;
+import com.wecast.mobile.ui.base.BaseOnClickListener;
 import com.wecast.mobile.ui.base.BaseViewHolder;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 
 import androidx.databinding.ViewDataBinding;
 
@@ -13,7 +15,7 @@ import androidx.databinding.ViewDataBinding;
  * Created by ageech@live.com
  */
 
-public class ChannelFavoriteViewHolder extends BaseViewHolder<Channel> implements ChannelFavoriteViewModel.OnClickListener {
+public class ChannelFavoriteViewHolder extends BaseViewHolder<Channel> {
 
     private CardChannelFavoriteBinding binding;
     private ChannelFavoriteViewModel viewModel;
@@ -24,8 +26,10 @@ public class ChannelFavoriteViewHolder extends BaseViewHolder<Channel> implement
     }
 
     @Override
-    public void onBind(Channel item) {
-        viewModel = new ChannelFavoriteViewModel(item, this);
+    public void onBind(Context context, BaseOnClickListener onClickListener, Channel item) {
+        attachOnClickListener((ListRowOnClickListener) onClickListener, item);
+
+        viewModel = new ChannelFavoriteViewModel(item);
         binding.setViewModel(viewModel);
 
         // Immediate Binding
@@ -35,11 +39,9 @@ public class ChannelFavoriteViewHolder extends BaseViewHolder<Channel> implement
         binding.executePendingBindings();
     }
 
-    @Override
-    public void onItemClick(Channel item) {
-        if (item != null) {
-            Context context = binding.getRoot().getContext();
-            ScreenRouter.openChannelDetails(context, item);
+    private void attachOnClickListener(ListRowOnClickListener onClickListener, Channel item) {
+        if (onClickListener != null) {
+            itemView.setOnClickListener(view -> onClickListener.onClick(item, view));
         }
     }
 }

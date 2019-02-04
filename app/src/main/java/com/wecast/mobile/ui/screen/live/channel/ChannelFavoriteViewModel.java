@@ -15,13 +15,10 @@ public class ChannelFavoriteViewModel {
     public final ObservableField<String> screenShotUrl;
     public final ObservableField<Boolean> isNotRented;
 
-    public final OnClickListener listener;
-
     private final Channel channel;
 
-    ChannelFavoriteViewModel(Channel channel, OnClickListener listener) {
+    ChannelFavoriteViewModel(Channel channel) {
         this.channel = channel;
-        this.listener = listener;
 
         // Set channel title
         this.title = new ObservableField<>(channel.getTitle());
@@ -34,14 +31,5 @@ public class ChannelFavoriteViewModel {
 
         // Set channel isNotRented
         this.isNotRented = new ObservableField<>(channel.isNotRented());
-    }
-
-    public void onItemClick() {
-        listener.onItemClick(channel);
-    }
-
-    public interface OnClickListener {
-
-        void onItemClick(Channel item);
     }
 }
