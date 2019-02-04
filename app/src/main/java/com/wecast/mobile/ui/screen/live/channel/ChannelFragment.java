@@ -26,6 +26,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -87,7 +88,6 @@ public class ChannelFragment extends BaseFragment<FragmentChannelBinding, Channe
 
     private void setupListeners() {
         binding.loadMore.setOnClickListener(v -> {
-            viewModel.setLoading(true);
             page++;
             getAll();
         });
@@ -98,6 +98,7 @@ public class ChannelFragment extends BaseFragment<FragmentChannelBinding, Channe
                 .delay(500, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete(() -> viewModel.setLoading(false))
                 .subscribe(response -> {
                     if (response != null) {
                         if (response.status == ApiStatus.LOADING) {
@@ -167,6 +168,7 @@ public class ChannelFragment extends BaseFragment<FragmentChannelBinding, Channe
         Disposable disposable = viewModel.getByGenreId(true, genreId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete(() -> viewModel.setLoading(false))
                 .subscribe(response -> {
                     if (response != null) {
                         if (response.status == ApiStatus.LOADING) {
@@ -174,7 +176,7 @@ public class ChannelFragment extends BaseFragment<FragmentChannelBinding, Channe
                         } else if (response.status == ApiStatus.SUCCESS) {
                             checkForData(response.data);
                         } else if (response.status == ApiStatus.ERROR) {
-                            binding.all.setVisibility(View.GONE);
+                            noData();
                         } else if (response.status == ApiStatus.TOKEN_EXPIRED) {
                             refreshToken(this::getAllByGenreId);
                         } else if (response.status == ApiStatus.SUBSCRIPTION_EXPIRED) {

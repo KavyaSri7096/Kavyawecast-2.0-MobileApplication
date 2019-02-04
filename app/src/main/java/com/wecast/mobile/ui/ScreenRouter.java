@@ -160,6 +160,10 @@ public class ScreenRouter {
             if (channel.isNotRented()) {
                 ChannelDetailsRentDialog dialog = ChannelDetailsRentDialog.newInstance(channel);
                 dialog.show(getFragmentManager(context), ChannelDetailsRentDialog.TAG);
+            } else if (channel.isPinProtected()) {
+                ParentalPinDialog dialog = ParentalPinDialog.newInstance();
+                dialog.setOnPinInputListener(() -> ChannelDetailsActivity.open(context, channel));
+                dialog.show(getFragmentManager(context), ParentalPinDialog.TAG);
             } else {
                 ChannelDetailsActivity.open(context, channel);
             }
