@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/root"
@@ -18,8 +19,8 @@
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/standard"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_mood_bad"
-            android:tint="@color/white" />
+            android:tint="@color/white"
+            app:srcCompat="@drawable/ic_mood_bad" />
 
         <TextView
             android:id="@+id/title"

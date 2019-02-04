@@ -16,7 +16,7 @@
             android:layout_width="@dimen/toolbar_logo_width"
             android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/app_logo" />
+            app:srcCompat="@drawable/app_logo" />
 
     </androidx.appcompat.widget.Toolbar>
 

@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_rate_off" />
+                app:srcCompat="@drawable/ic_rate_off" />
 
             <TextView
                 android:id="@+id/title"

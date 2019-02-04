@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -64,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"
                 android:rotation="180"
-                android:src="@drawable/ic_arrow_back" />
+                app:srcCompat="@drawable/ic_arrow_back" />
 
         </LinearLayout>
 

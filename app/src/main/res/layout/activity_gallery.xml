@@ -42,7 +42,7 @@
             android:layout_marginTop="@dimen/status_bar_height"
             android:contentDescription="@string/app_name"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_close" />
+            app:srcCompat="@drawable/ic_close" />
 
     </FrameLayout>
 

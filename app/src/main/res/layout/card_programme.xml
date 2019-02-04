@@ -58,7 +58,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/standard_small"
                             android:contentDescription="@string/app_name"
-                            android:src="@drawable/ic_catchup" />
+                            app:srcCompat="@drawable/ic_catchup" />
 
                         <ImageView
                             android:id="@+id/reminder"
@@ -66,7 +66,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/standard_small"
                             android:contentDescription="@string/app_name"
-                            android:src="@drawable/ic_reminder" />
+                            app:srcCompat="@drawable/ic_reminder" />
 
                         <TextView
                             android:id="@+id/title"

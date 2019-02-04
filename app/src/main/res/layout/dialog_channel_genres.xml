@@ -35,7 +35,7 @@
             android:layout_margin="@dimen/standard_double"
             android:background="@drawable/bg_button_oval"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_check" />
+            app:srcCompat="@drawable/ic_check" />
 
     </RelativeLayout>
 

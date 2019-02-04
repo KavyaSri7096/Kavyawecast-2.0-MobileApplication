@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -21,7 +22,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/status_bar_height"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/app_logo" />
+            app:srcCompat="@drawable/app_logo" />
 
     </FrameLayout>
 

@@ -65,8 +65,8 @@
                         android:layout_height="wrap_content"
                         android:background="?selectableItemBackgroundBorderless"
                         android:contentDescription="@string/app_name"
-                        android:src="@drawable/ic_arrow_back"
-                        android:tint="@color/white" />
+                        android:tint="@color/white"
+                        app:srcCompat="@drawable/ic_arrow_back" />
 
                     <View
                         android:layout_width="0dp"
@@ -80,8 +80,8 @@
                         android:background="@color/transparent"
                         android:contentDescription="@string/app_name"
                         android:padding="12dp"
-                        android:src="@drawable/ic_subtitles"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_subtitles" />
 
                     <ImageButton
                         android:id="@+id/video"
@@ -90,8 +90,8 @@
                         android:background="@color/transparent"
                         android:contentDescription="@string/app_name"
                         android:padding="12dp"
-                        android:src="@drawable/ic_video"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_video" />
 
                     <ImageButton
                         android:id="@+id/audio"
@@ -100,8 +100,8 @@
                         android:background="@color/transparent"
                         android:contentDescription="@string/app_name"
                         android:padding="12dp"
-                        android:src="@drawable/ic_audio"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_audio" />
 
                 </LinearLayout>
 

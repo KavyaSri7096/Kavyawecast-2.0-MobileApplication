@@ -27,8 +27,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="@dimen/standard_double"
                 android:layout_marginStart="@dimen/standard_double"
+                android:layout_marginEnd="@dimen/standard_double"
                 android:gravity="center"
                 android:padding="@dimen/standard_small"
                 app:selectedDotColor="?android:attr/colorAccent" />
@@ -39,14 +39,14 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_play_trailer" />
+                app:srcCompat="@drawable/ic_play_trailer" />
 
             <ImageView
                 android:id="@+id/back"
                 style="@style/CustomBackButton.White"
                 android:layout_marginTop="@dimen/status_bar_height"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_arrow_back_white" />
+                app:srcCompat="@drawable/ic_arrow_back_white" />
 
         </RelativeLayout>
 
