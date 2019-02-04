@@ -142,7 +142,8 @@ public class ScreenRouter {
     public static void openHighlighted(Context context, Highlighted highlighted) {
         if (highlighted.getType() == HighlightedType.CHANNEL) {
             openChannelDetails(context, highlighted.getChannelModel());
-        } else if (highlighted.getType() == HighlightedType.MOVIE || highlighted.getType() == HighlightedType.EPISODE) {
+        } else if (highlighted.getType() == HighlightedType.MOVIE
+                || highlighted.getType() == HighlightedType.EPISODE) {
             openVodDetails(context, highlighted.getMovieModel());
         } else if (highlighted.getType() == HighlightedType.TV_SHOW) {
             openTVShowDetails(context, highlighted.getTVShowModel());

@@ -20,9 +20,7 @@
             style="@style/TextView.Content.Big"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/standard_half"
-            android:layout_marginTop="@dimen/standard_half"
-            android:layout_marginEnd="@dimen/standard_half"
+            android:layout_margin="@dimen/standard_half"
             android:gravity="center" />
 
         <LinearLayout
