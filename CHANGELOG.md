@@ -1,3 +1,9 @@
+## 2.11.1
+
+  **Bug fixes**
+
+  - [WC2-2341](https://wetekdev.atlassian.net/browse/WC2-2341) Highlighted item details
+
 ## 2.11.0
 
   **New features**
