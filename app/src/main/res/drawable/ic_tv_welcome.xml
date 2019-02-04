@@ -125,7 +125,7 @@
         android:fillColor="#fff"
         android:pathData="M3.77,3.77h302.42v170.04h-302.42z" />
     <path
-        android:fillColor="?attr/colorTextInactive"
+        android:fillColor="?attr/colorSplashBackground"
         android:pathData="M3.77,3.77h302.42v170.04h-302.42z" />
     <path
         android:fillAlpha="0.08"

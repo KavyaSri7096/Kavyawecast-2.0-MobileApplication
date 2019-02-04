@@ -113,6 +113,10 @@ ext.libraries = [
                 release: "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakcanaryVersion"
         ],
 
+        toasty          : [
+                base: "com.github.GrenderG:Toasty:$versions.toastyVersion"
+        ],
+
         timber          : [
                 base: "com.jakewharton.timber:timber:$versions.timberVersion"
         ],
