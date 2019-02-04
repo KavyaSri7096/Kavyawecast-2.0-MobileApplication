@@ -15,7 +15,6 @@
         style="@style/CustomCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> viewModel.onItemClick()}"
         app:cardBackgroundColor="@color/transparent"
         app:cardElevation="0dp"
         app:cardUseCompatPadding="false">

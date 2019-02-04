@@ -5,7 +5,9 @@ import android.content.Context;
 import com.wecast.core.data.db.entities.TVShow;
 import com.wecast.mobile.databinding.CardTvShowBinding;
 import com.wecast.mobile.ui.ScreenRouter;
+import com.wecast.mobile.ui.base.BaseOnClickListener;
 import com.wecast.mobile.ui.base.BaseViewHolder;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 
 import androidx.databinding.ViewDataBinding;
 
@@ -13,7 +15,7 @@ import androidx.databinding.ViewDataBinding;
  * Created by ageech@live.com
  */
 
-public class TVShowViewHolder extends BaseViewHolder<TVShow> implements TVShowViewModel.OnClickListener {
+public class TVShowViewHolder extends BaseViewHolder<TVShow> {
 
     private CardTvShowBinding binding;
     private TVShowViewModel viewModel;
@@ -24,8 +26,10 @@ public class TVShowViewHolder extends BaseViewHolder<TVShow> implements TVShowVi
     }
 
     @Override
-    public void onBind(TVShow item) {
-        viewModel = new TVShowViewModel(item, this);
+    public void onBind(Context context, BaseOnClickListener onClickListener, TVShow item) {
+        attachOnClickListener((ListRowOnClickListener) onClickListener, item);
+
+        viewModel = new TVShowViewModel(item);
         binding.setViewModel(viewModel);
 
         // Immediate Binding
@@ -35,11 +39,9 @@ public class TVShowViewHolder extends BaseViewHolder<TVShow> implements TVShowVi
         binding.executePendingBindings();
     }
 
-    @Override
-    public void onItemClick(TVShow item) {
-        if (item != null) {
-            Context context = binding.getRoot().getContext();
-            ScreenRouter.openTVShowDetails(context, item);
+    private void attachOnClickListener(ListRowOnClickListener onClickListener, TVShow item) {
+        if (onClickListener != null) {
+            itemView.setOnClickListener(view -> onClickListener.onClick(item, view));
         }
     }
 }

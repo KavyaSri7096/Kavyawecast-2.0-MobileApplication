@@ -14,11 +14,13 @@ import com.wecast.core.data.db.entities.Vod;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityVodSearchBinding;
+import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
 import com.wecast.mobile.ui.common.adapter.SortingFiltersAdapter;
 import com.wecast.mobile.ui.common.listener.OnItemSelectListener;
 import com.wecast.mobile.ui.common.listener.OnTextInputListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowType;
 import com.wecast.mobile.utils.CommonUtils;
 
@@ -34,7 +36,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -103,6 +104,7 @@ public class VodSearchActivity extends BaseActivity<ActivityVodSearchBinding, Vo
         binding.data.setHasFixedSize(true);
         binding.data.setNestedScrollingEnabled(false);
         adapter = new ListRowAdapter(this, ListRowType.MOVIES);
+        adapter.setOnClickListener((ListRowOnClickListener<Vod>) (item, view) -> ScreenRouter.openVodDetails(this, item));
         binding.data.setAdapter(adapter);
 
         // Setup filters

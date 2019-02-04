@@ -8,6 +8,8 @@ import com.wecast.core.data.db.entities.TVShow;
 import com.wecast.core.data.repository.TVShowRepository;
 import com.wecast.mobile.R;
 import com.wecast.mobile.di.component.AppComponent;
+import com.wecast.mobile.ui.ScreenRouter;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowView;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
 import com.wecast.mobile.ui.widget.listRow.ListRowItemDecoration;
@@ -77,7 +79,9 @@ public class TVShowRecommendedListRow extends ListRowView<TVShow> {
 
     @Override
     protected ListRowAdapter adapter() {
-        return new ListRowAdapter(getContext(), ListRowType.TV_SHOWS);
+        ListRowAdapter adapter = new ListRowAdapter(getContext(), ListRowType.TV_SHOWS);
+        adapter.setOnClickListener((ListRowOnClickListener<TVShow>) (item, view) -> ScreenRouter.openTVShowDetails(getContext(), item));
+        return adapter;
     }
 
     @Override

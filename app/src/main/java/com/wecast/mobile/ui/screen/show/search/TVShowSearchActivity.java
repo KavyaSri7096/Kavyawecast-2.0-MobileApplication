@@ -14,11 +14,13 @@ import com.wecast.core.data.db.entities.TVShow;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityTvShowSearchBinding;
+import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
 import com.wecast.mobile.ui.common.adapter.SortingFiltersAdapter;
 import com.wecast.mobile.ui.common.listener.OnItemSelectListener;
 import com.wecast.mobile.ui.common.listener.OnTextInputListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowType;
 import com.wecast.mobile.utils.CommonUtils;
 
@@ -102,6 +104,7 @@ public class TVShowSearchActivity extends BaseActivity<ActivityTvShowSearchBindi
         binding.data.setHasFixedSize(true);
         binding.data.setNestedScrollingEnabled(false);
         adapter = new ListRowAdapter(this, ListRowType.TV_SHOWS);
+        adapter.setOnClickListener((ListRowOnClickListener<TVShow>) (item, view) -> ScreenRouter.openTVShowDetails(this, item));
         binding.data.setAdapter(adapter);
 
         // Setup filters

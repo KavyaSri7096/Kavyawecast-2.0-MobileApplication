@@ -4,8 +4,9 @@ import android.content.Context;
 
 import com.wecast.core.data.db.entities.Vod;
 import com.wecast.mobile.databinding.CardVodBinding;
-import com.wecast.mobile.ui.ScreenRouter;
+import com.wecast.mobile.ui.base.BaseOnClickListener;
 import com.wecast.mobile.ui.base.BaseViewHolder;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 
 import androidx.databinding.ViewDataBinding;
 
@@ -13,7 +14,7 @@ import androidx.databinding.ViewDataBinding;
  * Created by ageech@live.com
  */
 
-public class VodViewHolder extends BaseViewHolder<Vod> implements VodViewModel.OnClickListener {
+public class VodViewHolder extends BaseViewHolder<Vod> {
 
     private CardVodBinding binding;
     private VodViewModel viewModel;
@@ -24,8 +25,10 @@ public class VodViewHolder extends BaseViewHolder<Vod> implements VodViewModel.O
     }
 
     @Override
-    public void onBind(Vod item) {
-        viewModel = new VodViewModel(item, this);
+    public void onBind(Context context, BaseOnClickListener onClickListener, Vod item) {
+        attachOnClickListener((ListRowOnClickListener) onClickListener, item);
+
+        viewModel = new VodViewModel(item);
         binding.setViewModel(viewModel);
 
         // Immediate Binding
@@ -35,11 +38,9 @@ public class VodViewHolder extends BaseViewHolder<Vod> implements VodViewModel.O
         binding.executePendingBindings();
     }
 
-    @Override
-    public void onItemClick(Vod item) {
-        if (item != null) {
-            Context context = binding.getRoot().getContext();
-            ScreenRouter.openVodDetails(context, item);
+    private void attachOnClickListener(ListRowOnClickListener onClickListener, Vod item) {
+        if (onClickListener != null) {
+            itemView.setOnClickListener(view -> onClickListener.onClick(item, view));
         }
     }
 }

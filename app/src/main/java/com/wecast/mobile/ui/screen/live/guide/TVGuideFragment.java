@@ -3,12 +3,16 @@ package com.wecast.mobile.ui.screen.live.guide;
 import android.os.Bundle;
 import android.view.View;
 
+import com.wecast.core.data.db.dao.ChannelDao;
+import com.wecast.core.data.db.entities.Channel;
 import com.wecast.core.data.db.entities.TVGuide;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.FragmentTvGuideBinding;
+import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseFragment;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
+import com.wecast.mobile.ui.widget.listRow.ListRowOnClickListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowType;
 
 import java.util.List;
@@ -32,6 +36,8 @@ public class TVGuideFragment extends BaseFragment<FragmentTvGuideBinding, TVGuid
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
+    @Inject
+    ChannelDao channelDao;
 
     private FragmentTvGuideBinding binding;
     private TVGuideFragmentViewModel viewModel;
@@ -78,6 +84,10 @@ public class TVGuideFragment extends BaseFragment<FragmentTvGuideBinding, TVGuid
         binding.programmes.addItemDecoration(new TVGuideItemDecoration());
         binding.programmes.setNestedScrollingEnabled(false);
         adapter = new ListRowAdapter(getBaseActivity(), ListRowType.TV_GUIDE);
+        adapter.setOnClickListener((ListRowOnClickListener<TVGuide>) (item, view) -> {
+            Channel channel = channelDao.getById(item.getId());
+            ScreenRouter.openChannelDetails(getBaseActivity(), channel);
+        });
         binding.programmes.setAdapter(adapter);
 
         getProgrammes(page);
