@@ -33,6 +33,7 @@ ext.versions = [
         googleAdsVersion       : '17.1.1',
         hockeyAppVersion       : "5.1.1",
         leakcanaryVersion      : '1.6.3',
+        toastyVersion          : '1.4.0',
         timberVersion          : '4.7.1',
         mockitoVersion         : '2.15.0',
         junitVersion           : '4.12',

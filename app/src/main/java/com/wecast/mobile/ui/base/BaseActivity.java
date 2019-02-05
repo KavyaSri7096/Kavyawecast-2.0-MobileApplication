@@ -38,6 +38,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import dagger.android.AndroidInjection;
 import dagger.android.support.DaggerAppCompatActivity;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -227,13 +228,13 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
 
     public void toast(String message) {
         if (message != null && !message.isEmpty()) {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            Toasty.info(this, message, Toast.LENGTH_SHORT).show();
         }
     }
 
     public void toast(int message) {
         if (message > -1) {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            Toasty.info(this, message, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -241,15 +242,15 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         throwable.printStackTrace();
 
         if (throwable instanceof SocketTimeoutException) {
-            toast(R.string.error_timeout);
+            Toasty.error(this, R.string.error_timeout, Toast.LENGTH_SHORT, true).show();
         } else if (throwable instanceof MalformedJsonException) {
-            toast(R.string.error_malformed_json);
+            Toasty.error(this, R.string.error_malformed_json, Toast.LENGTH_SHORT, true).show();
         } else if (throwable instanceof IOException) {
-            toast(R.string.error_no_internet_connection);
+            Toasty.error(this, R.string.error_no_internet_connection, Toast.LENGTH_SHORT, true).show();
         } else if (throwable instanceof HttpException) {
             toast(((HttpException) throwable).response().message());
         } else {
-            toast(R.string.error_unknown);
+            Toasty.error(this, R.string.error_unknown, Toast.LENGTH_SHORT, true).show();
         }
     }
 
@@ -267,7 +268,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         }
 
         if (snackBar == null) {
-            Spanned spanned = Html.fromHtml("<font color=\"#ffffff\">" + message +"</font>");
+            Spanned spanned = Html.fromHtml("<font color=\"#ffffff\">" + message + "</font>");
             snackBar = Snackbar.make(findViewById(android.R.id.content), spanned, Snackbar.LENGTH_INDEFINITE);
             snackBar.setAction("OK", v -> {
                 snackBar.dismiss();
