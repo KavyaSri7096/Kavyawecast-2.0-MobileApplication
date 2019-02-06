@@ -90,9 +90,14 @@ public class ChannelFavoriteListRow extends ListRowView<Channel> {
     @Override
     protected void inject(AppComponent appComponent) {
         appComponent.inject(this);
+        fetchData();
     }
 
     public void fetchData() {
+        if (channelRepository == null) {
+            return;
+        }
+
         Disposable disposable = channelRepository.getFavorites(true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -103,7 +108,7 @@ public class ChannelFavoriteListRow extends ListRowView<Channel> {
                             // Refresh data in widget
                             WeCastWidget.sendRefreshBroadcast(getContext());
                         } else if (response.status == ApiStatus.ERROR) {
-                            removeView();
+                            setVisibility(GONE);
                         } else if (response.status == ApiStatus.TOKEN_EXPIRED) {
                             refreshToken(this::fetchData);
                         } else if (response.status == ApiStatus.SUBSCRIPTION_EXPIRED) {

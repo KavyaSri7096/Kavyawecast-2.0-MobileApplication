@@ -88,6 +88,7 @@
                         android:src="@drawable/ic_tv_welcome" />
 
                     <ImageView
+                        android:id="@+id/logo"
                         android:layout_width="@dimen/splash_logo_width"
                         android:layout_height="@dimen/splash_logo_height"
                         android:layout_gravity="center"

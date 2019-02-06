@@ -89,6 +89,7 @@ public class ChannelFragment extends BaseFragment<FragmentChannelBinding, Channe
     @Override
     public void onResume() {
         super.onResume();
+
         // Refresh favorite channels
         binding.favorites.clearItems();
         binding.favorites.fetchData();

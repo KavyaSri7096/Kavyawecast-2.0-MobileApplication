@@ -92,7 +92,12 @@ public class VodRecentlyAddedListRow extends ListRowView<Vod> {
     @Override
     protected void inject(AppComponent appComponent) {
         appComponent.inject(this);
-        fetchData(1);
+
+        if (getAppModules().hasVod()) {
+            fetchData(1);
+        } else {
+            removeView();
+        }
     }
 
     private void fetchData(int page) {
