@@ -38,8 +38,8 @@ public class HomeHighlightedViewModel {
     }
 
     private String getInfo() {
-        Vod itemVod = highlighted.getMovieModel();
-        if (itemVod != null) {
+        if (highlighted.getMovieModel() != null) {
+            Vod itemVod = highlighted.getMovieModel();
             if (itemVod.getYear() != null && itemVod.getRuntime() != null) {
                 return String.format("%1$s | %2$s", itemVod.getYear(), CommonUtils.getRuntime(itemVod.getRuntime()));
             } else if (itemVod.getYear() != null) {
@@ -47,17 +47,15 @@ public class HomeHighlightedViewModel {
             } else if (itemVod.getRuntime() != null) {
                 return CommonUtils.getRuntime(itemVod.getRuntime());
             }
-        }
-        TVShow itemTVShow = highlighted.getTVShowModel();
-        if (itemTVShow != null) {
+        } else if (highlighted.getTVShowModel() != null) {
+            TVShow itemTVShow = highlighted.getTVShowModel();
             if (itemTVShow.getYear() != null) {
                 return String.format(Locale.getDefault(), "%1$s | Seasons : %2$d", itemTVShow.getYear(), itemTVShow.getSeasonCount());
             } else {
                 return String.format(Locale.getDefault(), "%1$d Season(s)", itemTVShow.getSeasonCount());
             }
-        }
-        Channel itemChannel = highlighted.getChannelModel();
-        if (itemChannel != null) {
+        } else if (highlighted.getChannelModel() != null) {
+            Channel itemChannel = highlighted.getChannelModel();
             imageUrl.set(itemChannel.getScreenShotUrl());
             return itemChannel.getTitle();
         }

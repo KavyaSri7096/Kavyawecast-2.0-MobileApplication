@@ -117,6 +117,15 @@ public abstract class ListRowView<T> extends BaseListRow {
         }
     }
 
+    /**
+     * Clear items from adapter
+     */
+    public void clearItems() {
+        if (adapter != null) {
+            adapter.clear();
+        }
+    }
+
     public void showTitle() {
         binding.title.setVisibility(VISIBLE);
     }

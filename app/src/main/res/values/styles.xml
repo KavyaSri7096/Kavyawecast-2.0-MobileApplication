@@ -146,6 +146,7 @@
         <item name="android:padding">@dimen/standard</item>
         <item name="android:textColor">?attr/colorTextActive</item>
         <item name="android:textSize">@dimen/content_medium</item>
+        <item name="android:textColorHint">?attr/colorTextInactive</item>
         <item name="android:textColorHighlight">?attr/colorTextInactive</item>
         <item name="android:textCursorDrawable">@null</item>
     </style>

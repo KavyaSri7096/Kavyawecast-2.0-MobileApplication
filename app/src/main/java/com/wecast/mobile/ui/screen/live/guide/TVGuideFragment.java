@@ -81,7 +81,6 @@ public class TVGuideFragment extends BaseFragment<FragmentTvGuideBinding, TVGuid
 
     private void setupUI() {
         binding.programmes.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.programmes.addItemDecoration(new TVGuideItemDecoration());
         binding.programmes.setNestedScrollingEnabled(false);
         adapter = new ListRowAdapter(getBaseActivity(), ListRowType.TV_GUIDE);
         adapter.setOnClickListener((ListRowOnClickListener<TVGuide>) (item, view) -> {

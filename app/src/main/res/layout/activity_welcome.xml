@@ -35,7 +35,8 @@
                     android:drawableStart="@drawable/ic_language"
                     android:drawablePadding="@dimen/standard_half"
                     android:gravity="start|center_vertical"
-                    android:textAllCaps="true" />
+                    android:textAllCaps="true"
+                    android:textColor="?colorTextActive" />
 
                 <Button
                     android:id="@+id/login"
@@ -47,7 +48,8 @@
                     android:drawablePadding="@dimen/standard_half"
                     android:gravity="end|center_vertical"
                     android:text="@string/log_in"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="?colorTextActive" />
 
             </RelativeLayout>
 
@@ -88,6 +90,7 @@
                         android:src="@drawable/ic_tv_welcome" />
 
                     <ImageView
+                        android:id="@+id/logo"
                         android:layout_width="@dimen/splash_logo_width"
                         android:layout_height="@dimen/splash_logo_height"
                         android:layout_gravity="center"

@@ -5,12 +5,14 @@ import android.os.Handler;
 import android.os.Looper;
 import androidx.annotation.Nullable;
 
+import com.wecast.core.data.db.entities.composer.Composer;
 import com.wecast.core.data.db.pref.PreferenceManager;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityComposerBinding;
 import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
+import com.wecast.mobile.utils.ThemeUtils;
 
 import javax.inject.Inject;
 
@@ -75,13 +77,20 @@ public class ComposerActivity extends BaseActivity<ActivityComposerBinding, Comp
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
                     if (response != null) {
-                        onSuccess();
+                        onSuccess(response);
                     }
                 }, this::toast);
         subscribe(disposable);
     }
 
-    private void onSuccess() {
+    private void onSuccess(Composer composer) {
+        // Save selected theme from composer to app prefs
+        if (composer.getTheme().equals("marble")) {
+            preferenceManager.setTheme(ThemeUtils.THEME_MARBLE);
+        } else {
+            preferenceManager.setTheme(ThemeUtils.THEME_PRISM);
+        }
+        // Proceed with app flow
         Handler handler = new Handler(Looper.myLooper());
         handler.postDelayed(this::openNextScreen, 1000);
     }

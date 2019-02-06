@@ -87,10 +87,15 @@ public class TVShowRecommendedListRow extends ListRowView<TVShow> {
     @Override
     protected void inject(AppComponent appComponent) {
         appComponent.inject(this);
-        fetchData(1);
+
+        if (getAppModules().hasVod()) {
+            fetchData();
+        } else {
+            removeView();
+        }
     }
 
-    private void fetchData(int page) {
+    private void fetchData() {
         Disposable disposable = tvShowRepository.getRecommended(true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -98,10 +103,10 @@ public class TVShowRecommendedListRow extends ListRowView<TVShow> {
                     if (response != null) {
                         if (response.status == ApiStatus.SUCCESS) {
                             addItems(response.data);
-                        } else if (response.status == ApiStatus.ERROR && page == 1) {
+                        } else if (response.status == ApiStatus.ERROR) {
                             removeView();
                         } else if (response.status == ApiStatus.TOKEN_EXPIRED) {
-                            refreshToken(() -> fetchData(page));
+                            refreshToken(this::fetchData);
                         } else if (response.status == ApiStatus.SUBSCRIPTION_EXPIRED) {
                             addItems(response.data);
                             snackBar(R.string.error_subscription_expired);

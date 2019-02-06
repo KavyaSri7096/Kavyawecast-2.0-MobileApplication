@@ -24,6 +24,7 @@ import com.wecast.mobile.databinding.ActivityNavigationBinding;
 import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
 import com.wecast.mobile.ui.utils.FragmentStateManager;
+import com.wecast.mobile.utils.BindingUtils;
 import com.wecast.mobile.utils.PermissionUtils;
 
 import javax.inject.Inject;
@@ -106,6 +107,9 @@ public class NavigationActivity extends BaseActivity<ActivityNavigationBinding, 
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
+
+        // Set app logo
+        BindingUtils.bindAppLogo(binding.toolbar.logo, composerRepository.getAppLogo());
 
         // Remove ripple effect from tab
         binding.tabLayout.setTabRippleColor(null);

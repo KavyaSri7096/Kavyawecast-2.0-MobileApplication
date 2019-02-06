@@ -15,6 +15,7 @@ import com.wecast.mobile.databinding.ActivityWelcomeBinding;
 import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
 import com.wecast.mobile.ui.common.dialog.LanguageDialog;
+import com.wecast.mobile.utils.BindingUtils;
 import com.wecast.mobile.utils.LocaleUtils;
 
 import java.util.Locale;
@@ -74,9 +75,14 @@ public class WelcomeActivity extends BaseActivity<ActivityWelcomeBinding, Welcom
         binding = getViewDataBinding();
         viewModel.setNavigator(this);
 
+        // Set app logo
+        BindingUtils.bindAppLogo(binding.logo, composerRepository.getAppLogo());
+
+        // Set selected language
         Language language = getPreferenceManager().getLanguage();
         binding.language.setText(language.getShortCode());
 
+        // Show/hide registration button based on composer configuration
         if (!composerRepository.getAppModules().hasRegistration()) {
             binding.register.setVisibility(View.GONE);
         }

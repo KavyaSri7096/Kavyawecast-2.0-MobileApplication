@@ -46,5 +46,12 @@ android {
             // Variables
             buildConfigField "String", "API_URL", "\"https://api0.wecastdemo.com\""
         }
+
+        cluxter {
+            dimension "app"
+            applicationIdSuffix ".cluxter"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api.cluxter.com.br\""
+        }
     }
 }

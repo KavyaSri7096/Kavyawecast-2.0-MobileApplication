@@ -8,18 +8,24 @@ android {
     compileSdkVersion versions.compileSdk
 
     defaultConfig {
+
+        // App package Id
         applicationId "com.wecast.mobile"
+
         // Version
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode versions.appVersionCode
         versionName versions.appVersion
+
         // Renderscript for blur
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
+
         // Testing
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        // Common SDK integration IDs
+
+        // SDK integration Ids
         manifestPlaceholders = [
                 ADMOB_APP_ID: "ca-app-pub-8022422195783695~7199223580",
                 HOCKEYAPP_APP_ID: "59e07effc02f41108cb4c7522042f5c8",
@@ -55,6 +61,9 @@ dependencies {
 
     implementation project(':wecast-core')
     implementation project(':wecast-player')
+
+    // Android X support
+    api libraries.androidx.base
 
     // Dependency Injection
     implementation libraries.dagger.base
