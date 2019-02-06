@@ -93,9 +93,12 @@ public class ChannelDetailsRentDialog extends BaseDialog implements SingleChoice
         }
 
         List<ChannelProfile> channelProfiles = channel.getProfiles();
-        for (ChannelProfile profile : channelProfiles) {
-            if (profile.isSubscribed()) {
-                channelProfiles.remove(profile);
+
+        if (channelProfiles != null && channelProfiles.size() > 0) {
+            for (ChannelProfile profile : channelProfiles) {
+                if (profile.isSubscribed()) {
+                    channelProfiles.remove(profile);
+                }
             }
         }
 
