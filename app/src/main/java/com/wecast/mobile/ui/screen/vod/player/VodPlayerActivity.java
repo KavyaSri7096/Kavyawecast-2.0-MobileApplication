@@ -562,6 +562,12 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        trackSocketWatchedTime();
+        super.onBackPressed();
+    }
+
     /**
      * Since user has option to show debug in settings
      * we have to start or stop default exo player debug view
@@ -610,12 +616,6 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
                 startDebugViewHelper();
                 break;
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        trackSocketWatchedTime();
-        super.onBackPressed();
     }
 
     @Override

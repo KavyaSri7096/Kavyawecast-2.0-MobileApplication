@@ -8,11 +8,16 @@ import android.widget.RemoteViewsService;
 
 import com.bumptech.glide.Glide;
 import com.wecast.core.data.db.dao.ChannelDao;
+import com.wecast.core.data.db.dao.TVGuideDao;
 import com.wecast.core.data.db.entities.Channel;
+import com.wecast.core.data.db.entities.TVGuide;
+import com.wecast.core.data.db.entities.TVGuideProgramme;
+import com.wecast.core.utils.TVGuideUtils;
 import com.wecast.mobile.R;
 import com.wecast.mobile.WeApp;
+import com.wecast.mobile.ui.screen.live.channel.details.ChannelDetailsActivity;
+import com.wecast.mobile.ui.screen.navigation.NavigationActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,61 +30,80 @@ public class WeCastRemoteViewsFactory implements RemoteViewsService.RemoteViewsF
 
     @Inject
     ChannelDao channelDao;
+    @Inject
+    TVGuideDao tvGuideDao;
 
     private Context context;
-    private List<Channel> channels = new ArrayList<>();
+    private Intent intent;
+    private List<Channel> channels;
 
     WeCastRemoteViewsFactory(Context context, Intent intent) {
         this.context = context;
+        this.intent = intent;
     }
 
     @Override
     public void onCreate() {
-        ((WeApp) context.getApplicationContext()).getAppComponent().inject(this);
+        WeApp weApp = (WeApp) context.getApplicationContext();
+        weApp.getAppComponent().inject(this);
     }
 
     @Override
     public void onDataSetChanged() {
+        // Get favorite channels from database
         channels = channelDao.getFavoritesAsList();
     }
 
     @Override
     public RemoteViews getViewAt(int position) {
-        Channel item = channels.get(position);
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_wecast_app_item);
+        // Get channel from list
+        Channel channel = channels.get(position);
+        TVGuide tvGuide = tvGuideDao.getById(channel.getId());
+
+        // Create list item layout
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_wecast_item);
+
         // Set channel title
-        views.setTextViewText(R.id.title, item.getTitle());
+        views.setTextViewText(R.id.title, channel.getTitle());
+
+        // Set channel logo
         try {
-            // Set channel logo
             Bitmap bitmap = Glide.with(context)
                     .asBitmap()
-                    .load(item.getLogoUrl())
-                    .submit(512, 512)
+                    .load(channel.getLogoUrl())
+                    .submit(100, 100)
                     .get();
             views.setImageViewBitmap(R.id.logo, bitmap);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // Set channel categories
-        if (item.getCategories() != null && item.getCategories().size() > 0) {
-            StringBuilder categories = new StringBuilder();
-            for (int i = 0; i < item.getCategories().size(); i++) {
-                categories.append(item.getCategories().get(i).getName());
-                if (i < item.getCategories().size() - 1) {
-                    categories.append(", ");
+
+        if (tvGuide != null && tvGuide.getProgrammes() != null) {
+            for (TVGuideProgramme programme : tvGuide.getProgrammes()) {
+                if (programme.isCurrent()) {
+                    // Set programme title
+                    views.setTextViewText(R.id.programmeTitle, programme.getTitle());
+                    // Set programme logo
+                    views.setTextViewText(R.id.programmeTime, TVGuideUtils.getStartEnd(programme));
+                    // Set programme progress
+                    int max = TVGuideUtils.getMax(programme);
+                    int progress = TVGuideUtils.getProgress(programme);
+                    views.setProgressBar(R.id.programmeProgress, max, progress, false);
                 }
             }
-            views.setTextViewText(R.id.categories, categories.toString());
         }
-        // Set OnClick listener
-        Intent fillInIntent = new Intent();
-        views.setOnClickFillInIntent(R.id.root, fillInIntent);
+
+        // On item click open channel details
+        Intent intent = new Intent(context, NavigationActivity.class);
+        views.setOnClickFillInIntent(R.id.root, intent);
+
+        // Return item layout
         return views;
     }
 
     @Override
     public int getCount() {
-        return channels.size();
+        return channels != null ? channels.size() : 0;
     }
 
     @Override
@@ -104,6 +128,6 @@ public class WeCastRemoteViewsFactory implements RemoteViewsService.RemoteViewsF
 
     @Override
     public void onDestroy() {
-        // Do nothing.
+        // Do nothing
     }
 }

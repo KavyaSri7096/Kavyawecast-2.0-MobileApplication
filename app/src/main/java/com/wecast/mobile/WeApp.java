@@ -61,10 +61,10 @@ public class WeApp extends Application implements HasActivityInjector, HasSuppor
         weApp = this;
 
         // Initialize leak canary
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        LeakCanary.install(this);
+        //if (LeakCanary.isInAnalyzerProcess(this)) {
+        //    return;
+        //}
+        //LeakCanary.install(this);
 
         // Setup dependency injection
         appComponent = AppComponentWrapper.getAppComponent(this);

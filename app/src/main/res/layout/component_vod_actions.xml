@@ -13,6 +13,7 @@
             android:layout_height="4dp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/standard_half"
+            android:layout_marginBottom="@dimen/standard_half"
             android:background="?attr/colorAccent" />
 
         <TextView

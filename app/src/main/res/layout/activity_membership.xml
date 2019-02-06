@@ -89,16 +89,6 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <Button
-                    android:id="@+id/renewSubscription"
-                    style="@style/CustomButtonOval"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_double"
-                    android:layout_marginTop="@dimen/standard"
-                    android:layout_marginEnd="@dimen/standard_double"
-                    android:text="@string/renew_subscription" />
-
                 <TextView
                     style="@style/TextView.Title.Small"
                     android:layout_width="match_parent"

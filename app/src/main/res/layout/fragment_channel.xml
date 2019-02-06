@@ -36,8 +36,7 @@
                 <com.wecast.mobile.ui.screen.live.channel.ChannelFavoriteListRow
                     android:id="@+id/favorites"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="62dp" />
+                    android:layout_height="wrap_content" />
 
                 <com.wecast.mobile.ui.widget.banner.BannerView
                     android:layout_width="match_parent"

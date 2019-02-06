@@ -103,7 +103,7 @@ public class VodGenreListRow extends ListRowView<VodGenre> {
                             refreshToken(() -> fetchData(page));
                         } else if (response.status == ApiStatus.SUBSCRIPTION_EXPIRED) {
                             addItems(response.data);
-                            //snackBar(R.string.error_subscription_expired);
+                            snackBar(R.string.error_subscription_expired);
                         }
                     }
                 }, throwable -> {

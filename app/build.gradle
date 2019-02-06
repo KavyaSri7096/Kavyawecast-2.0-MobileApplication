@@ -64,8 +64,6 @@ dependencies {
     implementation libraries.dagger.androidSupport
 
     // Glide
-    implementation 'com.facebook.fresco:fresco:1.10.0'
-
     implementation libraries.glide.base
     annotationProcessor 'androidx.annotation:annotation:1.0.1'
     annotationProcessor libraries.glide.compiler

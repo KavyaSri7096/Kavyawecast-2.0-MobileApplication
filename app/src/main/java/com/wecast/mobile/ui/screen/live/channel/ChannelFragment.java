@@ -86,6 +86,14 @@ public class ChannelFragment extends BaseFragment<FragmentChannelBinding, Channe
         getAll();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Refresh favorite channels
+        binding.favorites.clearItems();
+        binding.favorites.fetchData();
+    }
+
     private void setupListeners() {
         binding.loadMore.setOnClickListener(v -> {
             page++;

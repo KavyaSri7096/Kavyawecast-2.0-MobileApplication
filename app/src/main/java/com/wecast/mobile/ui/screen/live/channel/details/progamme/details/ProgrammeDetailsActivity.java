@@ -22,6 +22,7 @@ import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityProgrammeDetailsBinding;
 import com.wecast.mobile.ui.base.BaseActivity;
+import com.wecast.mobile.ui.widget.wecast.WeCastWidget;
 import com.wecast.mobile.utils.BindingUtils;
 import com.wecast.mobile.utils.CommonUtils;
 import com.wecast.mobile.utils.PermissionUtils;
@@ -396,6 +397,7 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
                         refreshToken(this::addToFavorites);
                     } else if (response.isSuccessful()) {
                         binding.controls.setIsFavorite(true);
+                        WeCastWidget.sendRefreshBroadcast(this);
                     }
                 }, throwable -> {
                     throwable.printStackTrace();
@@ -414,6 +416,7 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
                         refreshToken(this::removeFromFavorites);
                     } else if (response.isSuccessful()) {
                         binding.controls.setIsFavorite(false);
+                        WeCastWidget.sendRefreshBroadcast(this);
                     }
                 }, throwable -> {
                     throwable.printStackTrace();

@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import com.wecast.core.data.api.model.PagedData;
 import com.wecast.core.data.db.entities.Authentication;
 import com.wecast.core.data.db.entities.PaymentHistory;
 import com.wecast.core.data.db.entities.Subscription;
@@ -14,9 +13,7 @@ import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityMembershipBinding;
 import com.wecast.mobile.ui.base.BaseActivity;
-import com.wecast.mobile.ui.common.dialog.PurchasePinDialog;
 import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
-import com.wecast.mobile.ui.widget.listRow.ListRowLoadMoreListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowType;
 
 import java.text.ParseException;
@@ -29,7 +26,6 @@ import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -138,11 +134,6 @@ public class MembershipActivity extends BaseActivity<ActivityMembershipBinding, 
 
     private void setupListeners() {
         binding.toolbar.back.setOnClickListener(v -> onBackPressed());
-        binding.renewSubscription.setOnClickListener(v -> {
-            PurchasePinDialog dialog = PurchasePinDialog.newInstance();
-            dialog.setOnPinInputListener(this::renewSubscription);
-            dialog.show(getSupportFragmentManager(), PurchasePinDialog.TAG);
-        });
     }
 
     private void renewSubscription() {

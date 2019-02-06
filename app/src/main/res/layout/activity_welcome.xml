@@ -35,7 +35,6 @@
                     android:drawableStart="@drawable/ic_language"
                     android:drawablePadding="@dimen/standard_half"
                     android:gravity="start|center_vertical"
-                    android:text="ES"
                     android:textAllCaps="true" />
 
                 <Button
