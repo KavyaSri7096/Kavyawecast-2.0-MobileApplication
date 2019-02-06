@@ -10,6 +10,7 @@ import com.wecast.core.analytics.SocketManager;
 import com.wecast.core.data.api.ApiStatus;
 import com.wecast.core.data.db.entities.TVGuideProgramme;
 import com.wecast.core.data.db.entities.TVGuideReminder;
+import com.wecast.core.data.repository.ComposerRepository;
 import com.wecast.core.utils.ReminderUtils;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
@@ -36,6 +37,8 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashAc
     SocketManager socketManager;
     @Inject
     ReminderUtils reminderUtils;
+    @Inject
+    ComposerRepository composerRepository;
     @Inject
     SplashActivityViewModel viewModel;
 
@@ -138,47 +141,63 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashAc
     }
 
     private void getContinueWatching() {
-        Disposable disposable = viewModel.getContinueWatching()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete(this::getLiveTV)
-                .subscribe(response -> {
+        if (composerRepository.getAppModules().hasVod()) {
+            Disposable disposable = viewModel.getContinueWatching()
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnComplete(this::getLiveTV)
+                    .subscribe(response -> {
 
-                }, this::toast);
-        subscribe(disposable);
+                    }, this::toast);
+            subscribe(disposable);
+        } else {
+            getLiveTV();
+        }
     }
 
     private void getLiveTV() {
-        Disposable disposable = viewModel.getLiveTV()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete(this::getMovies)
-                .subscribe(response -> {
+        if (composerRepository.getAppModules().hasChannels()) {
+            Disposable disposable = viewModel.getLiveTV()
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnComplete(this::getMovies)
+                    .subscribe(response -> {
 
-                }, this::toast);
-        subscribe(disposable);
+                    }, this::toast);
+            subscribe(disposable);
+        } else {
+            getMovies();
+        }
     }
 
     private void getMovies() {
-        Disposable disposable = viewModel.getMovies()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete(this::getTVShows)
-                .subscribe(response -> {
+        if (composerRepository.getAppModules().hasVod()) {
+            Disposable disposable = viewModel.getMovies()
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnComplete(this::getTVShows)
+                    .subscribe(response -> {
 
-                }, this::toast);
-        subscribe(disposable);
+                    }, this::toast);
+            subscribe(disposable);
+        } else {
+            getTVShows();
+        }
     }
 
     private void getTVShows() {
-        Disposable disposable = viewModel.getTVShows()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete(this::openMainActivity)
-                .subscribe(response -> {
+        if (composerRepository.getAppModules().hasVod()) {
+            Disposable disposable = viewModel.getTVShows()
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnComplete(this::openMainActivity)
+                    .subscribe(response -> {
 
-                }, this::toast);
-        subscribe(disposable);
+                    }, this::toast);
+            subscribe(disposable);
+        } else {
+            openMainActivity();
+        }
     }
 
     @Override
