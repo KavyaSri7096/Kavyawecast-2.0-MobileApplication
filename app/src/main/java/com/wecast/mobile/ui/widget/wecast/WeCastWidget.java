@@ -52,7 +52,7 @@ public class WeCastWidget extends AppWidgetProvider {
         views.setEmptyView(R.id.data, R.id.noData);
 
         // Handle on item click
-        Intent intent = new Intent(context, ChannelDetailsActivity.class);
+        Intent intent = new Intent(context, NavigationActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         views.setPendingIntentTemplate(R.id.data, pendingIntent);
 

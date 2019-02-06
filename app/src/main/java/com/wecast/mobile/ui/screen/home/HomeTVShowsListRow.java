@@ -114,7 +114,7 @@ public class HomeTVShowsListRow extends ListRowView<TVShow> {
                             refreshToken(() -> fetchData(page));
                         } else if (response.status == ApiStatus.SUBSCRIPTION_EXPIRED) {
                             addItems(response.data);
-                            //snackBar(R.string.error_subscription_expired);
+                            snackBar(R.string.error_subscription_expired);
                         }
                     }
                 }, throwable -> {

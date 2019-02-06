@@ -75,7 +75,6 @@
         <activity
             android:name=".ui.screen.live.channel.details.ChannelDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName=".ui.screen.navigation.NavigationActivity"
             android:theme="@style/AppTheme.Base.Transparent" />
 
         <activity

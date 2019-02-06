@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.wecast.core.data.db.pref.PreferenceManager;
 import com.wecast.core.data.repository.ComposerRepository;
 import com.wecast.mobile.R;
 import com.wecast.mobile.ui.ScreenRouter;
+import com.wecast.mobile.ui.base.BaseActivity;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -151,6 +153,16 @@ public abstract class BaseListRow extends FrameLayout {
         } else {
             ViewGroup container = (ViewGroup) getParent();
             handler.post(() -> container.removeView(BaseListRow.this));
+        }
+    }
+
+    /**
+     * Show snack bar message if user subscription is not valid
+     */
+    protected void snackBar(int message) {
+        if (getContext() instanceof BaseActivity) {
+            BaseActivity activity = (BaseActivity) getContext();
+            activity.snackBar(message);
         }
     }
 
