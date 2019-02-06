@@ -136,7 +136,6 @@
     <string name="current_profile">CURRENT PROFILE</string>
     <string name="expire_date">EXPIRE DATE</string>
     <string name="expired">Expired</string>
-    <string name="renew_subscription">Renew subscription</string>
     <string name="payment_history">Payment history</string>
     <!-- Edit Info Dialog -->
     <string name="edit_info">Edit Info</string>
