@@ -194,7 +194,8 @@
     <string name="message_reminder_added">Recordatorio añadido exitosamente</string>
     <string name="message_reminder_removed">Recordatorio eliminado con éxito</string>
     <string name="message_reminder_updated">Tiempo de activación del recordatorio actualizado exitosamente</string>
-    <string name="message_you_are_not_subscribed">Usted no está suscrito a nuestro servicio. Si aún no ha iniciado sesión, inicie sesión o verifique su suscripción</string>
+    <string name="message_you_are_not_subscribed">List is empty for one of following reasons:</string>
+    <string name="message_you_are_not_subscribed_reasons">-You are not subscribed to our service \n-Your subscription has expired \n-You don\'t have any favorite channels</string>
     <string name="message_timeshift_length">Please select timeshift length</string>
 
     <!-- Error -->

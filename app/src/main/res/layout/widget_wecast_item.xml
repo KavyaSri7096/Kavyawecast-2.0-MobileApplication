@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/standard_half">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/TextView.Title.Small.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/standard_small"
+        android:singleLine="true"
+        android:text="@string/no_data"
+        android:textColor="@color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="@dimen/channel_logo_width"
+            android:layout_height="@dimen/channel_logo_height">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/bg_widget_item_logo" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/standard_half"
+            android:layout_marginEnd="@dimen/standard_half"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/programmeTitle"
+                style="@style/TextView.Content.Big"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@string/no_data"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/programmeTime"
+                style="@style/TextView.Content.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@string/no_data"
+                android:textColor="@color/black" />
+
+            <ProgressBar
+                android:id="@+id/programmeProgress"
+                style="@style/ProgressBar.Card"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginTop="@dimen/standard_small"
+                android:layout_marginBottom="@dimen/standard_small"
+                android:gravity="center_vertical"
+                android:progressDrawable="@drawable/progress_bar_widget" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/standard_half"
+        android:alpha="0.5"
+        android:background="@color/gray" />
+
+</LinearLayout>

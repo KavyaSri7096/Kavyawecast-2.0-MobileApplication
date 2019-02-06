@@ -15,6 +15,7 @@ import com.wecast.mobile.ui.widget.listRow.ListRowAdapter;
 import com.wecast.mobile.ui.widget.listRow.ListRowItemDecoration;
 import com.wecast.mobile.ui.widget.listRow.ListRowLoadMoreListener;
 import com.wecast.mobile.ui.widget.listRow.ListRowType;
+import com.wecast.mobile.ui.widget.wecast.WeCastWidget;
 
 import javax.inject.Inject;
 
@@ -98,12 +99,16 @@ public class ChannelFavoriteListRow extends ListRowView<Channel> {
                     if (response != null) {
                         if (response.status == ApiStatus.SUCCESS) {
                             addItems(response.data);
+                            // Refresh data in widget
+                            WeCastWidget.sendRefreshBroadcast(getContext());
                         } else if (response.status == ApiStatus.ERROR && page == 1) {
                             removeView();
                         } else if (response.status == ApiStatus.TOKEN_EXPIRED) {
                             refreshToken(() -> fetchData(page));
                         } else if (response.status == ApiStatus.SUBSCRIPTION_EXPIRED) {
                             addItems(response.data);
+                            // Refresh data in widget
+                            WeCastWidget.sendRefreshBroadcast(getContext());
                             //snackBar(R.string.error_subscription_expired);
                         }
                     }

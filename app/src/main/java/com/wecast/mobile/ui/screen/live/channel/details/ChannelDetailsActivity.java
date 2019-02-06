@@ -18,14 +18,17 @@ import com.google.android.exoplayer2.ui.DebugTextViewHelper;
 import com.wecast.core.Constants;
 import com.wecast.core.analytics.SocketManager;
 import com.wecast.core.data.api.ApiStatus;
+import com.wecast.core.data.db.dao.ChannelDao;
 import com.wecast.core.data.db.entities.Channel;
 import com.wecast.core.data.db.pref.PreferenceManager;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityChannelDetailsBinding;
+import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
 import com.wecast.mobile.ui.common.dialog.ParentalPinDialog;
 import com.wecast.mobile.ui.screen.live.channel.details.progamme.ProgrammeFragment;
+import com.wecast.mobile.ui.widget.wecast.WeCastWidget;
 import com.wecast.player.WePlayerFactory;
 import com.wecast.player.WePlayerType;
 import com.wecast.player.data.model.WePlayerParams;
@@ -54,6 +57,8 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
     PreferenceManager preferenceManager;
     @Inject
     SocketManager socketManager;
+    @Inject
+    ChannelDao channelDao;
     @Inject
     ChannelDetailsActivityViewModel viewModel;
 
@@ -256,6 +261,11 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
                         refreshToken(this::addToFavorites);
                     } else if (response.isSuccessful()) {
                         binding.controls.setIsFavorite(true);
+                        // Save data to database
+                        channel.setFavorite(true);
+                        channelDao.insert(channel);
+                        // Refresh widget data
+                        WeCastWidget.sendRefreshBroadcast(this);
                     }
                 }, throwable -> {
                     throwable.printStackTrace();
@@ -274,6 +284,11 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
                         refreshToken(this::removeFromFavorites);
                     } else if (response.isSuccessful()) {
                         binding.controls.setIsFavorite(false);
+                        // Save data to database
+                        channel.setFavorite(false);
+                        channelDao.insert(channel);
+                        // Refresh widget data
+                        WeCastWidget.sendRefreshBroadcast(this);
                     }
                 }, throwable -> {
                     throwable.printStackTrace();
@@ -490,6 +505,12 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
             releaseDebugViewHelper();
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        ScreenRouter.openNavigation(this);
+        finishAffinity();
     }
 
     /**

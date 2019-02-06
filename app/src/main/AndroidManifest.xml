@@ -75,6 +75,7 @@
         <activity
             android:name=".ui.screen.live.channel.details.ChannelDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:parentActivityName=".ui.screen.navigation.NavigationActivity"
             android:theme="@style/AppTheme.Base.Transparent" />
 
         <activity
@@ -170,11 +171,12 @@
         <receiver android:name=".ui.widget.wecast.WeCastWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.wecast.mobile.app.ACTION_DATA_UPDATED" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/wecast_app_widget_info" />
+                android:resource="@xml/widget_wecast_info" />
         </receiver>
 
         <service
