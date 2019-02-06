@@ -36,6 +36,8 @@ public class ChannelFavoriteListRow extends ListRowView<Channel> {
     @Inject
     ChannelRepository channelRepository;
 
+    private ListRowAdapter adapter;
+
     public ChannelFavoriteListRow(@NonNull Context context) {
         super(context);
     }
@@ -80,7 +82,7 @@ public class ChannelFavoriteListRow extends ListRowView<Channel> {
 
     @Override
     protected ListRowAdapter adapter() {
-        ListRowAdapter adapter = new ListRowAdapter(getContext(), ListRowType.FAVORITE_CHANNELS);
+        adapter = new ListRowAdapter(getContext(), ListRowType.FAVORITE_CHANNELS);
         adapter.setOnClickListener((ListRowOnClickListener<Channel>) (item, view) -> ScreenRouter.openChannelDetails(getContext(), item));
         return adapter;
     }
@@ -88,10 +90,9 @@ public class ChannelFavoriteListRow extends ListRowView<Channel> {
     @Override
     protected void inject(AppComponent appComponent) {
         appComponent.inject(this);
-        fetchData(1);
     }
 
-    private void fetchData(int page) {
+    public void fetchData() {
         Disposable disposable = channelRepository.getFavorites(true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -101,15 +102,15 @@ public class ChannelFavoriteListRow extends ListRowView<Channel> {
                             addItems(response.data);
                             // Refresh data in widget
                             WeCastWidget.sendRefreshBroadcast(getContext());
-                        } else if (response.status == ApiStatus.ERROR && page == 1) {
+                        } else if (response.status == ApiStatus.ERROR) {
                             removeView();
                         } else if (response.status == ApiStatus.TOKEN_EXPIRED) {
-                            refreshToken(() -> fetchData(page));
+                            refreshToken(this::fetchData);
                         } else if (response.status == ApiStatus.SUBSCRIPTION_EXPIRED) {
                             addItems(response.data);
+                            snackBar(R.string.error_subscription_expired);
                             // Refresh data in widget
                             WeCastWidget.sendRefreshBroadcast(getContext());
-                            //snackBar(R.string.error_subscription_expired);
                         }
                     }
                 }, throwable -> {
@@ -117,5 +118,11 @@ public class ChannelFavoriteListRow extends ListRowView<Channel> {
                     removeView();
                 });
         subscribe(disposable);
+    }
+
+    public void clearItems() {
+        if (adapter != null) {
+            adapter.clear();
+        }
     }
 }

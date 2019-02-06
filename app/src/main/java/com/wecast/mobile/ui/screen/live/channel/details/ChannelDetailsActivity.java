@@ -28,6 +28,7 @@ import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
 import com.wecast.mobile.ui.common.dialog.ParentalPinDialog;
 import com.wecast.mobile.ui.screen.live.channel.details.progamme.ProgrammeFragment;
+import com.wecast.mobile.ui.screen.navigation.NavigationActivity;
 import com.wecast.mobile.ui.widget.wecast.WeCastWidget;
 import com.wecast.player.WePlayerFactory;
 import com.wecast.player.WePlayerType;
@@ -509,8 +510,8 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
 
     @Override
     public void onBackPressed() {
-        ScreenRouter.openNavigation(this);
-        finishAffinity();
+        trackSocketWatchedTime();
+        super.onBackPressed();
     }
 
     /**
@@ -538,6 +539,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
                 bufferTime = System.currentTimeMillis();
                 break;
             case Player.STATE_ENDED:
+                trackSocketWatchedTime();
                 break;
             case Player.STATE_IDLE:
                 break;
@@ -566,6 +568,19 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         long buffer = (System.currentTimeMillis() - bufferTime);
         if (buffer >= Constants.DEFAULT_MIN_BUFFER_TIME) {
             socketManager.sendPlayIssueData(true, false, (int) (buffer / 1000), SocketManager.RECORD_MODEL_CHANNEL, channel.getId(), 0);
+        }
+    }
+
+    private void trackSocketWatchedTime() {
+        if (weExoPlayer == null || weExoPlayer.getPlayer() == null) {
+            return;
+        }
+
+        long watchTime = weExoPlayer.getPlayer().getCurrentPosition();
+        // Do not send event to socket if user did not watch video for minimum 15 seconds
+        if (watchTime > Constants.DEFAULT_TRACK_TIME) {
+            int watched = (int) watchTime / 1000;
+            socketManager.sendChannelPlayedData(channel, watched);
         }
     }
 

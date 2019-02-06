@@ -16,7 +16,7 @@ import com.wecast.core.utils.TVGuideUtils;
 import com.wecast.mobile.R;
 import com.wecast.mobile.WeApp;
 import com.wecast.mobile.ui.screen.live.channel.details.ChannelDetailsActivity;
-import com.wecast.mobile.utils.BitmapUtils;
+import com.wecast.mobile.ui.screen.navigation.NavigationActivity;
 
 import java.util.List;
 
@@ -56,11 +56,6 @@ public class WeCastRemoteViewsFactory implements RemoteViewsService.RemoteViewsF
 
     @Override
     public RemoteViews getViewAt(int position) {
-        if (channels == null || channels.size() == 0) {
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.component_channel_empty);
-            return views;
-        }
-
         // Get channel from list
         Channel channel = channels.get(position);
         TVGuide tvGuide = tvGuideDao.getById(channel.getId());
@@ -99,8 +94,7 @@ public class WeCastRemoteViewsFactory implements RemoteViewsService.RemoteViewsF
         }
 
         // On item click open channel details
-        Intent intent = new Intent(context, ChannelDetailsActivity.class);
-        intent.putExtra("ID", channel.getId());
+        Intent intent = new Intent(context, NavigationActivity.class);
         views.setOnClickFillInIntent(R.id.root, intent);
 
         // Return item layout

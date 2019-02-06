@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import com.wecast.core.data.api.ApiStatus;
 import com.wecast.core.data.db.entities.Highlighted;
 import com.wecast.core.data.repository.HighlightedRepository;
+import com.wecast.mobile.R;
 import com.wecast.mobile.di.component.AppComponent;
 import com.wecast.mobile.ui.widget.listRow.ListRowPager;
 
@@ -99,7 +100,7 @@ public class HomeHighlightedListRow extends ListRowPager {
                             refreshToken(this::fetchData);
                         } else if (response.status == ApiStatus.SUBSCRIPTION_EXPIRED) {
                             addItems(response.data);
-                            //snackBar(R.string.error_subscription_expired);
+                            snackBar(R.string.error_subscription_expired);
                         }
                     }
                 }, throwable -> {

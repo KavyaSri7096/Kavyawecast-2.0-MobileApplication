@@ -7,7 +7,6 @@ import android.widget.Toast;
 import com.wecast.core.data.db.entities.Channel;
 import com.wecast.core.data.db.entities.Highlighted;
 import com.wecast.core.data.db.entities.HighlightedType;
-import com.wecast.core.data.db.entities.TVGuide;
 import com.wecast.core.data.db.entities.TVGuideProgramme;
 import com.wecast.core.data.db.entities.TVShow;
 import com.wecast.core.data.db.entities.TVShowGenre;
@@ -61,6 +60,7 @@ import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import es.dmoral.toasty.Toasty;
 
 /**
  * Created by ageech@live.com
@@ -156,7 +156,7 @@ public class ScreenRouter {
      */
     public static void openChannelDetails(Context context, Channel channel) {
         if (WeApp.SUBSCRIPTION_EXPIRED) {
-            Toast.makeText(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
+            Toasty.warning(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
         } else {
             if (channel.isNotRented()) {
                 ChannelDetailsRentDialog dialog = ChannelDetailsRentDialog.newInstance(channel);
@@ -226,7 +226,7 @@ public class ScreenRouter {
 
     public static void openVodPlayDialog(Context context, Vod vod) {
         if (WeApp.SUBSCRIPTION_EXPIRED) {
-            Toast.makeText(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
+            Toasty.warning(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -237,7 +237,7 @@ public class ScreenRouter {
 
     public static void openVodPlayer(Context context, Vod vod, VodSourceProfile profile, int playType, float seekTo) {
         if (WeApp.SUBSCRIPTION_EXPIRED) {
-            Toast.makeText(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
+            Toasty.warning(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -275,7 +275,7 @@ public class ScreenRouter {
 
     public static void continuePlaying(Context context, Vod vod) {
         if (WeApp.SUBSCRIPTION_EXPIRED) {
-            Toast.makeText(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
+            Toasty.warning(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -338,7 +338,7 @@ public class ScreenRouter {
 
     public static void openTVShowPlayer(Context context, TVShow tvShow) {
         if (WeApp.SUBSCRIPTION_EXPIRED) {
-            Toast.makeText(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
+            Toasty.warning(context, R.string.error_subscription_expired, Toast.LENGTH_SHORT).show();
             return;
         }
 
