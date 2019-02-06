@@ -192,7 +192,8 @@
     <string name="message_reminder_added">Lembrete adicionado com sucesso</string>
     <string name="message_reminder_removed">Lembrete removido com sucesso</string>
     <string name="message_reminder_updated">Tempo de ativação do lembrete atualizado com sucesso</string>
-    <string name="message_you_are_not_subscribed">Você não está inscrito em nosso serviço. Se você ainda não fez login, faça login ou verifique sua assinatura</string>
+    <string name="message_you_are_not_subscribed">List is empty for one of following reasons:</string>
+    <string name="message_you_are_not_subscribed_reasons">-You are not subscribed to our service \n-Your subscription has expired \n-You don\'t have any favorite channels</string>
     <string name="message_timeshift_length">Please select timeshift length</string>
 
     <!-- Error -->

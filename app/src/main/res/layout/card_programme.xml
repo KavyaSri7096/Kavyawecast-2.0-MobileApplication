@@ -79,7 +79,6 @@
 
                     </LinearLayout>
 
-
                     <ProgressBar
                         android:id="@+id/progress"
                         style="@style/ProgressBar.Card"
