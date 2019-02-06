@@ -2,25 +2,16 @@ apply from: '../versions.gradle'
 
 ext.libraries = [
 
-        appCompat       : [
-                base              : "androidx.appcompat:appcompat:1.0.0-beta01",
-                cardview          : "androidx.cardview:cardview:1.0.0-beta01",
-                constraintLayout  : "androidx.constraintlayout:constraintlayout:1.1.2",
-                design            : "com.google.android.material:material:1.0.0-beta01",
-                gridlayout        : "com.android.support:gridlayout-v7:$versions.supportLibraryVersion",
-                leanback          : "com.android.support:leanback-v17:$versions.supportLibraryVersion",
-                mediarouter       : "com.android.support:mediarouter-v7:$versions.supportLibraryVersion",
-                multidex          : "com.android.support:multidex:$versions.appCompatMultidexVersion",
-                palette           : "com.android.support:palette-v7:$versions.supportLibraryVersion",
-                recyclerview      : "androidx.recyclerview:recyclerview:1.0.0-beta01",
-                supportAnnotations: "com.android.support:support-annotations:$versions.supportLibraryVersion",
-                supportV13        : "com.android.support:support-v13:$versions.supportLibraryVersion",
-                supportV4         : "com.android.support:support-v4:$versions.supportLibraryVersion"
+        androidx        : [
+                base       : "androidx.appcompat:appcompat:$versions.androidxVersion",
+                annotations: "androidx.annotation:annotation:$versions.androidxAnnotationsVersion",
+                design     : "com.google.android.material:material:$versions.androidxDesignVersion",
+                constraintLayout  : "androidx.constraintlayout:constraintlayout:$versions.constraintVersion",
         ],
 
         architecture    : [
-                lifecycle        : "androidx.lifecycle:lifecycle-extensions:2.0.0-beta01",
-                lifecycleCompiler: "androidx.lifecycle:lifecycle-compiler:2.0.0-beta01",
+                lifecycle        : "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleVersion",
+                lifecycleCompiler: "androidx.lifecycle:lifecycle-compiler:$versions.lifecycleVersion",
         ],
 
         dagger          : [
