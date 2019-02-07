@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -88,6 +89,20 @@
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
+                <TextView
+                    style="@style/TextView.Content.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/standard_double"
+                    android:layout_marginEnd="@dimen/standard_double"
+                    android:gravity="center"
+                    android:text="@string/message_subscription_renewal"
+                    android:textAllCaps="false"
+                    android:textColor="?colorTextInactive"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
 
                 <TextView
                     android:id="@+id/paymentHistoryTitle"
