@@ -1,5 +1,7 @@
 package com.wecast.mobile.ui.screen.home;
 
+import android.text.TextUtils;
+
 import androidx.databinding.ObservableField;
 
 import com.wecast.core.data.db.entities.Channel;
@@ -34,7 +36,34 @@ public class HomeHighlightedViewModel {
         this.info = new ObservableField<>(getInfo());
 
         // Set highlighted image
-        this.imageUrl = new ObservableField<>(highlighted.getImage());
+        this.imageUrl = new ObservableField<>(getImage());
+    }
+
+    private String getImage() {
+        if (!TextUtils.isEmpty(highlighted.getImage())) {
+            return highlighted.getImage();
+        } else if (highlighted.getChannelModel() != null) {
+            // If highlighted is channel then background should be screenshot
+            Channel itemChannel = highlighted.getChannelModel();
+            return itemChannel.getScreenShotUrl();
+        } else if (highlighted.getMovieModel() != null) {
+            // If highlighted is move/episode background should be banner or gallery
+            Vod itemVod = highlighted.getMovieModel();
+            if (itemVod.getBanners() != null && itemVod.getBanners().size() > 0) {
+                return itemVod.getBanners().get(0).getPreviewAr();
+            } else if (itemVod.getGallery() != null && itemVod.getGallery().size() > 0) {
+                return itemVod.getGallery().get(0).getPreviewAr();
+            }
+        } else if (highlighted.getTVShowModel() != null) {
+            // If highlighted is tv show background should be banner or gallery
+            TVShow itemTVShow = highlighted.getTVShowModel();
+            if (itemTVShow.getBanners() != null && itemTVShow.getBanners().size() > 0) {
+                return itemTVShow.getBanners().get(0).getPreviewAr();
+            } else if (itemTVShow.getGallery() != null && itemTVShow.getGallery().size() > 0) {
+                return itemTVShow.getGallery().get(0).getPreviewAr();
+            }
+        }
+        return null;
     }
 
     private String getInfo() {
@@ -56,10 +85,9 @@ public class HomeHighlightedViewModel {
             }
         } else if (highlighted.getChannelModel() != null) {
             Channel itemChannel = highlighted.getChannelModel();
-            imageUrl.set(itemChannel.getScreenShotUrl());
             return itemChannel.getTitle();
         }
-        return "";
+        return null;
     }
 
     public void onItemClick() {
