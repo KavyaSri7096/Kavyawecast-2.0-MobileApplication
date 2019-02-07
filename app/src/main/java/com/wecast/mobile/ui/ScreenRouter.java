@@ -280,17 +280,14 @@ public class ScreenRouter {
         }
 
         List<VodSourceProfile> profiles = VodDetailsUtils.getSourceProfiles(vod, true);
-        if (profiles.size() == 1) {
+        if (profiles != null && profiles.size() > 1) {
             VodSourceProfile vodSourceProfile = profiles.get(0);
             if (vodSourceProfile.isSubscribed()) {
                 if (vod.getContinueWatching() != null) {
-                    openVodStartOverDialog(context, vod, vodSourceProfile);
-                } else {
-                    openVodPlayer(context, vod, vodSourceProfile, VodPlayerActivity.PLAY_MOVIE, 0);
+                    float seekTo = vod.getContinueWatching().getStoppedTime();
+                    openVodPlayer(context, vod, vodSourceProfile, VodPlayerActivity.PLAY_MOVIE, seekTo);
                 }
             }
-        } else {
-            openVodPlayDialog(context, vod);
         }
     }
 
