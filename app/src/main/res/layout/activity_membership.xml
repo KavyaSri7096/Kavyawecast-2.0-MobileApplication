@@ -90,6 +90,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/paymentHistoryTitle"
                     style="@style/TextView.Title.Small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

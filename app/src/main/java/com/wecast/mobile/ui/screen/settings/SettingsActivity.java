@@ -87,7 +87,7 @@ public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, Sett
         // Set title
         binding.toolbar.title.setText(getString(R.string.account));
 
-        // Night mode is only available in debug mode
+        // Night mode and force RTL options are available only in debug mode
         binding.theme.root.setVisibility(BuildConfig.DEBUG ? View.VISIBLE : View.GONE);
         binding.rtl.root.setVisibility(BuildConfig.DEBUG ? View.VISIBLE : View.GONE);
 
