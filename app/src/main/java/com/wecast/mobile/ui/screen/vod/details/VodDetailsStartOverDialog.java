@@ -86,6 +86,7 @@ public class VodDetailsStartOverDialog extends BaseDialog {
     }
 
     private void setupListeners() {
+        binding.close.setOnClickListener(v -> dismiss());
         binding.startOver.setOnClickListener(v -> play(0));
         binding.resume.setOnClickListener(v -> play(vod.getContinueWatching().getStoppedTime()));
     }

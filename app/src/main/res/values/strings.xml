@@ -194,6 +194,7 @@
     <string name="message_you_are_not_subscribed">List is empty for one of following reasons:</string>
     <string name="message_you_are_not_subscribed_reasons">- You are not subscribed to our service \n- Your subscription has expired \n- You don\'t have any favorite channels</string>
     <string name="message_timeshift_length">Please select timeshift length</string>
+    <string name="message_subscription_renewal">*If your subscription has expired, please contact your administrator or visit WEB TV Application</string>
 
     <!-- Error -->
     <string name="error_email_can_not_be_empty">Email/Username filed can not be empty</string>

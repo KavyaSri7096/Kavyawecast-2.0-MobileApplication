@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -129,7 +130,6 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
     private void setupListeners() {
         // Set back button listeners
         binding.toolbar.back.setOnClickListener(v -> onBackPressed());
-        binding.controls.back.setOnClickListener(view -> onBackPressed());
 
         // Set swipe detector listener
         gestureDetector = new GestureDetector(this, new ChannelDetailsOnSwipeListener() {

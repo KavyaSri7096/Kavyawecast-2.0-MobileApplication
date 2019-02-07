@@ -1,6 +1,14 @@
+## 2.12.0
+
+  **New features**
+
+  - [WC2-2362](https://wetekdev.atlassian.net/browse/WC2-WC2-2362) Subscription renewal message on settings
+
 ## 2.11.1
 
   **Bug fixes**
+  
+  - [WC2-2344](https://wetekdev.atlassian.net/browse/WC2-2344) Start Over & Resume improvement
   - [WC2-1806](https://wetekdev.atlassian.net/browse/WC2-1806) Added limit to trending channels/movies/tv shows
   - [WC2-2347](https://wetekdev.atlassian.net/browse/WC2-2347) Parental pin on channel
   - [WC2-1729](https://wetekdev.atlassian.net/browse/WC2-1729) Hide loader on live tv screen if there is no more items to load
