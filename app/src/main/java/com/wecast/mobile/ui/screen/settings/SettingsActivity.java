@@ -155,13 +155,11 @@ public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, Sett
         Date expirationDate;
         try {
             expirationDate = parser.parse(authentication.getAccount().getExpire());
-            long current = System.currentTimeMillis();
-            long expiration = expirationDate.getTime();
-            if (current <= expiration) {
+            if (authentication.getAccount().isSubscriptionExpired()) {
+                showSubscriptionExpired(String.format(getString(R.string.expired_on), format.format(expirationDate)));
+            } else {
                 binding.subscription.setSubtitle(String.format(getString(R.string.valid_until), format.format(expirationDate)));
                 binding.subscription.subtitle.setTextColor(getResources().getColor(getColorTextActive()));
-            } else {
-                showSubscriptionExpired(String.format(getString(R.string.expired_on), format.format(expirationDate)));
             }
         } catch (ParseException e) {
             e.printStackTrace();

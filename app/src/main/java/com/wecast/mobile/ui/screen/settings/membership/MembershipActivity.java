@@ -84,8 +84,39 @@ public class MembershipActivity extends BaseActivity<ActivityMembershipBinding, 
         // Setup toolbar title
         binding.toolbar.title.setText(getString(R.string.membership_title));
 
-        Authentication authentication = preferenceManager.getAuthentication();
-        Subscription subscription = authentication.getSubscription();
+        // Get subscription info from server
+        getSubscriptionInfo();
+
+        // Set recycler view for payment history
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        binding.paymentHistory.setLayoutManager(layoutManager);
+        adapter = new ListRowAdapter(this, ListRowType.PAYMENT_HISTORY);
+        binding.paymentHistory.setAdapter(adapter);
+
+        // Get payment history from server
+        getPaymentHistory(1);
+    }
+
+    private void getSubscriptionInfo() {
+        Disposable disposable = viewModel.checkSubscription()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    if (response != null) {
+                        if (response.isSuccessful()) {
+                            showSubscriptionInfo(response.getData());
+                        } else if (response.isTokenExpired()) {
+                            refreshToken(this::getSubscriptionInfo);
+                        } else {
+                            toast(response.getMessage());
+                        }
+                    }
+                }, this::toast);
+        subscribe(disposable);
+    }
+
+    private void showSubscriptionInfo(Authentication authentication) {
+        Subscription subscription = preferenceManager.getAuthentication().getSubscription();
         // Set current subscription name
         binding.currentProfile.setText(subscription.getName());
         // Subscription expiration date is not set
@@ -96,28 +127,17 @@ public class MembershipActivity extends BaseActivity<ActivityMembershipBinding, 
             Date expirationDate;
             try {
                 expirationDate = parser.parse(authentication.getAccount().getExpire());
-                long current = System.currentTimeMillis();
-                long expiration = expirationDate.getTime();
-                if (current <= expiration) {
+                if (authentication.getAccount().isSubscriptionExpired()) {
+                    showSubscriptionExpired(getString(R.string.expired));
+                } else {
                     binding.expireDate.setText(format.format(expirationDate));
                     binding.expireDate.setTextColor(getResources().getColor(getColorTextActive()));
-                } else {
-                    showSubscriptionExpired(getString(R.string.expired));
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
                 showSubscriptionExpired(getResources().getString(R.string.no_data));
             }
         }
-
-        // Set recycler view for payment history
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        binding.paymentHistory.setLayoutManager(layoutManager);
-        adapter = new ListRowAdapter(this, ListRowType.PAYMENT_HISTORY);
-        binding.paymentHistory.setAdapter(adapter);
-
-        // Get payment history from server
-        getPaymentHistory(1);
     }
 
     private void showSubscriptionExpired(String message) {
