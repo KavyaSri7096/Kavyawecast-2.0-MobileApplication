@@ -1,8 +1,14 @@
+## 2.12.1
+
+  **Bug fixes**
+
+  - [WC2-2373](https://wetekdev.atlassian.net/browse/WC2-2373) Highlighted item background bug fix
+
 ## 2.12.0
 
   **New features**
 
-  - [WC2-2362](https://wetekdev.atlassian.net/browse/WC2-WC2-2362) Subscription renewal message on settings
+  - [WC2-2362](https://wetekdev.atlassian.net/browse/WC2-2362) Subscription renewal message on settings
 
 ## 2.11.1
 
@@ -120,17 +126,22 @@
 
   **New features**
 
-  - [WC2-1806](https://wetekdev.atlassian.net/browse/WC2-1806)  Trending
-  - [WC2-1888](https://wetekdev.atlassian.net/browse/WC2-1888)  Localisation (English & Spanish)
+-   [WC2-1806](https://wetekdev.atlassian.net/browse/WC2-1806) Trending
+-   [WC2-1888](https://wetekdev.atlassian.net/browse/WC2-1888) 
+    Localisation (English & Spanish)
 
   **Bug fixes**
 
-  - [WC2-1757](https://wetekdev.atlassian.net/browse/WC2-1757)  Login with username and password
+-   [WC2-1757](https://wetekdev.atlassian.net/browse/WC2-1757) Login
+    with username and password
 
 ## 2.0.0
 
   **New features**
 
-  - [WC2-1729](https://wetekdev.atlassian.net/browse/WC2-1729)  Categories for Live Channels
-  - [WC2-1749](https://wetekdev.atlassian.net/browse/WC2-1749)  App Widget
-  - [WC2-1732](https://wetekdev.atlassian.net/browse/WC2-1732)  Continue Watching List
+-   [WC2-1729](https://wetekdev.atlassian.net/browse/WC2-1729) 
+    Categories for Live Channels
+-   [WC2-1749](https://wetekdev.atlassian.net/browse/WC2-1749) App
+    Widget
+-   [WC2-1732](https://wetekdev.atlassian.net/browse/WC2-1732) Continue
+    Watching List
