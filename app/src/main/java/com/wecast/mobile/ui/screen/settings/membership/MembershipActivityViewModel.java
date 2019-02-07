@@ -3,6 +3,7 @@ package com.wecast.mobile.ui.screen.settings.membership;
 import com.wecast.core.data.api.manager.AccountManager;
 import com.wecast.core.data.api.model.PagedData;
 import com.wecast.core.data.api.model.ResponseModel;
+import com.wecast.core.data.db.entities.Authentication;
 import com.wecast.core.data.db.entities.PaymentHistory;
 import com.wecast.mobile.ui.base.BaseViewModel;
 
@@ -20,6 +21,10 @@ public class MembershipActivityViewModel extends BaseViewModel<MembershipActivit
 
     MembershipActivityViewModel(AccountManager accountManager) {
         this.accountManager = accountManager;
+    }
+
+    Observable<ResponseModel<Authentication>> checkSubscription() {
+        return accountManager.checkSubscription();
     }
 
     Observable<ResponseModel<PagedData<PaymentHistory>>> getPaymentHistory(int page) {
