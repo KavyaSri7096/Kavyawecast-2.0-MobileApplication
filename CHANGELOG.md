@@ -1,3 +1,9 @@
+## 2.12.0
+
+  **New features**
+
+  - [WC2-2362](https://wetekdev.atlassian.net/browse/WC2-WC2-2362) Subscription renewal message on settings
+
 ## 2.11.1
 
   **Bug fixes**
