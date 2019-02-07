@@ -3,9 +3,11 @@ package com.wecast.mobile.ui.screen.settings.buffer;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SeekBar;
 
 import com.wecast.core.data.db.pref.PreferenceManager;
+import com.wecast.core.data.repository.ComposerRepository;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityBufferBinding;
@@ -21,13 +23,14 @@ import javax.inject.Inject;
 public class BufferActivity extends BaseActivity<ActivityBufferBinding, BufferActivityViewModel> implements BufferActivityNavigator {
 
     @Inject
+    ComposerRepository composerRepository;
+    @Inject
     PreferenceManager preferenceManager;
     @Inject
     BufferActivityViewModel viewModel;
 
     private ActivityBufferBinding binding;
     private final int offset = 10;
-
 
     public static void open(Context context) {
         Intent intent = new Intent(context, BufferActivity.class);
@@ -71,17 +74,27 @@ public class BufferActivity extends BaseActivity<ActivityBufferBinding, BufferAc
         binding.toolbar.title.setText(getString(R.string.buffer_title));
 
         // Set current live tv buffer
-        int liveTVBuffer = preferenceManager.getLiveTVBuffer();
-        if (liveTVBuffer >= 0) {
-            binding.bufferLiveValue.setText(String.format(getString(R.string.buffer_size_live_tv), liveTVBuffer));
-            binding.bufferLive.setProgress(liveTVBuffer);
+        if (composerRepository.getAppModules().hasChannels()) {
+            int liveTVBuffer = preferenceManager.getLiveTVBuffer();
+            if (liveTVBuffer >= 0) {
+                binding.bufferLiveValue.setText(String.format(getString(R.string.buffer_size_live_tv), liveTVBuffer));
+                binding.bufferLive.setProgress(liveTVBuffer);
+            }
+        } else {
+            binding.bufferLiveValue.setVisibility(View.GONE);
+            binding.bufferLive.setVisibility(View.GONE);
         }
 
         // Set current movies buffer
-        int moviesBuffer = preferenceManager.getVodBuffer();
-        if (moviesBuffer >= 0) {
-            binding.bufferVodValue.setText(String.format(getString(R.string.buffer_size_movies), moviesBuffer));
-            binding.bufferVod.setProgress(moviesBuffer);
+        if (composerRepository.getAppModules().hasVod()) {
+            int moviesBuffer = preferenceManager.getVodBuffer();
+            if (moviesBuffer >= 0) {
+                binding.bufferVodValue.setText(String.format(getString(R.string.buffer_size_movies), moviesBuffer));
+                binding.bufferVod.setProgress(moviesBuffer);
+            }
+        } else {
+            binding.bufferVodValue.setVisibility(View.GONE);
+            binding.bufferVod.setVisibility(View.GONE);
         }
     }
 

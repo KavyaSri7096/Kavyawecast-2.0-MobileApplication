@@ -77,3 +77,18 @@ lint/tmp/
 # lint/reports/
 
 .DS_Store
+
+app/src/brasilnet/key/brasilnet_keystore
+app/src/brasilnet/key/keystore_properties
+app/src/cluxter/key/cluxter_keystore
+app/src/cluxter/key/keystore_properties
+app/src/demo/key/demo_keystore
+app/src/demo/key/keystore_properties
+app/src/dev/key/keystore_properties
+app/src/dev/key/wecast_keystore
+app/src/intv/key/intv_keystore
+app/src/intv/key/keystore_properties
+app/src/nettv/key/keystore_properties
+app/src/nettv/key/nettv_keystore
+app/src/trendtv/key/keystore_properties
+app/src/trendtv/key/trendtv_keystore

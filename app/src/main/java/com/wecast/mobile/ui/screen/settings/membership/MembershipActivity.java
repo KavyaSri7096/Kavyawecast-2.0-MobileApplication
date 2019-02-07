@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 
 import com.wecast.core.data.db.entities.Authentication;
 import com.wecast.core.data.db.entities.PaymentHistory;
@@ -90,23 +91,23 @@ public class MembershipActivity extends BaseActivity<ActivityMembershipBinding, 
         // Subscription expiration date is not set
         if (authentication.getAccount().getExpire() == null) {
             binding.expireDate.setText(getString(R.string.unlimited));
-            return;
-        }
-        // Check if subscription is valid
-        Date expirationDate;
-        try {
-            expirationDate = parser.parse(authentication.getAccount().getExpire());
-            long current = System.currentTimeMillis();
-            long expiration = expirationDate.getTime();
-            if (current <= expiration) {
-                binding.expireDate.setText(format.format(expirationDate));
-                binding.expireDate.setTextColor(getResources().getColor(getColorTextActive()));
-            } else {
-                showSubscriptionExpired(getString(R.string.expired));
+        } else {
+            // Check if subscription is valid
+            Date expirationDate;
+            try {
+                expirationDate = parser.parse(authentication.getAccount().getExpire());
+                long current = System.currentTimeMillis();
+                long expiration = expirationDate.getTime();
+                if (current <= expiration) {
+                    binding.expireDate.setText(format.format(expirationDate));
+                    binding.expireDate.setTextColor(getResources().getColor(getColorTextActive()));
+                } else {
+                    showSubscriptionExpired(getString(R.string.expired));
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                showSubscriptionExpired(getResources().getString(R.string.no_data));
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
-            showSubscriptionExpired(getResources().getString(R.string.no_data));
         }
 
         // Set recycler view for payment history
@@ -136,10 +137,6 @@ public class MembershipActivity extends BaseActivity<ActivityMembershipBinding, 
         binding.toolbar.back.setOnClickListener(v -> onBackPressed());
     }
 
-    private void renewSubscription() {
-
-    }
-
     private void getPaymentHistory(int page) {
         Disposable disposable = viewModel.getPaymentHistory(page)
                 .subscribeOn(Schedulers.newThread())
@@ -152,7 +149,6 @@ public class MembershipActivity extends BaseActivity<ActivityMembershipBinding, 
                             refreshToken(() -> getPaymentHistory(page));
                         } else if (response.isSubscriptionExpired()) {
                             showData(response.getData().getItems());
-                            snackBar(R.string.error_subscription_expired);
                         }
                     }
                 }, this::toast);
@@ -161,6 +157,7 @@ public class MembershipActivity extends BaseActivity<ActivityMembershipBinding, 
 
     private void showData(List<PaymentHistory> data) {
         if (data == null || data.size() == 0) {
+            binding.paymentHistoryTitle.setVisibility(View.GONE);
             return;
         }
 
