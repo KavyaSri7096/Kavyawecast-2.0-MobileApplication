@@ -6,6 +6,7 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,6 +33,7 @@ import javax.inject.Inject;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
@@ -46,8 +48,6 @@ public class NavigationActivity extends BaseActivity<ActivityNavigationBinding, 
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentInjector;
-    @Inject
-    PermissionUtils permissionUtils;
     @Inject
     NavigationActivityViewModel viewModel;
     @Inject
@@ -139,19 +139,12 @@ public class NavigationActivity extends BaseActivity<ActivityNavigationBinding, 
             }
         }
 
-        // Request for READ/WRITE calendar permission
-        String[] permissions = new String[]{Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR};
-        permissionUtils.request(this, permissions, 1, new PermissionUtils.PermissionListener() {
-            @Override
-            public void onAllowed() {
-                startRemindersSyncService();
-            }
-
-            @Override
-            public void onDeclined() {
-                toast(R.string.message_calendar_permission_denied);
-            }
-        });
+        // Check for READ/WRITE calendar permission
+        boolean isReadGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) == PackageManager.PERMISSION_GRANTED;
+        boolean isWriteGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_GRANTED;
+        if (isReadGranted && isWriteGranted) {
+            startRemindersSyncService();
+        }
     }
 
     private TabLayout.Tab buildTab(int title) {
@@ -215,12 +208,6 @@ public class NavigationActivity extends BaseActivity<ActivityNavigationBinding, 
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        permissionUtils.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     private void startRemindersSyncService() {

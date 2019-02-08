@@ -434,9 +434,17 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
     protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 104 && resultCode == Activity.RESULT_OK) {
-            if (data != null) {
-                String url = data.getStringExtra("OVERRIDE_URL");
-                buildParams(url);
+            if (data != null && data.getExtras() != null) {
+                Bundle bundle = data.getExtras();
+                if (bundle.containsKey("OVERRIDE_URL")) {
+                    String url = data.getStringExtra("OVERRIDE_URL");
+                    buildParams(url);
+                } else if (bundle.containsKey("REFRESH_PROGRAMMES")) {
+                    boolean shouldRefreshProgrammes = bundle.getBoolean("REFRESH_PROGRAMMES");
+                    if (shouldRefreshProgrammes) {
+                        setupProgrammes();
+                    }
+                }
             }
         }
     }

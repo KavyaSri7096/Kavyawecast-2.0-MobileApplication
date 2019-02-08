@@ -35,7 +35,7 @@ public class ProgrammeDetailsActivityViewModel extends BaseViewModel<ProgrammeDe
         this.reminderDao = reminderDao;
     }
 
-    TVGuideProgramme getProgrammeByID(String id) {
+    TVGuideProgramme getProgrammeById(String id) {
         return tvGuideRepository.getProgrammeById(id);
     }
 

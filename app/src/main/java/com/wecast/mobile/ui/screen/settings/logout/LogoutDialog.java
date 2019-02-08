@@ -1,9 +1,12 @@
 package com.wecast.mobile.ui.screen.settings.logout;
 
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import com.wecast.core.data.api.manager.AccountManager;
 import com.wecast.core.data.db.DatabaseManager;
 import com.wecast.core.data.db.pref.PreferenceManager;
 import com.wecast.core.data.repository.ComposerRepository;
+import com.wecast.core.utils.ReminderUtils;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.DialogLogOutBinding;
 import com.wecast.mobile.ui.base.BaseDialog;
@@ -46,6 +50,8 @@ public class LogoutDialog extends BaseDialog {
     PreferenceManager preferenceManager;
     @Inject
     DatabaseManager databaseManager;
+    @Inject
+    ReminderUtils reminderUtils;
 
     private DialogLogOutBinding binding;
 
@@ -108,6 +114,7 @@ public class LogoutDialog extends BaseDialog {
         socketManager.disconnect();
         preferenceManager.clear();
         databaseManager.clear();
+        reminderUtils.removeCalendar();
         // Go to login screen
         openActivityOnTokenExpire();
         dismiss();
