@@ -16,6 +16,7 @@ import com.wecast.core.data.db.entities.Channel;
 import com.wecast.core.data.db.entities.ChannelTimeShiftStream;
 import com.wecast.core.data.db.entities.TVGuideProgramme;
 import com.wecast.core.data.db.entities.TVGuideReminder;
+import com.wecast.core.logger.Logger;
 import com.wecast.core.utils.ReminderUtils;
 import com.wecast.core.utils.TVGuideUtils;
 import com.wecast.mobile.BR;
@@ -51,11 +52,12 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
     private int channelId;
     private Channel channel;
     private TVGuideProgramme programme;
+    private boolean shouldRefreshList = false;
 
     public static void open(AppCompatActivity activity, Channel channel, TVGuideProgramme programme) {
         Intent intent = new Intent(activity, ProgrammeDetailsActivity.class);
         intent.putExtra("CHANNEL_ID", channel.getId());
-        intent.putExtra("PROGRAMME_ID", programme.getId());
+        intent.putExtra("PROGRAMME_ID", programme.getStringId());
         activity.startActivityForResult(intent, 104);
     }
 
@@ -96,7 +98,7 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
         if (bundle != null) {
             channelId = bundle.getInt("CHANNEL_ID");
             String programmeId = bundle.getString("PROGRAMME_ID");
-            programme = viewModel.getProgrammeByID(programmeId);
+            programme = viewModel.getProgrammeById(programmeId);
         }
 
         // Get channel details by id
@@ -174,8 +176,8 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
         }
 
         // Set reminder add/remove icon
-        long eventId = reminderUtils.getEventId(programme);
-        if (eventId != -1) {
+        boolean hasReminder = reminderUtils.isEventInCalendar(programme.getStart());
+        if (hasReminder) {
             Drawable icon = getDrawable(R.drawable.ic_reminder_on);
             binding.controls.reminder.setCompoundDrawablesWithIntrinsicBounds(null, icon, null, null);
         } else {
@@ -287,9 +289,9 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
     }
 
     private void checkIfEventExist() {
-        long eventId = reminderUtils.getEventId(programme);
-        if (eventId != -1) {
-            removeReminder(eventId);
+        boolean hasReminder = reminderUtils.isEventInCalendar(programme.getStart());
+        if (hasReminder) {
+            removeReminder(programme.getStart());
         } else {
             addReminder();
         }
@@ -306,6 +308,8 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
                         viewModel.addReminderToDatabase(response.getData());
                         reminderUtils.createEvent(programme);
                         updateReminderIcon(true);
+                        // Refresh programmes list in channel details activity
+                        shouldRefreshList = true;
                     } else {
                         toast(response.getMessage());
                     }
@@ -328,6 +332,8 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
                         viewModel.removeReminderFromDatabase(reminder.getId());
                         reminderUtils.removeReminder(eventId, reminder);
                         updateReminderIcon(false);
+                        // Refresh programmes list in channel details activity
+                        shouldRefreshList = true;
                     } else {
                         toast(response.getMessage());
                     }
@@ -336,8 +342,8 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
     }
 
     private void updateReminder() {
-        long eventId = reminderUtils.getEventId(programme);
-        if (eventId != -1) {
+        boolean hasReminder = reminderUtils.isEventInCalendar(programme.getStart());
+        if (hasReminder) {
             RadialTimePickerDialogFragment dialog = new RadialTimePickerDialogFragment()
                     .setOnTimeSetListener((dialog1, hourOfDay, minute) -> {
                         int minutes = (hourOfDay * 60) + minute;
@@ -367,9 +373,10 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
                         refreshToken(() -> editReminder(minutes));
                     } else if (response.isSuccessful()) {
                         viewModel.addReminderToDatabase(response.getData());
-                        long eventId = reminderUtils.getEventId(programme);
-                        reminderUtils.updateReminder(eventId, minutes);
+                        reminderUtils.updateReminder(programme.getStart(), minutes);
                         toast(R.string.message_reminder_updated);
+                        // Refresh programmes list in channel details activity
+                        shouldRefreshList = true;
                     } else {
                         toast(response.getMessage());
                     }
@@ -423,5 +430,13 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
                     toast(throwable.getMessage());
                 });
         subscribe(disposable);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("REFRESH_PROGRAMMES", shouldRefreshList);
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
     }
 }

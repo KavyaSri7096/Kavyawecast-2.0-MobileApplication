@@ -7,7 +7,7 @@ android {
 
         dev {
             dimension "app"
-            applicationIdSuffix ".admin"
+            applicationIdSuffix ".dev"
             // Variables
             buildConfigField "String", "API_URL", "\"http://api2.wecast.tv\""
         }

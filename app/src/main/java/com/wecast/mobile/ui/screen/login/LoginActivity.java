@@ -1,5 +1,6 @@
 package com.wecast.mobile.ui.screen.login;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,8 +13,11 @@ import com.wecast.core.data.repository.ComposerRepository;
 import com.wecast.mobile.databinding.ActivityLoginBinding;
 import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
+import com.wecast.mobile.utils.PermissionUtils;
 
 import javax.inject.Inject;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by ageech@live.com
@@ -25,6 +29,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginActiv
     LoginActivityViewModel viewModel;
     @Inject
     ComposerRepository composerRepository;
+    @Inject
+    PermissionUtils permissionUtils;
 
     private ActivityLoginBinding binding;
 
@@ -65,6 +71,20 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginActiv
         setStatusTransparent(this);
         binding = getViewDataBinding();
         viewModel.setNavigator(this);
+
+        // Request for READ/WRITE calendar permission
+        String[] permissions = new String[]{Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR};
+        permissionUtils.request(this, permissions, 1, new PermissionUtils.PermissionListener() {
+            @Override
+            public void onAllowed() {
+                // Do nothing.
+            }
+
+            @Override
+            public void onDeclined() {
+                toast(R.string.message_calendar_permission_denied);
+            }
+        });
     }
 
     private void setupListeners() {
@@ -111,6 +131,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginActiv
     @Override
     public void onError(String message) {
         toast(message);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        permissionUtils.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
