@@ -8,9 +8,11 @@ import android.os.Looper;
 
 import com.wecast.core.analytics.SocketManager;
 import com.wecast.core.data.api.ApiStatus;
+import com.wecast.core.data.db.dao.ReminderDao;
 import com.wecast.core.data.db.entities.TVGuideProgramme;
 import com.wecast.core.data.db.entities.TVGuideReminder;
 import com.wecast.core.data.repository.ComposerRepository;
+import com.wecast.core.logger.Logger;
 import com.wecast.core.utils.ReminderUtils;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
@@ -37,6 +39,8 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashAc
     SocketManager socketManager;
     @Inject
     ReminderUtils reminderUtils;
+    @Inject
+    ReminderDao reminderDao;
     @Inject
     ComposerRepository composerRepository;
     @Inject
@@ -110,6 +114,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashAc
             return;
         }
 
+        reminderDao.clear();
         reminderUtils.createCalendar();
         for (TVGuideReminder reminder : data) {
             TVGuideProgramme programme = new TVGuideProgramme();
@@ -119,9 +124,10 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashAc
             programme.setDesc(reminder.getEpgProgramme().getDescription());
             programme.setStart(reminder.getEpgProgramme().getStartTimestamp());
             programme.setStop(reminder.getEpgProgramme().getStopTimestamp());
+            reminderDao.insert(reminder);
             // Add event to calendar
-            long eventId = reminderUtils.getEventId(programme);
-            if (eventId == -1) {
+            boolean hasReminder = reminderUtils.isEventInCalendar(programme.getStart());
+            if (!hasReminder) {
                 reminderUtils.createEvent(programme);
             }
         }
