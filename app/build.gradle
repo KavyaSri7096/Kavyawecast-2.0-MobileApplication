@@ -34,7 +34,6 @@ android {
     }
 
     signingConfigs {
-
         release {
             applicationVariants.all { variant ->
                 def keystorePropertiesFile = rootProject.file("app/src/${variant.productFlavors[0].name}/key/keystore_properties")
@@ -51,6 +50,7 @@ android {
 
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
