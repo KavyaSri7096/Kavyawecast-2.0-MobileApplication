@@ -6,14 +6,4 @@
         <color android:color="#0C0C0C" />
     </item>
 
-    <item
-        android:drawable="@drawable/ic_tv_splash"
-        android:gravity="center" />
-
-    <item
-        android:width="@dimen/splash_logo_width"
-        android:height="@dimen/splash_logo_height"
-        android:drawable="@drawable/app_logo"
-        android:gravity="center" />
-
 </layer-list>
