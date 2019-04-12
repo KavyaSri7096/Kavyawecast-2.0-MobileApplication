@@ -9,7 +9,7 @@ android {
             dimension "app"
             applicationIdSuffix ".dev"
             // Variables
-            buildConfigField "String", "API_URL", "\"http://api2.wecast.tv\""
+            buildConfigField "String", "API_URL", "\"http://api.fibernet.com.py\""
         }
 
         demo {
