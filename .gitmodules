@@ -1,7 +1,6 @@
 [submodule "wecast-core"]
 	path = wecast-core
-	url = git@bitbucket.org:harunagic/wecast-2.0-core.git
+	url = git@bitbucket.org:trle/wecast-2.0-core.git
 [submodule "wecast-player"]
 	path = wecast-player
-	url = git@bitbucket.org:harunagic/wecast-2.0-player.git
-
+	url = git@bitbucket.org:trle/wecast-2.0-player.git
