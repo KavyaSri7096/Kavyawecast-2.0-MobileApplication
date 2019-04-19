@@ -1,9 +1,14 @@
+## 2.13.0
+
+  **New features**
+
+  - [WC2-2686](https://wetekdev.atlassian.net/browse/WC2-2686) Widevine DRM
+
 ## 2.12.2
 
   **Bug fixes**
 
   - [WC2-2178](https://wetekdev.atlassian.net/browse/WC2-2178) Update reminder activation time bug fix
-
 
 ## 2.12.1
 

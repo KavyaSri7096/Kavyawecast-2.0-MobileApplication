@@ -53,5 +53,12 @@ android {
             // Variables
             buildConfigField "String", "API_URL", "\"https://api.cluxter.com.br\""
         }
+
+        fibernet {
+            dimension "app"
+            applicationIdSuffix ".fibernet"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api.wetek.streamer.fibernet-tv.com\""
+        }
     }
 }

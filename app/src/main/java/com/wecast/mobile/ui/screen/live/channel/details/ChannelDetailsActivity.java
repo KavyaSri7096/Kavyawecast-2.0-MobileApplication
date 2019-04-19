@@ -318,7 +318,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
      * Get channel position in list
      */
     private void getChannelPosition(Channel channel) {
-        if (channelList == null || channelList.size() == 0) {
+        if (channel == null || channelList == null || channelList.size() == 0) {
             return;
         }
 
@@ -457,6 +457,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         if (channel != null && channel.getPrimaryUrl() != null) {
             WePlayerParams params = new WePlayerParams.Builder()
                     .setUrl(channel.getPrimaryUrl())
+                    .setDrmUrl(channel.getPrimaryDrmLicenseUrl())
                     .setBackupUrl(channel.isBackupEnabled() ? channel.getBackupUrl() : null)
                     .setMaxBitrate(-1)
                     .setBuffer(preferenceManager.getLiveTVBuffer())
@@ -469,6 +470,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         if (url != null && url.length() > 0) {
             WePlayerParams params = new WePlayerParams.Builder()
                     .setUrl(url)
+                    .setDrmUrl(channel.getPrimaryDrmLicenseUrl())
                     .setBackupUrl(null)
                     .setMaxBitrate(-1)
                     .setBuffer(preferenceManager.getLiveTVBuffer())

@@ -181,6 +181,7 @@ public class MembershipActivity extends BaseActivity<ActivityMembershipBinding, 
             return;
         }
 
+        binding.paymentHistoryTitle.setVisibility(View.VISIBLE);
         adapter.addAll(data);
     }
 

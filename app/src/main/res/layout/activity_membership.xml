@@ -112,7 +112,8 @@
                     android:layout_marginTop="@dimen/standard"
                     android:layout_marginBottom="@dimen/standard_half"
                     android:text="@string/payment_history"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/paymentHistory"

@@ -31,7 +31,7 @@ public class ChannelDetailsActivityViewModel extends BaseViewModel<ChannelDetail
     }
 
     Observable<ResponseWrapper<List<Channel>>> getAll() {
-        return channelRepository.getAll();
+        return channelRepository.getAll(false, 1);
     }
 
     Observable<ResponseModel<Favorite>> addToFavorites(int id) {

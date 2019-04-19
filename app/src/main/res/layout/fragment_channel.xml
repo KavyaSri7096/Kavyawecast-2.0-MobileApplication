@@ -41,7 +41,9 @@
                 <com.wecast.mobile.ui.widget.banner.BannerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/standard"
                     android:layout_marginTop="@dimen/standard"
+                    android:layout_marginEnd="@dimen/standard"
                     app:box_position="live_tv_box" />
 
                 <com.wecast.mobile.ui.screen.live.channel.ChannelListRow
