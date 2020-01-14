@@ -60,5 +60,13 @@ android {
             // Variables
             buildConfigField "String", "API_URL", "\"https://api.wetek.streamer.fibernet-tv.com\""
         }
+
+        copaco {
+            dimension "app"
+            applicationIdSuffix ".copaco"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api.wetek.com.py\""
+        }
+
     }
 }
