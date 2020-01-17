@@ -58,7 +58,8 @@ android {
             dimension "app"
             applicationIdSuffix ".fibernet"
             // Variables
-            buildConfigField "String", "API_URL", "\"https://api.wetek.streamer.fibernet-tv.com\""
+            buildConfigField "String", "API_URL", "\"https://api.fibernet-tv.com\""
+//            buildConfigField "String", "API_URL", "\"https://api.wetek.streamer.fibernet-tv.com\""
         }
     }
 }
