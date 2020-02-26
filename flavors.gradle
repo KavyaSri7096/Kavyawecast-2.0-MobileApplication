@@ -16,7 +16,8 @@ android {
             dimension "app"
             applicationIdSuffix ".demo"
             // Variables
-            buildConfigField "String", "API_URL", "\"https://api0.wecastdemo.com\""
+//            buildConfigField "String", "API_URL", "\"https://api0.wecastdemo.com\""
+            buildConfigField "String", "API_URL", "\"https://api.wecastdemo.com\""
         }
 
         nettv {
@@ -67,6 +68,13 @@ android {
             applicationIdSuffix ".copaco"
             // Variables
             buildConfigField "String", "API_URL", "\"https://api.wetek.com.py\""
+        }
+
+        nelson {
+            dimension "app"
+            applicationIdSuffix ".nelson"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api.www.scouttv.tv\""
         }
 
     }
