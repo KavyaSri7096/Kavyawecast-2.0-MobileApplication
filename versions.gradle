@@ -31,7 +31,7 @@ ext.versions = [
         horizontalPickerVersion   : '1.1.1',
         betterPickersVersion      : '3.1.0',
         numberPicker              : '2.4.7',
-        exoPlayerVersion          : '2.6.1',
+        exoPlayerVersion          : '2.7.3',
         googleAdsVersion          : '17.1.1',
         hockeyAppVersion          : "5.1.1",
         leakcanaryVersion         : '1.6.3',

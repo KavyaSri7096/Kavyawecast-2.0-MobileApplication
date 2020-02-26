@@ -36,14 +36,14 @@ android {
     signingConfigs {
         release {
             applicationVariants.all { variant ->
-                def keystorePropertiesFile = rootProject.file("app/src/${variant.productFlavors[0].name}/key/keystore_properties")
-                def keystoreProperties = new Properties()
-                keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-                // Read key store info from file
-                keyAlias keystoreProperties['keyAlias']
-                keyPassword keystoreProperties['keyPassword']
-                storeFile file(keystoreProperties['storeFile'])
-                storePassword keystoreProperties['storePassword']
+//                def keystorePropertiesFile = rootProject.file("app/src/${variant.productFlavors[0].name}/key/keystore_properties")
+//                def keystoreProperties = new Properties()
+//                keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+//                // Read key store info from file
+//                keyAlias keystoreProperties['keyAlias']
+//                keyPassword keystoreProperties['keyPassword']
+//                storeFile file(keystoreProperties['storeFile'])
+//                storePassword keystoreProperties['storePassword']
             }
         }
     }
