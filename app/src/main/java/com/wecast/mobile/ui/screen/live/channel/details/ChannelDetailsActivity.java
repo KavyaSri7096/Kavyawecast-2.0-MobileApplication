@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -73,6 +74,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
     private WeExoPlayer weExoPlayer;
     private DebugTextViewHelper debugViewHelper;
     private long bufferTime = 0;
+    private boolean tryBackupUrl = true;
 
     public static void open(Context context, Channel channel) {
         Intent intent = new Intent(context, ChannelDetailsActivity.class);
@@ -206,6 +208,8 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         config.orientation = getResources().getConfiguration().orientation;
         onConfigurationChanged(config);
 
+        Log.e("m3h", "Channel " + channel.getPrimaryUrl() + "\n Channel backup " + channel.getBackupUrl());
+
         // Initialize player
         weExoPlayer = (WeExoPlayer) WePlayerFactory.get(WePlayerType.EXO_PLAYER, this, binding.playerView.simpleExoView);
         if (weExoPlayer != null) {
@@ -214,6 +218,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
             weExoPlayer.setUseController(false);
             buildParams();
         }
+        tryBackupUrl= true;
     }
 
     private void getAll() {
@@ -471,7 +476,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
             WePlayerParams params = new WePlayerParams.Builder()
                     .setUrl(url)
                     .setDrmUrl(channel.getPrimaryDrmLicenseUrl())
-                    .setBackupUrl(null)
+                    .setBackupUrl(channel.isBackupEnabled() ? channel.getBackupUrl() : null)
                     .setMaxBitrate(-1)
                     .setBuffer(preferenceManager.getLiveTVBuffer())
                     .build();
@@ -554,8 +559,8 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
             case Player.STATE_IDLE:
                 break;
             case Player.STATE_READY:
-                binding.playerView.error.root.setVisibility(View.GONE);
-                binding.playerView.loader.setVisibility(View.GONE);
+                    binding.playerView.error.root.setVisibility(View.GONE);
+                    binding.playerView.loader.setVisibility(View.GONE);
                 trackSocketBuffer();
                 break;
         }
@@ -564,10 +569,16 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
     @Override
     public void onError(ExoPlaybackException exception) {
         exception.printStackTrace();
-        trackSocketError(exception.getLocalizedMessage());
+
         // Show playback error message
-        binding.playerView.error.root.setVisibility(View.VISIBLE);
-        binding.playerView.loader.setVisibility(View.GONE);
+        if(tryBackupUrl){
+            trackSocketError(exception.getLocalizedMessage());
+            weExoPlayer.play(channel.getBackupUrl());
+            tryBackupUrl = false;
+        }else {
+            binding.playerView.error.root.setVisibility(View.VISIBLE);
+            binding.playerView.loader.setVisibility(View.GONE);
+        }
     }
 
     /**
