@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
-apply from: '../flavors.gradle'
+//apply from: '../flavors.gradle'
 apply from: '../libraries.gradle'
+apply from: '../versions.gradle'
+
 
 android {
 
@@ -34,26 +36,179 @@ android {
     }
 
     signingConfigs {
-        release {
-            applicationVariants.all { variant ->
-//                def keystorePropertiesFile = rootProject.file("app/src/${variant.productFlavors[0].name}/key/keystore_properties")
-//                def keystoreProperties = new Properties()
-//                keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-//                // Read key store info from file
-//                keyAlias keystoreProperties['keyAlias']
-//                keyPassword keystoreProperties['keyPassword']
-//                storeFile file(keystoreProperties['storeFile'])
-//                storePassword keystoreProperties['storePassword']
-            }
+
+        dev {
+            keyAlias 'keyAlias'
+            storeFile file('src/dev/key/keystore_properties.jks')
+            keyPassword 'keyPassword'
+            storePassword 'storepassword'
+        }
+
+        demo0 {
+            keyAlias 'keyAlias'
+            storeFile file('src/demo0/key/keystore_properties')
+            keyPassword 'keyPassword'
+            storePassword 'storepassword'
+        }
+
+        nettv {
+            keyAlias 'keyAlias'
+            storeFile file('src/nettv/key/keystore_properties')
+            keyPassword 'keyPassword'
+            storePassword 'storepassword'
+        }
+
+        brasilnet {
+            keyAlias 'keyAlias'
+            storeFile file('src/brasilnet/key/keystore_properties')
+            keyPassword 'keyPassword'
+            storePassword 'storepassword'
+        }
+
+        intv {
+            keyAlias 'keyAlias'
+            storeFile file('src/intv/key/keystore_properties')
+            keyPassword 'keyPassword'
+            storePassword 'storepassword'
+        }
+
+        trendtv {
+            keyAlias 'keyAlias'
+            storeFile file('src/trendtv/key/keystore_properties')
+            keyPassword 'keyPassword'
+            storePassword 'storepassword'
+        }
+
+        cluxter {
+            keyAlias 'keyAlias'
+            storeFile file('src/cluxter/key/keystore_properties')
+            keyPassword 'keyPassword'
+            storePassword 'storepassword'
+        }
+
+        fibernet {
+            keyAlias 'keyAlias'
+            storeFile file('src/fibernet/key/fibernet_keystore')
+            keyPassword 'keyPassword'
+            storePassword 'storepassword'
+        }
+
+        copaco {
+            keyAlias 'keyAlias'
+            storeFile file('src/copaco/key/keystore_properties')
+            keyPassword 'keyPassword'
+            storePassword 'storepassword'
+        }
+
+        nelson {
+            keyAlias 'keyAlias'
+            storeFile file('src/nelson/key/keystore_properties.jks')
+            keyPassword 'keyPassword'
+            storePassword 'storepassword'
         }
     }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+//            shrinkResources true
             minifyEnabled false
+            debuggable false
+            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            signingConfig null
+            versionNameSuffix ".debug"
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+        }
+    }
+
+    flavorDimensions "app"
+    productFlavors {
+        dev {
+            dimension "app"
+            applicationIdSuffix ".dev"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api2.wecast.tv\""
+            signingConfig signingConfigs.dev
+        }
+
+        demo0 {
+            dimension "app"
+            applicationIdSuffix ".demo"
+            // Variables
+//            buildConfigField "String", "API_URL", "\"https://api0.wecastdemo.com\""
+            buildConfigField "String", "API_URL", "\"https://api.wecastdemo.com\""
+            signingConfig signingConfigs.demo0
+        }
+
+        nettv {
+            dimension "app"
+            applicationIdSuffix ".nettv"
+            // Variables
+            buildConfigField "String", "API_URL", "\"http://api.mynet-tv.com/\""
+            signingConfig signingConfigs.nettv
+        }
+
+        brasilnet {
+            dimension "app"
+            applicationIdSuffix ".brasilnet"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api.brasilnet.net.br\""
+            signingConfig signingConfigs.brasilnet
+        }
+
+        intv {
+            dimension "app"
+            applicationIdSuffix ".intv"
+            // Variables
+            buildConfigField "String", "API_URL", "\"http://api.in.tv.br\""
+            signingConfig signingConfigs.intv
+        }
+
+        trendtv {
+            dimension "app"
+            applicationIdSuffix ".trendtv"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api0.wecastdemo.com\""
+            signingConfig signingConfigs.trendtv
+        }
+
+        cluxter {
+            dimension "app"
+            applicationIdSuffix ".cluxter"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api.cluxter.com.br\""
+            signingConfig signingConfigs.cluxter
+        }
+
+        fibernet {
+            dimension "app"
+            applicationIdSuffix ".fibernet"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api.fibernet-tv.com\""
+//            buildConfigField "String", "API_URL", "\"https://api.wetek.streamer.fibernet-tv.com\""
+            signingConfig signingConfigs.fibernet
+        }
+
+        copaco {
+            dimension "app"
+            applicationIdSuffix ".copaco"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api.wetek.com.py\""
+            signingConfig signingConfigs.copaco
+        }
+
+        nelson {
+            dimension "app"
+            applicationIdSuffix ".nelson"
+            // Variables
+            buildConfigField "String", "API_URL", "\"https://api.www.scouttv.tv\""
+            signingConfig signingConfigs.nelson
+        }
+
     }
 
     compileOptions {
