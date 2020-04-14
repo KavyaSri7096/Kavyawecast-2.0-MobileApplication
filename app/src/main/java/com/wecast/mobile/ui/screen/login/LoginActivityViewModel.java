@@ -1,5 +1,7 @@
 package com.wecast.mobile.ui.screen.login;
 
+import android.util.Log;
+
 import com.wecast.core.Constants;
 import com.wecast.core.data.api.manager.AccountManager;
 import com.wecast.core.data.api.model.ResponseModel;
