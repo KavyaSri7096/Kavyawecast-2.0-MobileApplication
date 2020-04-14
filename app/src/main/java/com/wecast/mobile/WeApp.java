@@ -54,7 +54,6 @@ public class WeApp extends Application implements HasActivityInjector, HasSuppor
     private AppComponent appComponent;
     private static WeApp weApp;
 
-
     @Override
     public void onCreate() {
         super.onCreate();
