@@ -12,6 +12,33 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            android:orientation="horizontal">
+
+            <com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioView
+                android:id="@+id/audio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/standard"
+                android:src="@drawable/ic_audio" />
+
+            <com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesView
+                android:id="@+id/subtitles_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/standard"
+                android:src="@drawable/ic_subtitles" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="horizontal">
 

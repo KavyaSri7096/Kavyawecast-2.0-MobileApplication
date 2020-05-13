@@ -12,4 +12,8 @@ public interface VodPlayerOnTrackChangedListener {
     void onTrackDialogCreated(BaseDialog dialog);
 
     void onTrackChanged(WePlayerTrack track);
+
+    void openSubtitlesDialogBox();
+
+    void openAudioDialogBox();
 }

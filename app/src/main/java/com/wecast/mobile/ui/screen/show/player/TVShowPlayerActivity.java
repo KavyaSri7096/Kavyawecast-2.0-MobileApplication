@@ -22,7 +22,9 @@ import com.wecast.mobile.ui.base.BaseActivity;
 import com.wecast.mobile.ui.base.BaseDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerAspectRatioView;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioTrackDialog;
+import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioView;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerOnTrackChangedListener;
+import com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesView;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerTextTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerVideoTrackDialog;
 import com.wecast.player.WePlayerFactory;
@@ -57,6 +59,8 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
     private TVShow tvShow;
     private DebugTextViewHelper debugViewHelper;
     private WeExoPlayer weExoPlayer;
+    private VodPlayerTextTrackDialog subtitlesDialog;
+    private VodPlayerAudioTrackDialog audioDialog;
 
     public static void open(Context context, TVShow item) {
         Intent intent = new Intent(context, TVShowPlayerActivity.class);
@@ -129,9 +133,22 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
 
         // Set aspect ratio
         VodPlayerAspectRatioView aspectRatio = findViewById(R.id.aspectRatio);
+        VodPlayerSubtitlesView subtitlesButton = findViewById(R.id.subtitles_button);
+        VodPlayerAudioView audioButton = findViewById(R.id.audio_button);
+
+
         if (aspectRatio != null) {
             aspectRatio.setOnClickListener(v -> aspectRatio.changeAspectRatio(weExoPlayer));
         }
+
+        if (subtitlesButton != null) {
+            subtitlesButton.setOnClickListener(v -> subtitlesButton.openSubtitlesDialog(this));
+        }
+
+        if (audioButton != null) {
+            audioButton.setOnClickListener(v -> audioButton.openAudioDialog(this));
+        }
+
     }
 
     private void getById(int id) {
@@ -286,6 +303,44 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
         }
     }
 
+    @Override
+    public void openSubtitlesDialogBox() {
+        if(audioDialog != null){
+            audioDialog.dismiss();
+            audioDialog = null;
+        }
+
+        if(subtitlesDialog!= null) {
+            subtitlesDialog.dismiss();
+            subtitlesDialog = null;
+        }else{
+
+            subtitlesDialog = new VodPlayerTextTrackDialog();
+            subtitlesDialog.setTrackSelectedListener(this);
+            subtitlesDialog.show(getSupportFragmentManager(), VodPlayerTextTrackDialog.TAG);
+        }
+
+    }
+
+    @Override
+    public void openAudioDialogBox() {
+        if(subtitlesDialog != null){
+            subtitlesDialog.dismiss();
+            subtitlesDialog = null;
+        }
+
+
+        if(audioDialog!= null){
+            audioDialog.dismiss();
+            audioDialog = null;
+        }else{
+            audioDialog = new VodPlayerAudioTrackDialog();
+            audioDialog.setTrackSelectedListener(this);
+            audioDialog.show(getSupportFragmentManager(), VodPlayerAudioTrackDialog.TAG);
+
+        }
+    }
+
     private void playWithDifferentTrack(WePlayerTrack track) {
         weExoPlayer.dispose();
 
@@ -364,4 +419,5 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
         exception.printStackTrace();
         ScreenRouter.showVodPlayerError(this, this::play);
     }
+
 }

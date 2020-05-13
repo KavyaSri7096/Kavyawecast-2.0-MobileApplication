@@ -77,6 +77,8 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
     private Handler nextEpisodeHandler;
     private Runnable nextEpisodeRunnable = () -> nextEpisodeView.startCounter();
     private List<Vod> episodes;
+    private VodPlayerTextTrackDialog subtitlesDialog;
+    private VodPlayerAudioTrackDialog audioDialog;
 
     public static void open(Context context, Vod item, VodSourceProfile profile, int playAction, float seekTo) {
         Intent intent = new Intent(context, VodPlayerActivity.class);
@@ -158,8 +160,18 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
 
         // Set aspect ratio
         VodPlayerAspectRatioView aspectRatio = findViewById(R.id.aspectRatio);
+        VodPlayerSubtitlesView subtitlesButton = findViewById(R.id.subtitles_button);
+        VodPlayerAudioView audioButton = findViewById(R.id.audio_button);
+
         if (aspectRatio != null) {
             aspectRatio.setOnClickListener(v -> aspectRatio.changeAspectRatio(weExoPlayer));
+        }
+        if (subtitlesButton != null) {
+            subtitlesButton.setOnClickListener(v -> subtitlesButton.openSubtitlesDialog(this));
+        }
+
+        if (audioButton != null) {
+            audioButton.setOnClickListener(v -> audioButton.openAudioDialog(this));
         }
 
         // Set play next episode listeners
@@ -495,6 +507,8 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
     public void onTrackChanged(WePlayerTrack track) {
         weExoPlayer.getTrackSelector().changeTrack(track);
 
+        closeDialogBox();
+
         switch (track.getTrackType()) {
             case ExoPlayerTrackSelector.TRACK_TYPE_VIDEO:
                 preferenceManager.setLastVideoTrack(track.getName());
@@ -561,6 +575,33 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
             releaseDebugViewHelper();
         }
     }
+
+
+    public void closeDialogBox(){
+        closeAudioDialog();
+        closeSubtitlesDialog();
+    }
+
+    private void closeSubtitlesDialog(){
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> {
+            if (subtitlesDialog != null) {
+                subtitlesDialog.dismiss();
+            }
+        }, 1000);
+    }
+
+    private void closeAudioDialog(){
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> {
+            if (audioDialog != null) {
+                audioDialog.dismiss();
+            }
+        }, 1000);
+    }
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -657,5 +698,43 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
     private void trackSocketError(String message) {
         socketManager.sendPlayIssueData(false, true, 0, SocketManager.RECORD_MODEL_VOD, vod.getId(), vod.getType());
         socketManager.sendIncidentData(message, VodPlayerActivity.class.getName(), "onPlayerError", null, null);
+    }
+
+    @Override
+    public void openSubtitlesDialogBox() {
+        if(audioDialog != null){
+            audioDialog.dismiss();
+            audioDialog = null;
+        }
+
+        if(subtitlesDialog!= null) {
+            subtitlesDialog.dismiss();
+            subtitlesDialog = null;
+        }else{
+
+            subtitlesDialog = new VodPlayerTextTrackDialog();
+            subtitlesDialog.setTrackSelectedListener(this);
+            subtitlesDialog.show(getSupportFragmentManager(), VodPlayerTextTrackDialog.TAG);
+        }
+
+    }
+
+    @Override
+    public void openAudioDialogBox() {
+        if(subtitlesDialog != null){
+            subtitlesDialog.dismiss();
+            subtitlesDialog = null;
+        }
+
+
+        if(audioDialog!= null){
+            audioDialog.dismiss();
+            audioDialog = null;
+        }else{
+            audioDialog = new VodPlayerAudioTrackDialog();
+            audioDialog.setTrackSelectedListener(this);
+            audioDialog.show(getSupportFragmentManager(), VodPlayerAudioTrackDialog.TAG);
+
+        }
     }
 }

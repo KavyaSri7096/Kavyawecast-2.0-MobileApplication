@@ -1,23 +1,25 @@
 package com.wecast.mobile.ui.screen.vod.player;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.wecast.core.data.db.pref.PreferenceManager;
+import com.wecast.core.utils.ViewUtils;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.DialogTrackBinding;
 import com.wecast.mobile.ui.base.BaseDialog;
 import com.wecast.mobile.ui.common.adapter.SingleChoiceAdapter;
-import com.wecast.core.utils.ViewUtils;
 import com.wecast.player.data.model.WePlayerTrack;
 import com.wecast.player.data.player.exo.trackSelector.ExoPlayerTrackSelector;
 
@@ -39,7 +41,6 @@ public class VodPlayerTextTrackDialog extends BaseDialog implements SingleChoice
     private DialogTrackBinding binding;
     private ExoPlayerTrackSelector trackSelector;
     private VodPlayerOnTrackChangedListener trackSelectedListener;
-
     @Override
     public void onStart() {
         super.onStart();
