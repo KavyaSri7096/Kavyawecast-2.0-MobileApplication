@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             app:auto_show="false"
             app:controller_layout_id="@layout/component_vod_player_controls"
-            app:show_timeout="0" />
+            app:show_timeout="5000" />
 
         <LinearLayout
             android:layout_width="match_parent"

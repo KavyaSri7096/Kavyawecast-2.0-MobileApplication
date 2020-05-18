@@ -58,6 +58,25 @@
                 android:visibility="@{isFavorite ? View.VISIBLE : View.GONE, default=gone}"
                 app:srcCompat="@drawable/ic_star_filled_white" />
 
+            <com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioView
+                android:id="@+id/audio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/standard"
+                android:src="@drawable/ic_audio" />
+
+            <com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesView
+                android:id="@+id/subtitles_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/standard"
+                android:src="@drawable/ic_subtitles" />
+
+
         </LinearLayout>
 
         <LinearLayout

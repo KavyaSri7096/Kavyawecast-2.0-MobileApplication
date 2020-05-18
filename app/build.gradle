@@ -60,7 +60,7 @@ android {
 
         brasilnet {
             keyAlias 'keyAlias'
-            storeFile file('src/brasilnet/key/keystore_properties')
+            storeFile file('src/brasilnet/key/keystore_properties.jks')
             keyPassword 'keyPassword'
             storePassword 'storepassword'
         }
@@ -243,6 +243,8 @@ dependencies {
     annotationProcessor libraries.dagger.androidProcessor
     implementation libraries.dagger.androidSupport
 
+    implementation 'com.google.firebase:firebase-analytics:17.2.1'
+
     // Glide
     implementation libraries.glide.base
     annotationProcessor 'androidx.annotation:annotation:1.0.1'
@@ -257,3 +259,6 @@ dependencies {
         transitive = true
     }
 }
+
+apply plugin: 'com.google.gms.google-services'
+

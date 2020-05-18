@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -28,13 +30,21 @@ import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityChannelDetailsBinding;
 import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
+import com.wecast.mobile.ui.base.BaseDialog;
 import com.wecast.mobile.ui.common.dialog.ParentalPinDialog;
 import com.wecast.mobile.ui.screen.live.channel.details.progamme.ProgrammeFragment;
 import com.wecast.mobile.ui.screen.navigation.NavigationActivity;
+import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioTrackDialog;
+import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioView;
+import com.wecast.mobile.ui.screen.vod.player.VodPlayerOnTrackChangedListener;
+import com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesView;
+import com.wecast.mobile.ui.screen.vod.player.VodPlayerTextTrackDialog;
+import com.wecast.mobile.ui.screen.vod.player.VodPlayerVideoTrackDialog;
 import com.wecast.mobile.ui.widget.wecast.WeCastWidget;
 import com.wecast.player.WePlayerFactory;
 import com.wecast.player.WePlayerType;
 import com.wecast.player.data.model.WePlayerParams;
+import com.wecast.player.data.model.WePlayerTrack;
 import com.wecast.player.data.player.AbstractPlayer;
 import com.wecast.player.data.player.exo.WeExoPlayer;
 
@@ -54,7 +64,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsBinding, ChannelDetailsActivityViewModel> implements ChannelDetailsActivityNavigator,
-        AbstractPlayer.PlaybackStateListener, WeExoPlayer.WeCastExoPlayerErrorListener, View.OnTouchListener {
+        AbstractPlayer.PlaybackStateListener, WeExoPlayer.WeCastExoPlayerErrorListener, View.OnTouchListener, VodPlayerOnTrackChangedListener {
 
     @Inject
     PreferenceManager preferenceManager;
@@ -75,6 +85,8 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
     private DebugTextViewHelper debugViewHelper;
     private long bufferTime = 0;
     private boolean tryBackupUrl = true;
+    private VodPlayerTextTrackDialog subtitlesDialog;
+    private VodPlayerAudioTrackDialog audioDialog;
 
     public static void open(Context context, Channel channel) {
         Intent intent = new Intent(context, ChannelDetailsActivity.class);
@@ -146,6 +158,18 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         // Set add/remove favorite listeners
         binding.controls.addToFavorites.setOnClickListener(v -> addToFavorites());
         binding.controls.removeFromFavorites.setOnClickListener(v -> removeFromFavorites());
+        VodPlayerSubtitlesView subtitlesButton = findViewById(R.id.subtitles_button);
+        VodPlayerAudioView audioButton = findViewById(R.id.audio_button);
+
+
+        if (subtitlesButton != null) {
+            subtitlesButton.setOnClickListener(v -> subtitlesButton.openSubtitlesDialog(this));
+        }
+
+        if (audioButton != null) {
+            audioButton.setOnClickListener(v -> audioButton.openAudioDialog(this));
+        }
+
 
         // Set up/dow buttons listener
         binding.controls.up.setOnClickListener(view -> goNext());
@@ -207,8 +231,6 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         Configuration config = new Configuration();
         config.orientation = getResources().getConfiguration().orientation;
         onConfigurationChanged(config);
-
-        Log.e("m3h", "Channel " + channel.getPrimaryUrl() + "\n Channel backup " + channel.getBackupUrl());
 
         // Initialize player
         weExoPlayer = (WeExoPlayer) WePlayerFactory.get(WePlayerType.EXO_PLAYER, this, binding.playerView.simpleExoView);
@@ -608,5 +630,87 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
     private void trackSocketError(String message) {
         socketManager.sendPlayIssueData(false, true, 0, SocketManager.RECORD_MODEL_CHANNEL, channel.getId(), 0);
         socketManager.sendIncidentData(message, ChannelDetailsActivity.class.getName(), "onPlayerError", null, null);
+    }
+
+
+    @Override
+    public void onTrackDialogCreated(BaseDialog dialog) {
+        if (dialog instanceof VodPlayerVideoTrackDialog) {
+            VodPlayerVideoTrackDialog dialog1 = (VodPlayerVideoTrackDialog) dialog;
+            dialog1.setTrackSelector(weExoPlayer.getTrackSelector());
+        } else if (dialog instanceof VodPlayerAudioTrackDialog) {
+            VodPlayerAudioTrackDialog dialog1 = (VodPlayerAudioTrackDialog) dialog;
+            dialog1.setTrackSelector(weExoPlayer.getTrackSelector());
+        } else if (dialog instanceof VodPlayerTextTrackDialog) {
+            VodPlayerTextTrackDialog dialog1 = (VodPlayerTextTrackDialog) dialog;
+            dialog1.setTrackSelector(weExoPlayer.getTrackSelector());
+        }
+    }
+
+    @Override
+    public void onTrackChanged(WePlayerTrack track) {
+        closeDialogBox();
+    }
+
+    public void closeDialogBox(){
+        closeAudioDialog();
+        closeSubtitlesDialog();
+    }
+
+    private void closeSubtitlesDialog(){
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> {
+            if (subtitlesDialog != null) {
+                subtitlesDialog.dismiss();
+            }
+        }, 1000);
+    }
+
+    private void closeAudioDialog(){
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> {
+            if (audioDialog != null) {
+                audioDialog.dismiss();
+            }
+        }, 1000);
+    }
+
+
+    @Override
+    public void openSubtitlesDialogBox() {
+        if(audioDialog != null){
+            audioDialog.dismiss();
+            audioDialog = null;
+        }
+
+        if(subtitlesDialog!= null) {
+            subtitlesDialog.dismiss();
+            subtitlesDialog = null;
+        }else{
+
+            subtitlesDialog = new VodPlayerTextTrackDialog();
+            subtitlesDialog.setTrackSelectedListener(this);
+            subtitlesDialog.show(getSupportFragmentManager(), VodPlayerTextTrackDialog.TAG);
+        }
+
+    }
+
+    @Override
+    public void openAudioDialogBox() {
+        if(subtitlesDialog != null){
+            subtitlesDialog.dismiss();
+            subtitlesDialog = null;
+        }
+
+
+        if(audioDialog!= null){
+            audioDialog.dismiss();
+            audioDialog = null;
+        }else{
+            audioDialog = new VodPlayerAudioTrackDialog();
+            audioDialog.setTrackSelectedListener(this);
+            audioDialog.show(getSupportFragmentManager(), VodPlayerAudioTrackDialog.TAG);
+
+        }
     }
 }
