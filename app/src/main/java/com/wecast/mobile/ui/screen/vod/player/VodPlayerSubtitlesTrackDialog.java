@@ -1,7 +1,6 @@
 package com.wecast.mobile.ui.screen.vod.player;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,13 +26,16 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import static com.wecast.player.data.player.exo.trackSelector.ExoPlayerTrackSelector.TRACK_TYPE_AUDIO;
+import static com.wecast.player.data.player.exo.trackSelector.ExoPlayerTrackSelector.TRACK_TYPE_TEXT;
+
 /**
  * Created by ageech@live.com
  */
 
-public class VodPlayerTextTrackDialog extends BaseDialog implements SingleChoiceAdapter.OnCheckListener<WePlayerTrack> {
+public class VodPlayerSubtitlesTrackDialog extends BaseDialog implements SingleChoiceAdapter.OnCheckListener<WePlayerTrack> {
 
-    public static final String TAG = VodPlayerTextTrackDialog.class.getName();
+    public static final String TAG = VodPlayerSubtitlesTrackDialog.class.getName();
 
     @Inject
     PreferenceManager preferenceManager;
@@ -96,6 +98,9 @@ public class VodPlayerTextTrackDialog extends BaseDialog implements SingleChoice
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.data.setLayoutManager(layoutManager);
         ArrayList<WePlayerTrack> data = trackSelector != null ? trackSelector.getSubtitleTracks() : new ArrayList<>();
+        if(data.size() <= 0 || data.isEmpty()){
+            data.add(new WePlayerTrack(getString(R.string.undefined_option), 0, TRACK_TYPE_AUDIO));
+        }
         VodPlayerTrackAdapter adapter = new VodPlayerTrackAdapter(preferenceManager, data, this);
         binding.data.setAdapter(adapter);
     }

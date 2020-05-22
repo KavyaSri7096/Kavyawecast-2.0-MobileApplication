@@ -77,7 +77,7 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
     private Handler nextEpisodeHandler;
     private Runnable nextEpisodeRunnable = () -> nextEpisodeView.startCounter();
     private List<Vod> episodes;
-    private VodPlayerTextTrackDialog subtitlesDialog;
+    private VodPlayerSubtitlesTrackDialog subtitlesDialog;
     private VodPlayerAudioTrackDialog audioDialog;
 
     public static void open(Context context, Vod item, VodSourceProfile profile, int playAction, float seekTo) {
@@ -497,8 +497,8 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
         } else if (dialog instanceof VodPlayerAudioTrackDialog) {
             VodPlayerAudioTrackDialog dialog1 = (VodPlayerAudioTrackDialog) dialog;
             dialog1.setTrackSelector(weExoPlayer.getTrackSelector());
-        } else if (dialog instanceof VodPlayerTextTrackDialog) {
-            VodPlayerTextTrackDialog dialog1 = (VodPlayerTextTrackDialog) dialog;
+        } else if (dialog instanceof VodPlayerSubtitlesTrackDialog) {
+            VodPlayerSubtitlesTrackDialog dialog1 = (VodPlayerSubtitlesTrackDialog) dialog;
             dialog1.setTrackSelector(weExoPlayer.getTrackSelector());
         }
     }
@@ -712,9 +712,9 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
             subtitlesDialog = null;
         }else{
 
-            subtitlesDialog = new VodPlayerTextTrackDialog();
+            subtitlesDialog = new VodPlayerSubtitlesTrackDialog();
             subtitlesDialog.setTrackSelectedListener(this);
-            subtitlesDialog.show(getSupportFragmentManager(), VodPlayerTextTrackDialog.TAG);
+            subtitlesDialog.show(getSupportFragmentManager(), VodPlayerSubtitlesTrackDialog.TAG);
         }
 
     }
@@ -725,7 +725,6 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
             subtitlesDialog.dismiss();
             subtitlesDialog = null;
         }
-
 
         if(audioDialog!= null){
             audioDialog.dismiss();

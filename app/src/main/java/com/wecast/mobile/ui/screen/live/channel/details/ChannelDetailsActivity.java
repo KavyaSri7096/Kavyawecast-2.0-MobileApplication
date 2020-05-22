@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,17 +26,15 @@ import com.wecast.core.data.db.pref.PreferenceManager;
 import com.wecast.mobile.BR;
 import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.ActivityChannelDetailsBinding;
-import com.wecast.mobile.ui.ScreenRouter;
 import com.wecast.mobile.ui.base.BaseActivity;
 import com.wecast.mobile.ui.base.BaseDialog;
 import com.wecast.mobile.ui.common.dialog.ParentalPinDialog;
 import com.wecast.mobile.ui.screen.live.channel.details.progamme.ProgrammeFragment;
-import com.wecast.mobile.ui.screen.navigation.NavigationActivity;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioView;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerOnTrackChangedListener;
+import com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesView;
-import com.wecast.mobile.ui.screen.vod.player.VodPlayerTextTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerVideoTrackDialog;
 import com.wecast.mobile.ui.widget.wecast.WeCastWidget;
 import com.wecast.player.WePlayerFactory;
@@ -47,6 +43,7 @@ import com.wecast.player.data.model.WePlayerParams;
 import com.wecast.player.data.model.WePlayerTrack;
 import com.wecast.player.data.player.AbstractPlayer;
 import com.wecast.player.data.player.exo.WeExoPlayer;
+import com.wecast.player.data.player.exo.trackSelector.ExoPlayerTrackSelector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +82,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
     private DebugTextViewHelper debugViewHelper;
     private long bufferTime = 0;
     private boolean tryBackupUrl = true;
-    private VodPlayerTextTrackDialog subtitlesDialog;
+    private VodPlayerSubtitlesTrackDialog subtitlesDialog;
     private VodPlayerAudioTrackDialog audioDialog;
 
     public static void open(Context context, Channel channel) {
@@ -507,6 +504,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
     }
 
     private void play(WePlayerParams params) {
+        closeDialogBox();
         releaseDebugViewHelper();
         weExoPlayer.play(params);
         startDebugViewHelper();
@@ -641,8 +639,8 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         } else if (dialog instanceof VodPlayerAudioTrackDialog) {
             VodPlayerAudioTrackDialog dialog1 = (VodPlayerAudioTrackDialog) dialog;
             dialog1.setTrackSelector(weExoPlayer.getTrackSelector());
-        } else if (dialog instanceof VodPlayerTextTrackDialog) {
-            VodPlayerTextTrackDialog dialog1 = (VodPlayerTextTrackDialog) dialog;
+        } else if (dialog instanceof VodPlayerSubtitlesTrackDialog) {
+            VodPlayerSubtitlesTrackDialog dialog1 = (VodPlayerSubtitlesTrackDialog) dialog;
             dialog1.setTrackSelector(weExoPlayer.getTrackSelector());
         }
     }
@@ -650,6 +648,27 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
     @Override
     public void onTrackChanged(WePlayerTrack track) {
         closeDialogBox();
+
+        switch (track.getTrackType()) {
+            case ExoPlayerTrackSelector.TRACK_TYPE_VIDEO:
+                preferenceManager.setLastVideoTrack(track.getName());
+                break;
+            case ExoPlayerTrackSelector.TRACK_TYPE_AUDIO:
+                preferenceManager.setLastAudioTrack(track.getName());
+                weExoPlayer.getTrackSelector().changeTrack(track);
+                break;
+            case ExoPlayerTrackSelector.TRACK_TYPE_TEXT:
+                preferenceManager.setLastTextTrack(track.getName());
+                if (track.isOff()) {
+                    weExoPlayer.updateSubtitleVisibility(false);
+                } else {
+                    weExoPlayer.getTrackSelector().changeTrack(track);
+                    if (!weExoPlayer.isSubtitleViewVisible()) {
+                        weExoPlayer.updateSubtitleVisibility(true);
+                    }
+                }
+                break;
+        }
     }
 
     public void closeDialogBox(){
@@ -688,9 +707,9 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
             subtitlesDialog = null;
         }else{
 
-            subtitlesDialog = new VodPlayerTextTrackDialog();
+            subtitlesDialog = new VodPlayerSubtitlesTrackDialog();
             subtitlesDialog.setTrackSelectedListener(this);
-            subtitlesDialog.show(getSupportFragmentManager(), VodPlayerTextTrackDialog.TAG);
+            subtitlesDialog.show(getSupportFragmentManager(), VodPlayerSubtitlesTrackDialog.TAG);
         }
 
     }
@@ -701,7 +720,6 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
             subtitlesDialog.dismiss();
             subtitlesDialog = null;
         }
-
 
         if(audioDialog!= null){
             audioDialog.dismiss();

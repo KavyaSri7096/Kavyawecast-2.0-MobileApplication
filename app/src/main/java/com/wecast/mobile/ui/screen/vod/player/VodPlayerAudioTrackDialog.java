@@ -25,6 +25,8 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import static com.wecast.player.data.player.exo.trackSelector.ExoPlayerTrackSelector.TRACK_TYPE_TEXT;
+
 /**
  * Created by ageech@live.com
  */
@@ -95,7 +97,12 @@ public class VodPlayerAudioTrackDialog extends BaseDialog implements SingleChoic
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.data.setLayoutManager(layoutManager);
         ArrayList<WePlayerTrack> data = trackSelector != null ? trackSelector.getAudioTracks() : new ArrayList<>();
+        if(data.size() <= 0 || data.isEmpty()){
+            data.add(new WePlayerTrack(getString(R.string.undefined_option), 0, TRACK_TYPE_TEXT));
+        }
         VodPlayerTrackAdapter adapter = new VodPlayerTrackAdapter(preferenceManager, data, this);
+
+
         binding.data.setAdapter(adapter);
     }
 

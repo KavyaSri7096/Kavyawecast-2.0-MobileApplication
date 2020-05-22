@@ -51,7 +51,7 @@ import com.wecast.mobile.ui.screen.vod.player.VodPlayerActivity;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerErrorDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerOnTrackChangedListener;
-import com.wecast.mobile.ui.screen.vod.player.VodPlayerTextTrackDialog;
+import com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerVideoTrackDialog;
 import com.wecast.mobile.ui.screen.vod.search.VodSearchActivity;
 import com.wecast.mobile.ui.screen.welcome.WelcomeActivity;
@@ -257,9 +257,9 @@ public class ScreenRouter {
     }
 
     public static void showVodTextTrack(Context context, VodPlayerOnTrackChangedListener listener) {
-        VodPlayerTextTrackDialog dialog = new VodPlayerTextTrackDialog();
+        VodPlayerSubtitlesTrackDialog dialog = new VodPlayerSubtitlesTrackDialog();
         dialog.setTrackSelectedListener(listener);
-        dialog.show(getFragmentManager(context), VodPlayerTextTrackDialog.TAG);
+        dialog.show(getFragmentManager(context), VodPlayerSubtitlesTrackDialog.TAG);
     }
 
     public static void showVodPlayerError(Context context, VodPlayerErrorDialog.OnRetryListener listener) {

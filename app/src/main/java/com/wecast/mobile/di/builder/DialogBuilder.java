@@ -20,7 +20,7 @@ import com.wecast.mobile.ui.screen.vod.details.VodDetailsRentPreviewDialog;
 import com.wecast.mobile.ui.screen.vod.details.VodDetailsStartOverDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerErrorDialog;
-import com.wecast.mobile.ui.screen.vod.player.VodPlayerTextTrackDialog;
+import com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerVideoTrackDialog;
 import com.wecast.mobile.ui.screen.vod.search.VodSearchFilterDialog;
 
@@ -86,7 +86,7 @@ public abstract class DialogBuilder {
     abstract VodPlayerAudioTrackDialog bindVodPlayerAudioTrackDialog();
 
     @ContributesAndroidInjector
-    abstract VodPlayerTextTrackDialog bindVodPlayerSubtitleTrackDialog();
+    abstract VodPlayerSubtitlesTrackDialog bindVodPlayerSubtitleTrackDialog();
 
     @ContributesAndroidInjector
     abstract VodPlayerErrorDialog bindVoDPlayerErrorDialog();

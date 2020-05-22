@@ -25,7 +25,7 @@ import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerAudioView;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerOnTrackChangedListener;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesView;
-import com.wecast.mobile.ui.screen.vod.player.VodPlayerTextTrackDialog;
+import com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerVideoTrackDialog;
 import com.wecast.player.WePlayerFactory;
 import com.wecast.player.WePlayerType;
@@ -59,7 +59,7 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
     private TVShow tvShow;
     private DebugTextViewHelper debugViewHelper;
     private WeExoPlayer weExoPlayer;
-    private VodPlayerTextTrackDialog subtitlesDialog;
+    private VodPlayerSubtitlesTrackDialog subtitlesDialog;
     private VodPlayerAudioTrackDialog audioDialog;
 
     public static void open(Context context, TVShow item) {
@@ -270,8 +270,8 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
         } else if (dialog instanceof VodPlayerAudioTrackDialog) {
             VodPlayerAudioTrackDialog dialog1 = (VodPlayerAudioTrackDialog) dialog;
             dialog1.setTrackSelector(weExoPlayer.getTrackSelector());
-        } else if (dialog instanceof VodPlayerTextTrackDialog) {
-            VodPlayerTextTrackDialog dialog1 = (VodPlayerTextTrackDialog) dialog;
+        } else if (dialog instanceof VodPlayerSubtitlesTrackDialog) {
+            VodPlayerSubtitlesTrackDialog dialog1 = (VodPlayerSubtitlesTrackDialog) dialog;
             dialog1.setTrackSelector(weExoPlayer.getTrackSelector());
         }
     }
@@ -315,9 +315,9 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
             subtitlesDialog = null;
         }else{
 
-            subtitlesDialog = new VodPlayerTextTrackDialog();
+            subtitlesDialog = new VodPlayerSubtitlesTrackDialog();
             subtitlesDialog.setTrackSelectedListener(this);
-            subtitlesDialog.show(getSupportFragmentManager(), VodPlayerTextTrackDialog.TAG);
+            subtitlesDialog.show(getSupportFragmentManager(), VodPlayerSubtitlesTrackDialog.TAG);
         }
 
     }
