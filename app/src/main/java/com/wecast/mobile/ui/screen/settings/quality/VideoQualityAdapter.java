@@ -10,6 +10,7 @@ import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.CardRadioButtonBinding;
 import com.wecast.mobile.ui.common.adapter.SingleChoiceAdapter;
 import com.wecast.mobile.ui.common.adapter.viewHolder.SingleChoiceViewHolder;
+import com.wecast.mobile.utils.LocaleUtils;
 
 import java.util.List;
 

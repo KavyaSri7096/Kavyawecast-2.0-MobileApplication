@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.Player;
@@ -26,6 +29,7 @@ import com.wecast.mobile.ui.base.BaseDialog;
 import com.wecast.mobile.ui.common.dialog.ParentalPinDialog;
 import com.wecast.mobile.ui.screen.vod.details.VodDetailsUtils;
 import com.wecast.mobile.ui.widget.TimeBarView;
+import com.wecast.mobile.utils.LocaleUtils;
 import com.wecast.player.WePlayerFactory;
 import com.wecast.player.WePlayerType;
 import com.wecast.player.data.model.WePlayerParams;
@@ -34,6 +38,7 @@ import com.wecast.player.data.player.AbstractPlayer;
 import com.wecast.player.data.player.exo.WeExoPlayer;
 import com.wecast.player.data.player.exo.trackSelector.ExoPlayerTrackSelector;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -246,6 +251,9 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
             nextEpisode.setVisibility(View.INVISIBLE);
             previousEpisode.setVisibility(View.INVISIBLE);
         }
+
+//        setupDefaultSubtitle();
+
     }
 
     /**
@@ -414,6 +422,29 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
         weExoPlayer.play(playerSource);
     }
 
+    private void setupDefaultTracks() {
+
+        ArrayList<WePlayerTrack> audioTracks = weExoPlayer.getTrackSelector().getAudioTracks();
+        ArrayList<WePlayerTrack> subtitles = weExoPlayer.getTrackSelector().getSubtitleTracks();
+
+        String savedIsoName = LocaleUtils.getInstance().getString("audioPrefLabel");
+        if (audioTracks != null && audioTracks.size() > 0) {
+            for (WePlayerTrack wePlayerTrack : audioTracks){
+                if(wePlayerTrack.getName() != null && wePlayerTrack.getName().equals(savedIsoName != null ? savedIsoName : "")){
+                    onTrackChanged(wePlayerTrack);
+                }
+            }
+        }
+        String savedSubtitleIsoName = LocaleUtils.getInstance().getString("subtitlesPrefLabel");
+        if (subtitles != null && subtitles.size() > 1) {
+            for (WePlayerTrack wePlayerTrack : subtitles){
+                if(wePlayerTrack.getName() != null && wePlayerTrack.getName().equals(savedSubtitleIsoName != null ? savedSubtitleIsoName : "")){
+                    onTrackChanged(wePlayerTrack);
+                }
+            }
+        }
+    }
+
     /**
      * Get real movie source url from server
      * and then play it in player
@@ -444,6 +475,8 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
                 .setSubtitles(vod.getMovieSource().getSubtitles())
                 .build();
         weExoPlayer.play(playerSource);
+        setDefaultSubtitles();
+
     }
 
     /**
@@ -463,9 +496,20 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
     }
 
     private void setupVideoTracks(ExoPlayerTrackSelector selector) {
+
+        binding.video.setVisibility(View.GONE);
+        // Show video options if stream has multiple video tracks
+        if (selector.getVideoTracks() != null && !selector.getVideoTracks().isEmpty()) {
+            binding.video.setOnClickListener(v -> ScreenRouter.showVodTextTrack(this, this));
+            binding.video.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setupSubtitleTracks(ExoPlayerTrackSelector selector) {
+
         binding.subtitle.setVisibility(View.GONE);
         // Show subtitle options if stream has multiple text tracks
-        if (selector.getSubtitleTracks() != null && selector.getSubtitleTracks().size() > 1) {
+        if (selector.getSubtitleTracks() != null && selector.getVideoTracks().size() > 1) {
             binding.subtitle.setOnClickListener(v -> ScreenRouter.showVodTextTrack(this, this));
             binding.subtitle.setVisibility(View.VISIBLE);
         }
@@ -480,13 +524,22 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
         }
     }
 
-    private void setupSubtitleTracks(ExoPlayerTrackSelector selector) {
-        binding.video.setVisibility(View.GONE);
-        // Show video options if stream has multiple video tracks
-        if (selector.getVideoTracks() != null && !selector.getVideoTracks().isEmpty()) {
-            binding.video.setOnClickListener(v -> ScreenRouter.showVodVideoTracks(this, this));
-            binding.video.setVisibility(View.VISIBLE);
+    private void setDefaultSubtitles(){
+        ArrayList<WePlayerTrack> subtitles = weExoPlayer.getTrackSelector().getSubtitleTracks();
+        String savedSubtitleName = LocaleUtils.getInstance().getString("subtitlesPrefLabel");
+        Log.e("m3h", "Saved subtitle Vod " + savedSubtitleName);
+        if (subtitles != null && subtitles.size() > 1) {
+            for (WePlayerTrack newTrack : subtitles){
+                if(newTrack.getName() != null && newTrack.getName().equals(savedSubtitleName) && !newTrack.getName().equals("Off")){
+                    weExoPlayer.getTrackSelector().changeTrack(newTrack);
+                    weExoPlayer.updateSubtitleVisibility(true);
+                }else{
+                    weExoPlayer.updateSubtitleVisibility(false);
+                }
+            }
+
         }
+
     }
 
     @Override
@@ -505,8 +558,7 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
 
     @Override
     public void onTrackChanged(WePlayerTrack track) {
-        weExoPlayer.getTrackSelector().changeTrack(track);
-
+        ArrayList<WePlayerTrack> subtitles = weExoPlayer.getTrackSelector().getSubtitleTracks();
         closeDialogBox();
 
         switch (track.getTrackType()) {
@@ -519,11 +571,24 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
                 weExoPlayer.getTrackSelector().changeTrack(track);
                 break;
             case ExoPlayerTrackSelector.TRACK_TYPE_TEXT:
-                preferenceManager.setLastTextTrack(track.getName());
+                String savedSubtitleName = LocaleUtils.getInstance().getString("subtitlesPrefLabel");
+                Log.e("m3h", "Saved subtitle Vod " + savedSubtitleName);
                 if (track.isOff()) {
                     weExoPlayer.updateSubtitleVisibility(false);
                 } else {
-                    weExoPlayer.getTrackSelector().changeTrack(track);
+                    if (subtitles != null && subtitles.size() > 1) {
+                        for (WePlayerTrack newTrack : subtitles){
+                            if(newTrack.getName() != null && newTrack.getName().equals(savedSubtitleName) && !newTrack.getName().equals("Off")){
+                                Log.e("m3h", "Bool  " + (newTrack.getName() != null && newTrack.getName().equals(savedSubtitleName)));
+                                weExoPlayer.getTrackSelector().changeTrack(newTrack);
+                                weExoPlayer.updateSubtitleVisibility(true);
+                                track.setOff(false);
+                            }else{
+                                track.setOff(true);
+                                weExoPlayer.updateSubtitleVisibility(false);
+                            }
+                        }
+                    }
                     if (!weExoPlayer.isSubtitleViewVisible()) {
                         weExoPlayer.updateSubtitleVisibility(true);
                     }
@@ -532,9 +597,9 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
         }
     }
 
+
     private void playWithDifferentTrack(WePlayerTrack track) {
         weExoPlayer.dispose();
-
         int maxBitrate = track.getMaxBitrate() * 1000;
         if (playAction == PLAY_TRAILER) {
             playTrailer(maxBitrate);
@@ -665,7 +730,6 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
         trackSocketError(exception.getLocalizedMessage());
         ScreenRouter.showVodPlayerError(this, this::play);
     }
-
     /**
      * SOCKET IMPLEMENTATION
      */

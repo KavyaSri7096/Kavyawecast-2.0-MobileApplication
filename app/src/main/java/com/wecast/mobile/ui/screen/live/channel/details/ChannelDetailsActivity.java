@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,6 +38,7 @@ import com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesView;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerVideoTrackDialog;
 import com.wecast.mobile.ui.widget.wecast.WeCastWidget;
+import com.wecast.mobile.utils.LocaleUtils;
 import com.wecast.player.WePlayerFactory;
 import com.wecast.player.WePlayerType;
 import com.wecast.player.data.model.WePlayerParams;
@@ -507,6 +509,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
         closeDialogBox();
         releaseDebugViewHelper();
         weExoPlayer.play(params);
+        Log.e("M3h", "Channel to play is " + channel.getTitle());
         startDebugViewHelper();
     }
 
@@ -647,6 +650,7 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
 
     @Override
     public void onTrackChanged(WePlayerTrack track) {
+        ArrayList<WePlayerTrack> subtitles = weExoPlayer.getTrackSelector().getSubtitleTracks();
         closeDialogBox();
 
         switch (track.getTrackType()) {
@@ -658,15 +662,23 @@ public class ChannelDetailsActivity extends BaseActivity<ActivityChannelDetailsB
                 weExoPlayer.getTrackSelector().changeTrack(track);
                 break;
             case ExoPlayerTrackSelector.TRACK_TYPE_TEXT:
-                preferenceManager.setLastTextTrack(track.getName());
-                if (track.isOff()) {
+                String savedSubtitleName = LocaleUtils.getInstance().getString("subtitlesPrefLabel");
+                Log.e("m3h", "Saved subtitle Channel " + savedSubtitleName);
+               /* if (track.isOff()) {
                     weExoPlayer.updateSubtitleVisibility(false);
-                } else {
+                } else {*/
+//                if (subtitles != null && subtitles.size() > 1) {
+//                    for (WePlayerTrack newTrack : subtitles){
+                if(track.getName() != null && track.getName().equals(savedSubtitleName != null ? savedSubtitleName : "")){
                     weExoPlayer.getTrackSelector().changeTrack(track);
-                    if (!weExoPlayer.isSubtitleViewVisible()) {
+                    weExoPlayer.updateSubtitleVisibility(true);
+//                        }
+//                    }
+                }
+                   /* if (!weExoPlayer.isSubtitleViewVisible()) {
                         weExoPlayer.updateSubtitleVisibility(true);
                     }
-                }
+                }*/
                 break;
         }
     }

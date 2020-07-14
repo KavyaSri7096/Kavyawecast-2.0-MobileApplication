@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import com.wecast.mobile.ui.screen.vod.player.VodPlayerOnTrackChangedListener;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesView;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerSubtitlesTrackDialog;
 import com.wecast.mobile.ui.screen.vod.player.VodPlayerVideoTrackDialog;
+import com.wecast.mobile.utils.LocaleUtils;
 import com.wecast.player.WePlayerFactory;
 import com.wecast.player.WePlayerType;
 import com.wecast.player.data.model.WePlayerParams;
@@ -34,6 +36,8 @@ import com.wecast.player.data.model.WePlayerTrack;
 import com.wecast.player.data.player.AbstractPlayer;
 import com.wecast.player.data.player.exo.WeExoPlayer;
 import com.wecast.player.data.player.exo.trackSelector.ExoPlayerTrackSelector;
+
+import java.util.ArrayList;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
@@ -278,7 +282,10 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
 
     @Override
     public void onTrackChanged(WePlayerTrack track) {
-        weExoPlayer.getTrackSelector().changeTrack(track);
+        ArrayList<WePlayerTrack> subtitles = weExoPlayer.getTrackSelector().getSubtitleTracks();
+//        weExoPlayer.getTrackSelector().changeTrack(track);
+
+        closeDialogBox();
 
         switch (track.getTrackType()) {
             case ExoPlayerTrackSelector.TRACK_TYPE_VIDEO:
@@ -290,15 +297,23 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
                 weExoPlayer.getTrackSelector().changeTrack(track);
                 break;
             case ExoPlayerTrackSelector.TRACK_TYPE_TEXT:
-                preferenceManager.setLastTextTrack(track.getName());
-                if (track.isOff()) {
+                String savedSubtitleName = LocaleUtils.getInstance().getString("subtitlesPrefLabel");
+                Log.e("m3h", "Saved subtitle Tvshow " + savedSubtitleName);
+               /* if (track.isOff()) {
                     weExoPlayer.updateSubtitleVisibility(false);
-                } else {
+                } else {*/
+//                if (subtitles != null && subtitles.size() > 1) {
+//                    for (WePlayerTrack newTrack : subtitles){
+                if(track.getName() != null && track.getName().equals(savedSubtitleName != null ? savedSubtitleName : "")){
                     weExoPlayer.getTrackSelector().changeTrack(track);
-                    if (!weExoPlayer.isSubtitleViewVisible()) {
+                    weExoPlayer.updateSubtitleVisibility(true);
+//                        }
+//                    }
+                }
+                   /* if (!weExoPlayer.isSubtitleViewVisible()) {
                         weExoPlayer.updateSubtitleVisibility(true);
                     }
-                }
+                }*/
                 break;
         }
     }
@@ -321,6 +336,7 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
         }
 
     }
+
 
     @Override
     public void openAudioDialogBox() {
@@ -418,6 +434,30 @@ public class TVShowPlayerActivity extends BaseActivity<ActivityTvShowPlayerBindi
     public void onError(ExoPlaybackException exception) {
         exception.printStackTrace();
         ScreenRouter.showVodPlayerError(this, this::play);
+    }
+
+
+    public void closeDialogBox(){
+        closeAudioDialog();
+        closeSubtitlesDialog();
+    }
+
+    private void closeSubtitlesDialog(){
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> {
+            if (subtitlesDialog != null) {
+                subtitlesDialog.dismiss();
+            }
+        }, 1000);
+    }
+
+    private void closeAudioDialog(){
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> {
+            if (audioDialog != null) {
+                audioDialog.dismiss();
+            }
+        }, 1000);
     }
 
 }

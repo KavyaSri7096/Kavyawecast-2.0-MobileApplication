@@ -1,6 +1,7 @@
 package com.wecast.mobile.ui.screen.vod.player;
 
 import android.app.Dialog;
+import android.icu.util.LocaleData;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.DialogTrackBinding;
 import com.wecast.mobile.ui.base.BaseDialog;
 import com.wecast.mobile.ui.common.adapter.SingleChoiceAdapter;
+import com.wecast.mobile.utils.LocaleUtils;
 import com.wecast.player.data.model.WePlayerTrack;
 import com.wecast.player.data.player.exo.trackSelector.ExoPlayerTrackSelector;
 
@@ -111,6 +113,7 @@ public class VodPlayerSubtitlesTrackDialog extends BaseDialog implements SingleC
 
     @Override
     public void onItemChecked(WePlayerTrack item) {
+        LocaleUtils.getInstance().persist("subtitlesPrefLabel", item.getName());
         trackSelectedListener.onTrackChanged(item);
     }
 

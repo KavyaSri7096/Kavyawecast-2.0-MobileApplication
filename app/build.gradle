@@ -95,7 +95,7 @@ android {
 
         copaco {
             keyAlias 'keyAlias'
-            storeFile file('src/copaco/key/keystore_properties')
+            storeFile file('src/copaco/key/keystore_properties.jks')
             keyPassword 'keyPassword'
             storePassword 'storepassword'
         }

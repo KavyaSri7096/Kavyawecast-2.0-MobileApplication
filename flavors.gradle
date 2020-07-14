@@ -11,6 +11,7 @@ android {
             applicationIdSuffix ".dev"
             // Variables
             buildConfigField "String", "API_URL", "\"https://api2.wecast.tv\""
+//            buildConfigField "String", "API_URL", "\"https://api.wecast.tv\""
         }
 
         demo {

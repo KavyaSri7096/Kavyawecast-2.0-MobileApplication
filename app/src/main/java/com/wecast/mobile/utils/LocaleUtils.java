@@ -1,10 +1,14 @@
 package com.wecast.mobile.utils;
 
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.preference.PreferenceManager;
 import android.view.ContextThemeWrapper;
 
+import com.google.android.gms.common.api.Api;
 import com.wecast.mobile.WeApp;
+import com.wecast.player.data.model.WePlayerTrack;
 
 import java.util.Locale;
 
@@ -15,6 +19,20 @@ import java.util.Locale;
 public final class LocaleUtils {
 
     private static Locale locale;
+    private static LocaleUtils INSTANCE;
+    private final SharedPreferences mSharedPreferences;
+
+
+    private LocaleUtils() {
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(WeApp.getInstance().getApplicationContext());
+    }
+
+
+    public static LocaleUtils getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new LocaleUtils();
+        return INSTANCE;
+    }
 
     public static void setLocale(Locale locale) {
         LocaleUtils.locale = locale;
@@ -41,5 +59,34 @@ public final class LocaleUtils {
             Resources res = app.getBaseContext().getResources();
             res.updateConfiguration(config, res.getDisplayMetrics());
         }
+    }
+
+    public void persist(String key, Object object) {
+        if (object == null) {
+            mSharedPreferences.edit().remove(key).apply();
+        } else if (object instanceof String) {
+            mSharedPreferences.edit().putString(key, (String) object).apply();
+        } else if (object instanceof Boolean) {
+            mSharedPreferences.edit().putBoolean(key, (Boolean) object).apply();
+        } else if (object instanceof Integer) {
+            mSharedPreferences.edit().putInt(key, (Integer) object).apply();
+        }
+    }
+
+
+    public String getString(String key) {
+        return mSharedPreferences.getString(key, null);
+    }
+
+    public boolean getBoolean(String key) {
+        return mSharedPreferences.getBoolean(key, false);
+    }
+
+    public boolean getBoolean(String key, boolean defaultValue) {
+        return mSharedPreferences.getBoolean(key, defaultValue);
+    }
+
+    public int getInt(String key, int defaultValue) {
+        return mSharedPreferences.getInt(key, defaultValue);
     }
 }

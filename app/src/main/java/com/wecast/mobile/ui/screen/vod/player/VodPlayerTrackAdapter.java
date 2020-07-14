@@ -9,16 +9,22 @@ import com.wecast.mobile.R;
 import com.wecast.mobile.databinding.CardTrackBinding;
 import com.wecast.mobile.ui.common.adapter.SingleChoiceAdapter;
 import com.wecast.mobile.ui.common.adapter.viewHolder.SingleChoiceViewHolder;
+import com.wecast.mobile.utils.LocaleUtils;
 import com.wecast.player.data.model.WePlayerTrack;
 import com.wecast.player.data.player.exo.trackSelector.ExoPlayerTrackSelector;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Created by ageech@live.com
  */
 
 public class VodPlayerTrackAdapter extends SingleChoiceAdapter<WePlayerTrack, VodPlayerTrackAdapter.TrackViewHolder> {
+
+    @Inject
+    PreferenceManager preferenceManager;
 
     VodPlayerTrackAdapter(PreferenceManager preferenceManager, List<WePlayerTrack> arrayList, SingleChoiceAdapter.OnCheckListener<WePlayerTrack> onCheckListener) {
         super(preferenceManager, arrayList, onCheckListener);
@@ -43,7 +49,7 @@ public class VodPlayerTrackAdapter extends SingleChoiceAdapter<WePlayerTrack, Vo
                 case ExoPlayerTrackSelector.TRACK_TYPE_AUDIO:
                     return item.getName().equals(preferenceManager.getLastAudioTrack());
                 case ExoPlayerTrackSelector.TRACK_TYPE_TEXT:
-                    return item.getName().equals(preferenceManager.getLastTextTrack());
+                    return item.getName().equals(LocaleUtils.getInstance().getString("subtitlesPrefLabel"));
                 default:
                     return false;
             }
@@ -73,6 +79,7 @@ public class VodPlayerTrackAdapter extends SingleChoiceAdapter<WePlayerTrack, Vo
         @Override
         public void onItemChecked() {
             binding.button.setChecked(true);
+
         }
 
         @Override

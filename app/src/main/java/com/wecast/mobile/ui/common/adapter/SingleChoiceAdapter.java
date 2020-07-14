@@ -90,7 +90,7 @@ public abstract class SingleChoiceAdapter<T, V extends SingleChoiceViewHolder> e
             if (findLastCheckedPosition(preferenceManager, items.get(i)))
                 return i;
         }
-        return -1;
+        return 0;
     }
 
     @LayoutRes
