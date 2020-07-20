@@ -4,14 +4,17 @@ apply from: '../versions.gradle'
 android {
     flavorDimensions "app"
 
+
+    //Not to be used.
     productFlavors {
 
         dev {
             dimension "app"
             applicationIdSuffix ".dev"
             // Variables
-            buildConfigField "String", "API_URL", "\"https://api2.wecast.tv\""
-//            buildConfigField "String", "API_URL", "\"https://api.wecast.tv\""
+//            buildConfigField "String", "API_URL", "\"https://api2.wecast.tv\""
+//            buildConfigField "String", "API_URL", "\"http://api.wecast.tv\""
+            buildConfigField "String", "API_URL", "\"https://api.wecast.tv\""
         }
 
         demo {

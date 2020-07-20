@@ -5,12 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.Player;
@@ -416,10 +413,13 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
                 .setUrl(vod.getTrailerSource().getUrl())
                 .setDrmUrl(vod.getTrailerSource().getDrmLicenseUrl())
                 .setMaxBitrate(maxBitrate)
+                .setPreferredSubtitleLanguage(LocaleUtils.getInstance().getString("subtitlesPrefLabel"))
+                .setPreferredAudioLanguage(LocaleUtils.getInstance().getString("audioPrefLabel"))
                 .setBuffer(preferenceManager.getVodBuffer())
                 .setSubtitles(vod.getTrailerSource().getSubtitles())
                 .build();
         weExoPlayer.play(playerSource);
+        setupDefaultTracks();
     }
 
     private void setupDefaultTracks() {
@@ -429,17 +429,23 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
 
         String savedIsoName = LocaleUtils.getInstance().getString("audioPrefLabel");
         if (audioTracks != null && audioTracks.size() > 0) {
-            for (WePlayerTrack wePlayerTrack : audioTracks){
-                if(wePlayerTrack.getName() != null && wePlayerTrack.getName().equals(savedIsoName != null ? savedIsoName : "")){
-                    onTrackChanged(wePlayerTrack);
+            for (WePlayerTrack newTrack : audioTracks){
+                if(newTrack.getName() != null && !newTrack.getName().equals(getString(R.string.add_Off_line)) && newTrack.getName().equals(savedIsoName)){
+                    weExoPlayer.getTrackSelector().changeTrack(newTrack);
+                    weExoPlayer.updateSubtitleVisibility(true);
+                }else{
+                    weExoPlayer.updateSubtitleVisibility(false);
                 }
             }
         }
         String savedSubtitleIsoName = LocaleUtils.getInstance().getString("subtitlesPrefLabel");
         if (subtitles != null && subtitles.size() > 1) {
-            for (WePlayerTrack wePlayerTrack : subtitles){
-                if(wePlayerTrack.getName() != null && wePlayerTrack.getName().equals(savedSubtitleIsoName != null ? savedSubtitleIsoName : "")){
-                    onTrackChanged(wePlayerTrack);
+            for (WePlayerTrack newTrack : subtitles){
+                if(newTrack.getName() != null && newTrack.getName().equals(savedSubtitleIsoName) && !newTrack.getName().equals(getString(R.string.add_Off_line))){
+                    weExoPlayer.getTrackSelector().changeTrack(newTrack);
+                    weExoPlayer.updateSubtitleVisibility(true);
+                }else{
+                    weExoPlayer.updateSubtitleVisibility(false);
                 }
             }
         }
@@ -472,11 +478,11 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
                 .setDrmUrl(vod.getMovieSource().getDrmLicenseUrl())
                 .setMaxBitrate(maxBitrate)
                 .setBuffer(preferenceManager.getVodBuffer())
+                .setPreferredSubtitleLanguage(LocaleUtils.getInstance().getString("subtitlesPrefLabel") == null ? getString(R.string.add_Off_line) :LocaleUtils.getInstance().getString("subtitlesPrefLabel"))
+                .setPreferredAudioLanguage(LocaleUtils.getInstance().getString("audioPrefLabel"))
                 .setSubtitles(vod.getMovieSource().getSubtitles())
                 .build();
         weExoPlayer.play(playerSource);
-        setDefaultSubtitles();
-
     }
 
     /**
@@ -506,7 +512,6 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
     }
 
     private void setupSubtitleTracks(ExoPlayerTrackSelector selector) {
-
         binding.subtitle.setVisibility(View.GONE);
         // Show subtitle options if stream has multiple text tracks
         if (selector.getSubtitleTracks() != null && selector.getVideoTracks().size() > 1) {
@@ -522,24 +527,6 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
             binding.audio.setOnClickListener(v -> ScreenRouter.showVodAudioTracks(this, this));
             binding.audio.setVisibility(View.VISIBLE);
         }
-    }
-
-    private void setDefaultSubtitles(){
-        ArrayList<WePlayerTrack> subtitles = weExoPlayer.getTrackSelector().getSubtitleTracks();
-        String savedSubtitleName = LocaleUtils.getInstance().getString("subtitlesPrefLabel");
-        Log.e("m3h", "Saved subtitle Vod " + savedSubtitleName);
-        if (subtitles != null && subtitles.size() > 1) {
-            for (WePlayerTrack newTrack : subtitles){
-                if(newTrack.getName() != null && newTrack.getName().equals(savedSubtitleName) && !newTrack.getName().equals("Off")){
-                    weExoPlayer.getTrackSelector().changeTrack(newTrack);
-                    weExoPlayer.updateSubtitleVisibility(true);
-                }else{
-                    weExoPlayer.updateSubtitleVisibility(false);
-                }
-            }
-
-        }
-
     }
 
     @Override
@@ -572,14 +559,12 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
                 break;
             case ExoPlayerTrackSelector.TRACK_TYPE_TEXT:
                 String savedSubtitleName = LocaleUtils.getInstance().getString("subtitlesPrefLabel");
-                Log.e("m3h", "Saved subtitle Vod " + savedSubtitleName);
-                if (track.isOff()) {
+                if (savedSubtitleName.equals(getString(R.string.add_Off_line))) {
                     weExoPlayer.updateSubtitleVisibility(false);
                 } else {
                     if (subtitles != null && subtitles.size() > 1) {
                         for (WePlayerTrack newTrack : subtitles){
-                            if(newTrack.getName() != null && newTrack.getName().equals(savedSubtitleName) && !newTrack.getName().equals("Off")){
-                                Log.e("m3h", "Bool  " + (newTrack.getName() != null && newTrack.getName().equals(savedSubtitleName)));
+                            if(newTrack.getName() != null && newTrack.getName().equals(savedSubtitleName) && !newTrack.getName().equals(getString(R.string.add_Off_line))){
                                 weExoPlayer.getTrackSelector().changeTrack(newTrack);
                                 weExoPlayer.updateSubtitleVisibility(true);
                                 track.setOff(false);

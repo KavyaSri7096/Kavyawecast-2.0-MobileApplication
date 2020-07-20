@@ -3,6 +3,7 @@ package com.wecast.mobile.ui.screen.vod.player;
 import android.app.Dialog;
 import android.icu.util.LocaleData;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

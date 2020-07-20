@@ -220,6 +220,7 @@
     <string name="search_result">No search result found</string>
     <string name="search_result_for">Search result for \"%1$s\"</string>
     <string name="undefined_option">Undefined</string>
+    <string name="add_Off_line">Off</string>
     <string-array name="filter">
         <item>Sort by Name</item>
         <item>Name: A - Z</item>

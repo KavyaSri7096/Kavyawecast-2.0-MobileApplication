@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,6 +114,7 @@ public class VodPlayerAudioTrackDialog extends BaseDialog implements SingleChoic
 
     @Override
     public void onItemChecked(WePlayerTrack item) {
+        Log.e("M3h", "Audio " + item.getName());
         trackSelectedListener.onTrackChanged(item);
     }
 
