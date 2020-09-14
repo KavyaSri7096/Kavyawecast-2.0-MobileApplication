@@ -68,7 +68,6 @@ public class TVShowFragment extends BaseFragment<FragmentTvShowBinding, TVShowFr
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = getViewDataBinding();
-
         setupUI();
     }
 

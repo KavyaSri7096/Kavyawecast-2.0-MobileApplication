@@ -89,10 +89,26 @@ public class NavigationActivity extends BaseActivity<ActivityNavigationBinding, 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setupUI();
         setupListeners();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkPermissions();
+    }
+
+    private void checkPermissions(){
+        // Check for READ/WRITE calendar permission
+        boolean isReadGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) == PackageManager.PERMISSION_GRANTED;
+        boolean isWriteGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_GRANTED;
+        if (isReadGranted && isWriteGranted) {
+            startRemindersSyncService();
+        }
+    }
+
+
 
     private void setupUI() {
         setStatusTransparent(this);
@@ -138,14 +154,8 @@ public class NavigationActivity extends BaseActivity<ActivityNavigationBinding, 
                 selectTab(title, 0);
             }
         }
-
-        // Check for READ/WRITE calendar permission
-        boolean isReadGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) == PackageManager.PERMISSION_GRANTED;
-        boolean isWriteGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_GRANTED;
-        if (isReadGranted && isWriteGranted) {
-            startRemindersSyncService();
-        }
     }
+
 
     private TabLayout.Tab buildTab(int title) {
         String tabTitle = getString(title);

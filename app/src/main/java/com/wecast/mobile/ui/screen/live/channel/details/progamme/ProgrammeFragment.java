@@ -83,7 +83,6 @@ public class ProgrammeFragment extends BaseFragment<FragmentProgrammeBinding, Pr
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setRetainInstance(true);
-
         setupUI();
     }
 

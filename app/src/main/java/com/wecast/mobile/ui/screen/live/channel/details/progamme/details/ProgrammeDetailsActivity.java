@@ -89,6 +89,7 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
         setupListeners();
     }
 
+
     private void setupUI() {
         setStatusTranslucent(false);
         binding = getViewDataBinding();

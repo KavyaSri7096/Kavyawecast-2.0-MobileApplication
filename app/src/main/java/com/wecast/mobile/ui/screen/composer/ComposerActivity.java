@@ -56,7 +56,13 @@ public class ComposerActivity extends BaseActivity<ActivityComposerBinding, Comp
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        setupUI();
+    }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         setupUI();
     }
 
