@@ -177,7 +177,7 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
         }
 
         // Set reminder add/remove icon
-        boolean hasReminder = reminderUtils.isEventInCalendar(programme.getStart());
+        boolean hasReminder = reminderUtils.isEventInCalendar(programme.getStart(), this);
         if (hasReminder) {
             Drawable icon = getDrawable(R.drawable.ic_reminder_on);
             binding.controls.reminder.setCompoundDrawablesWithIntrinsicBounds(null, icon, null, null);
@@ -290,7 +290,7 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
     }
 
     private void checkIfEventExist() {
-        boolean hasReminder = reminderUtils.isEventInCalendar(programme.getStart());
+        boolean hasReminder = reminderUtils.isEventInCalendar(programme.getStart(), this);
         if (hasReminder) {
             removeReminder(programme.getStart());
         } else {
@@ -343,7 +343,7 @@ public class ProgrammeDetailsActivity extends BaseActivity<ActivityProgrammeDeta
     }
 
     private void updateReminder() {
-        boolean hasReminder = reminderUtils.isEventInCalendar(programme.getStart());
+        boolean hasReminder = reminderUtils.isEventInCalendar(programme.getStart(), this);
         if (hasReminder) {
             RadialTimePickerDialogFragment dialog = new RadialTimePickerDialogFragment()
                     .setOnTimeSetListener((dialog1, hourOfDay, minute) -> {

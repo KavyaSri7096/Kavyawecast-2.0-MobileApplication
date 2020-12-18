@@ -3,9 +3,10 @@ package com.wecast.mobile;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
+import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.squareup.leakcanary.LeakCanary;
 import com.wecast.core.logger.Logger;
 import com.wecast.core.WeCore;
@@ -26,7 +27,6 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import dagger.android.HasServiceInjector;
 import dagger.android.support.HasSupportFragmentInjector;
-import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -71,7 +71,9 @@ public class WeApp extends Application implements HasActivityInjector, HasSuppor
         appComponent.inject(this);
 
         // Initialize Fabric to track incidents
-        Fabric.with(this, new Crashlytics());
+        FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
+        crashlytics.setCrashlyticsCollectionEnabled(true);
+//        Fabric.with(this, new Crashlytics());
 
         // Initialize ADMob
         MobileAds.initialize(this, Constants.ADMOB_APP_ID);
@@ -97,6 +99,9 @@ public class WeApp extends Application implements HasActivityInjector, HasSuppor
 
         // Set default app language
         setupLanguage();
+
+
+
     }
 
     @Override
@@ -131,5 +136,8 @@ public class WeApp extends Application implements HasActivityInjector, HasSuppor
         String code = preferenceManager.getLanguage().getShortCode();
         LocaleUtils.setLocale(new Locale(code));
         LocaleUtils.updateConfig(this, getBaseContext().getResources().getConfiguration());
+
+//                Log.e("M3h", "ERROR ERROR ERROR");
+//        throw new RuntimeException("Test Crash"); // Force a crash
     }
 }

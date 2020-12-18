@@ -6,9 +6,7 @@ import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.view.ContextThemeWrapper;
 
-import com.google.android.gms.common.api.Api;
 import com.wecast.mobile.WeApp;
-import com.wecast.player.data.model.WePlayerTrack;
 
 import java.util.Locale;
 

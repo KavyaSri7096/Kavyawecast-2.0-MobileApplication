@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="wecast-2.0-mobile/app" />
-      <module fileurl="file://$PROJECT_DIR$/wecast-2.0-mobile.iml" filepath="$PROJECT_DIR$/wecast-2.0-mobile.iml" group="wecast-2.0-mobile" />
-      <module fileurl="file://$PROJECT_DIR$/wecast-core/wecast-core.iml" filepath="$PROJECT_DIR$/wecast-core/wecast-core.iml" group="wecast-2.0-mobile/wecast-core" />
-      <module fileurl="file://$PROJECT_DIR$/wecast-player/wecast-player.iml" filepath="$PROJECT_DIR$/wecast-player/wecast-player.iml" group="wecast-2.0-mobile/wecast-player" />
+      <module fileurl="file://$PROJECT_DIR$/wecast-2.0-mobile.iml" filepath="$PROJECT_DIR$/wecast-2.0-mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/wecast-2.0-mobile.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/wecast-2.0-mobile.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/wecast-core/wecast-2.0-mobile.wecast-core.iml" filepath="$PROJECT_DIR$/.idea/modules/wecast-core/wecast-2.0-mobile.wecast-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/wecast-player/wecast-2.0-mobile.wecast-player.iml" filepath="$PROJECT_DIR$/.idea/modules/wecast-player/wecast-2.0-mobile.wecast-player.iml" />
     </modules>
   </component>
 </project>

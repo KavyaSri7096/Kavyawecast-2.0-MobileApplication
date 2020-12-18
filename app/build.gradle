@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-//apply from: '../flavors.gradle'
+apply plugin: 'com.google.firebase.crashlytics'
 apply from: '../libraries.gradle'
 apply from: '../versions.gradle'
 
@@ -51,12 +50,12 @@ android {
             storePassword 'storepassword'
         }
 
-        nettv {
-            keyAlias 'keyAlias'
-            storeFile file('src/nettv/key/keystore_properties')
-            keyPassword 'keyPassword'
-            storePassword 'storepassword'
-        }
+//        nettv {
+//            keyAlias 'keyAlias'
+//            storeFile file('src/nettv/key/keystore_properties')
+//            keyPassword 'keyPassword'
+//            storePassword 'storepassword'
+//        }
 
         brasilnet {
             keyAlias 'keyAlias'
@@ -65,26 +64,26 @@ android {
             storePassword 'storepassword'
         }
 
-        intv {
-            keyAlias 'keyAlias'
-            storeFile file('src/intv/key/keystore_properties')
-            keyPassword 'keyPassword'
-            storePassword 'storepassword'
-        }
+//        intv {
+//            keyAlias 'keyAlias'
+//            storeFile file('src/intv/key/keystore_properties')
+//            keyPassword 'keyPassword'
+//            storePassword 'storepassword'
+//        }
 
-        trendtv {
-            keyAlias 'keyAlias'
-            storeFile file('src/trendtv/key/keystore_properties')
-            keyPassword 'keyPassword'
-            storePassword 'storepassword'
-        }
-
-        cluxter {
-            keyAlias 'keyAlias'
-            storeFile file('src/cluxter/key/keystore_properties')
-            keyPassword 'keyPassword'
-            storePassword 'storepassword'
-        }
+//        trendtv {
+//            keyAlias 'keyAlias'
+//            storeFile file('src/trendtv/key/keystore_properties')
+//            keyPassword 'keyPassword'
+//            storePassword 'storepassword'
+//        }
+//
+//        cluxter {
+//            keyAlias 'keyAlias'
+//            storeFile file('src/cluxter/key/keystore_properties')
+//            keyPassword 'keyPassword'
+//            storePassword 'storepassword'
+//        }
 
         fibernet {
             keyAlias 'keyAlias'
@@ -115,13 +114,22 @@ android {
             debuggable false
             useProguard false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+                strippedNativeLibsDir "build/ndklibs/obj"
+                unstrippedNativeLibsDir "build/ndklibs/libs"
+            }
         }
 
         debug {
             signingConfig null
             versionNameSuffix ".debug"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+                strippedNativeLibsDir "build/ndklibs/obj"
+                unstrippedNativeLibsDir "build/ndklibs/libs"
+            }
         }
     }
 
@@ -132,8 +140,8 @@ android {
             applicationIdSuffix ".dev"
             // Variables
 //            buildConfigField "String", "API_URL", "\"https://api2.wecast.tv\""
-//            buildConfigField "String", "API_URL", "\"http://api.wecast.tv\""
-            buildConfigField "String", "API_URL", "\"https://api.brasilnet.net.br\""
+            buildConfigField "String", "API_URL", "\"http://api.wecast.tv\""
+//            buildConfigField "String", "API_URL", "\"https://api.brasilnet.net.br\""
             signingConfig signingConfigs.dev
         }
 
@@ -146,13 +154,13 @@ android {
             signingConfig signingConfigs.demo0
         }
 
-        nettv {
-            dimension "app"
-            applicationIdSuffix ".nettv"
-            // Variables
-            buildConfigField "String", "API_URL", "\"http://api.mynet-tv.com/\""
-            signingConfig signingConfigs.nettv
-        }
+//        nettv {
+//            dimension "app"
+//            applicationIdSuffix ".nettv"
+//            // Variables
+//            buildConfigField "String", "API_URL", "\"http://api.mynet-tv.com/\""
+//            signingConfig signingConfigs.nettv
+//        }
 
         brasilnet {
             dimension "app"
@@ -162,29 +170,29 @@ android {
             signingConfig signingConfigs.brasilnet
         }
 
-        intv {
-            dimension "app"
-            applicationIdSuffix ".intv"
-            // Variables
-            buildConfigField "String", "API_URL", "\"http://api.in.tv.br\""
-            signingConfig signingConfigs.intv
-        }
+//        intv {
+//            dimension "app"
+//            applicationIdSuffix ".intv"
+//            // Variables
+//            buildConfigField "String", "API_URL", "\"http://api.in.tv.br\""
+//            signingConfig signingConfigs.intv
+//        }
 
-        trendtv {
-            dimension "app"
-            applicationIdSuffix ".trendtv"
-            // Variables
-            buildConfigField "String", "API_URL", "\"https://api0.wecastdemo.com\""
-            signingConfig signingConfigs.trendtv
-        }
+//        trendtv {
+//            dimension "app"
+//            applicationIdSuffix ".trendtv"
+//            // Variables
+//            buildConfigField "String", "API_URL", "\"https://api0.wecastdemo.com\""
+//            signingConfig signingConfigs.trendtv
+//        }
 
-        cluxter {
-            dimension "app"
-            applicationIdSuffix ".cluxter"
-            // Variables
-            buildConfigField "String", "API_URL", "\"https://api.cluxter.com.br\""
-            signingConfig signingConfigs.cluxter
-        }
+//        cluxter {
+//            dimension "app"
+//            applicationIdSuffix ".cluxter"
+//            // Variables
+//            buildConfigField "String", "API_URL", "\"https://api.cluxter.com.br\""
+//            signingConfig signingConfigs.cluxter
+//        }
 
         fibernet {
             dimension "app"
@@ -245,7 +253,10 @@ dependencies {
     annotationProcessor libraries.dagger.androidProcessor
     implementation libraries.dagger.androidSupport
 
-    implementation 'com.google.firebase:firebase-analytics:17.2.1'
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+    implementation 'com.google.firebase:firebase-crashlytics-ndk:17.2.1'
+    implementation 'com.google.android.gms:play-services-ads:18.3.0'
+
 
     // Glide
     implementation libraries.glide.base

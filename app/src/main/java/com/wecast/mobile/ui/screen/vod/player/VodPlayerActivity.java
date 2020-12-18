@@ -650,9 +650,6 @@ public class VodPlayerActivity extends BaseActivity<ActivityVodPlayerBinding, Vo
         }, 1000);
     }
 
-
-
-
     @Override
     public void onBackPressed() {
         trackSocketWatchedTime();

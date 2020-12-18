@@ -126,7 +126,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashAc
             programme.setStop(reminder.getEpgProgramme().getStopTimestamp());
             reminderDao.insert(reminder);
             // Add event to calendar
-            boolean hasReminder = reminderUtils.isEventInCalendar(programme.getStart());
+            boolean hasReminder = reminderUtils.isEventInCalendar(programme.getStart(), this);
             if (!hasReminder) {
                 reminderUtils.createEvent(programme);
             }

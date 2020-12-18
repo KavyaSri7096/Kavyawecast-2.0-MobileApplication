@@ -118,7 +118,7 @@ public class VodDetailsPricingDialog extends BaseDialog implements SingleChoiceA
             }
         } else if (profile != null && profile.getBusinessModel().equals(VodType.DTR_VOD)) {
             for (final VodSourceProfilePricing price : profile.getPricing()) {
-                price.setName(String.format("<b>%1s DAYS</b> %2s%3s", price.getDuration(), currencyCode, price.getPrice()));
+                price.setName(String.format("<b>%1s HOURS</b> %2s%3s", price.getDuration(), currencyCode, price.getPrice()));
                 pricing.add(price);
             }
         }

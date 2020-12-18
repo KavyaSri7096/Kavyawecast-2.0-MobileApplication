@@ -40,8 +40,9 @@ public class ProgrammeViewHolder extends BaseViewHolder<TVGuideProgramme> {
         long now = System.currentTimeMillis();
         binding.catchup.setVisibility(item.getStartDate().getTime() < now ? View.VISIBLE : View.GONE);
 
+
         // Set reminder indicator
-        boolean hasReminder = reminderUtils.isEventInCalendar(item.getStart());
+        boolean hasReminder = reminderUtils.isEventInCalendar(item.getStart(), context);
         binding.reminder.setVisibility(hasReminder ? View.VISIBLE : View.GONE);
 
         // Set programme current progress
