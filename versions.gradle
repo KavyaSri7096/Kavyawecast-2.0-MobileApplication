@@ -4,8 +4,8 @@ ext.versions = [
         compileSdk                : 28,
         targetSdk                 : 28,
         minSdk                    : 21,
-        appVersion                : "2.13.9",
-        appVersionCode            : 24,
+        appVersion                : "2.13.10",
+        appVersionCode            : 25,
 
         // Libraries
         androidxVersion           : '1.0.2',

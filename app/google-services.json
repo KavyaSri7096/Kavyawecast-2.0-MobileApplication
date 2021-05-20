@@ -8,6 +8,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:615055219290:android:2ec137ff202041a76a1663",
+        "android_client_info": {
+          "package_name": "com.android.devicecontrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALqNzg1U8JApuhsrfAtGnt0XXqVhCRWmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wetek.WeTV.tvOS"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:615055219290:android:cf0e9115199c38e66a1663",
         "android_client_info": {
           "package_name": "com.brasilNet"
@@ -32,10 +68,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -68,10 +104,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -104,10 +140,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -140,10 +176,46 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615055219290:android:9362cd2e563d42c26a1663",
+        "android_client_info": {
+          "package_name": "com.demo.devicecontrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALqNzg1U8JApuhsrfAtGnt0XXqVhCRWmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -176,10 +248,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -212,10 +284,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -248,10 +320,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -284,10 +356,82 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615055219290:android:a568dd3cf8fd0e9c6a1663",
+        "android_client_info": {
+          "package_name": "com.iskonstaging.devicecontrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALqNzg1U8JApuhsrfAtGnt0XXqVhCRWmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wetek.WeTV.tvOS"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615055219290:android:2c2959214a8c07966a1663",
+        "android_client_info": {
+          "package_name": "com.kooli.devicecontrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALqNzg1U8JApuhsrfAtGnt0XXqVhCRWmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -320,10 +464,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -356,10 +500,46 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615055219290:android:e04651962e8059416a1663",
+        "android_client_info": {
+          "package_name": "com.qa.devicecontrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALqNzg1U8JApuhsrfAtGnt0XXqVhCRWmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -392,10 +572,82 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615055219290:android:15a94aee870abf806a1663",
+        "android_client_info": {
+          "package_name": "com.siden.devicecontrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALqNzg1U8JApuhsrfAtGnt0XXqVhCRWmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wetek.WeTV.tvOS"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615055219290:android:0c41a158ecf942e86a1663",
+        "android_client_info": {
+          "package_name": "com.skyboxe.devicecontrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALqNzg1U8JApuhsrfAtGnt0XXqVhCRWmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -428,10 +680,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -464,10 +716,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -500,10 +752,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -536,10 +788,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -572,10 +824,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -608,10 +860,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -644,10 +896,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -688,10 +940,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -740,10 +992,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -776,10 +1028,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -812,10 +1064,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -848,10 +1100,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -884,10 +1136,46 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615055219290:android:7b05b481667cc38b6a1663",
+        "android_client_info": {
+          "package_name": "ps.coolzone.devicecontrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALqNzg1U8JApuhsrfAtGnt0XXqVhCRWmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615055219290-tmdsqa1ams1hbkf9dhdmkn50a49qe8ul.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]
@@ -920,10 +1208,10 @@
               "client_type": 3
             },
             {
-              "client_id": "615055219290-rpbctbaoq3qhhr158drs8qj56nqp6fq4.apps.googleusercontent.com",
+              "client_id": "615055219290-97p5rpklv21rtc5ffhbeuhn15mnmoif0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wetek.NetTV"
+                "bundle_id": "com.wetek.WeTV.tvOS"
               }
             }
           ]

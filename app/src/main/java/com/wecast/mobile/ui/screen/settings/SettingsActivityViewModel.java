@@ -108,6 +108,10 @@ public class SettingsActivityViewModel extends BaseViewModel<SettingsActivityNav
         return preferenceManager.getDebug();
     }
 
+    public boolean is24hTimeFormat() {
+        return preferenceManager.is24hTimeFormat();
+    }
+
     public boolean getTheme() {
         return preferenceManager.getTheme() != ThemeUtils.THEME_MARBLE;
     }

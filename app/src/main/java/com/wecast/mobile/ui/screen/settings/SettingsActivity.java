@@ -41,7 +41,9 @@ public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, Sett
     @Inject
     SettingsActivityViewModel viewModel;
 
-    private SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+    boolean is24hTimeFormat = preferenceManager.is24hTimeFormat();
+
+    private SimpleDateFormat parser = new SimpleDateFormat(is24hTimeFormat ? "yyyy-MM-dd'T'HH:mm:ss" : "yyyy-MM-dd'T'hh:mm:ss a" );
     private SimpleDateFormat format = new SimpleDateFormat("MMMM dd'TH' yyyy", Locale.getDefault());
 
     private ActivitySettingsBinding binding;
@@ -102,6 +104,8 @@ public class SettingsActivity extends BaseActivity<ActivitySettingsBinding, Sett
         binding.quality.root.setOnClickListener(view -> ScreenRouter.openVideoQuality(this));
         binding.buffer.root.setOnClickListener(view -> ScreenRouter.openBuffer(this));
         binding.debug.switcher.setOnCheckedChangeListener((compoundButton, checked) -> getPreferenceManager().setDebug(checked));
+        binding.timeFormat.switcher.setOnCheckedChangeListener((compoundButton, checked) -> getPreferenceManager().set24hTimeFormat(checked));
+        binding.theme.switcher.setOnCheckedChangeListener((compoundButton, checked) -> switchTheme());
         binding.theme.switcher.setOnCheckedChangeListener((compoundButton, checked) -> switchTheme());
         binding.rtl.switcher.setOnCheckedChangeListener((compoundButton, checked) -> switchLayoutDirection());
         binding.logOut.setOnClickListener(view -> ScreenRouter.openLogout(this));

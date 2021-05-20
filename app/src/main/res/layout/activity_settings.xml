@@ -91,6 +91,12 @@
                     app:title="@{@string/membership}" />
 
                 <include
+                    android:id="@+id/time_format"
+                    layout="@layout/component_settings_time_format"
+                    app:checked="@{viewModel.is24hTimeFormat()}"
+                    app:title="@{@string/time_format}" />
+
+                <include
                     android:id="@+id/language"
                     layout="@layout/component_settings_next"
                     app:subtitle="@{viewModel.language}"

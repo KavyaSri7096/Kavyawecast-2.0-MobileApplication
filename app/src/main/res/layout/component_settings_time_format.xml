@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="checked"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/standard_half"
+            android:paddingBottom="@dimen/standard_half">
+
+            <Switch
+                android:id="@+id/switcher"
+                style="@style/TextView.Content.Big"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="@{checked}"
+                android:text="@{title}"
+                android:textAlignment="viewStart" />
+
+        </LinearLayout>
+
+        <include layout="@layout/component_divider" />
+
+    </LinearLayout>
+
+</layout>
