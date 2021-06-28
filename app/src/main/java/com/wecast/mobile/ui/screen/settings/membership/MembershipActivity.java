@@ -77,6 +77,9 @@ public class MembershipActivity extends BaseActivity<ActivityMembershipBinding, 
     }
 
     private void setupUI() {
+
+        parser = new SimpleDateFormat(getPreferenceManager().is24hTimeFormat()? "yyyy-MM-dd'T'HH:mm:ss" : "yyyy-MM-dd'T'hh:mm:ss a");
+
         setStatusTranslucent(false);
         binding = getViewDataBinding();
         viewModel.setNavigator(this);
