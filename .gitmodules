@@ -4,3 +4,9 @@
 [submodule "wecast-player"]
 	path = wecast-player
 	url = git@bitbucket.org:wetek_sa/wecast-2.0-player.git
+[submodule "wecast-2.0-core"]
+	path = wecast-2.0-core
+	url = https://github.com/KavyaSri7096/Kavyawecast-2.0-MobileApplication.git
+[submodule "wecast-2.0-player"]
+	path = wecast-2.0-player
+	url = https://github.com/KavyaSri7096/Kavyawecast-2.0-MobileApplication.git
