@@ -1,6 +1,6 @@
 [submodule "wecast-core"]
 	path = wecast-2.0-core
-	url = https://github.com/KavyaSri7096/Kavyawecast-2.0-coreApplication.git
+	url = git@github.com:KavyaSri7096/Kavyawecast-2.0-coreApplication.git
 [submodule "wecast-player"]
 	path = wecast-2.0-player
-	url = https://github.com/KavyaSri7096/Kavyawecast-2.0-PlayerApplication.git
+	url = git@github.com:KavyaSri7096/Kavyawecast-2.0-PlayerApplication.git
