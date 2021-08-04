@@ -240,8 +240,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(':wecast-core')
-    implementation project(':wecast-player')
+    implementation project(':wecast-2.0-core')
+    implementation project(':wecast-2.0-player')
 
     // Android X support
     api libraries.androidx.base

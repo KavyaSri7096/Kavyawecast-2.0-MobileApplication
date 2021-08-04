@@ -1,1 +1,3 @@
 include ':app', ':wecast-core', ':wecast-player'
+include ':wecast-2.0-core'
+include ':wecast-2.0-player'
