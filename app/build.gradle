@@ -235,10 +235,7 @@ android {
             outputFileName = "Mobile-${variant.productFlavors[0].name}-${variant.versionName}.apk"
         }
     }
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
+    
 }
 
 dependencies {
